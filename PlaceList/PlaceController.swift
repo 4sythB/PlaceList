@@ -15,6 +15,17 @@ class PlaceController {
     static let sharedController = PlaceController()
     let moc = Stack.sharedStack.managedObjectContext
     
+    var places: [Place] {
+        
+        let request = NSFetchRequest(entityName: "Place")
+        
+        do {
+            return try moc.executeFetchRequest(request) as? [Place] ?? []
+        } catch {
+            return []
+        }
+    }
+    
     func addPlace(location: CLLocation, notes: String?) {
         
         let latitude = location.coordinate.latitude

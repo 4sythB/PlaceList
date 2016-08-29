@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import CoreData
 import MapKit
-import AddressBookUI
 
 class LocationController {
     
