@@ -14,6 +14,10 @@
 		A202405D1D74A31B004C2DDC /* PlaceListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202405C1D74A31B004C2DDC /* PlaceListTests.swift */; };
 		A20240681D74A31B004C2DDC /* PlaceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240671D74A31B004C2DDC /* PlaceListUITests.swift */; };
 		A20240761D74A3AB004C2DDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20240751D74A3AB004C2DDC /* MapKit.framework */; };
+		A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */; };
+		A202407C1D74B34D004C2DDC /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202407A1D74B34D004C2DDC /* Place+CoreDataProperties.swift */; };
+		A202407D1D74B34D004C2DDC /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202407B1D74B34D004C2DDC /* Place.swift */; };
+		A20240801D74B3D8004C2DDC /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202407F1D74B3D8004C2DDC /* Stack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		A20240671D74A31B004C2DDC /* PlaceListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListUITests.swift; sourceTree = "<group>"; };
 		A20240691D74A31B004C2DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A20240751D74A3AB004C2DDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A20240781D74B2E0004C2DDC /* Place.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Place.xcdatamodel; sourceTree = "<group>"; };
+		A202407A1D74B34D004C2DDC /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Place+CoreDataProperties.swift"; path = "../Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A202407B1D74B34D004C2DDC /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Place.swift; path = ../Place.swift; sourceTree = "<group>"; };
+		A202407F1D74B3D8004C2DDC /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,8 @@
 			children = (
 				A20240471D74A31B004C2DDC /* AppDelegate.swift */,
 				A202404B1D74A31B004C2DDC /* Main.storyboard */,
+				A202407F1D74B3D8004C2DDC /* Stack.swift */,
+				A202407E1D74B357004C2DDC /* Model + CoreData */,
 				A202404E1D74A31B004C2DDC /* Assets.xcassets */,
 				A20240501D74A31B004C2DDC /* LaunchScreen.storyboard */,
 				A20240531D74A31B004C2DDC /* Info.plist */,
@@ -124,6 +134,16 @@
 				A20240691D74A31B004C2DDC /* Info.plist */,
 			);
 			path = PlaceListUITests;
+			sourceTree = "<group>";
+		};
+		A202407E1D74B357004C2DDC /* Model + CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */,
+				A202407A1D74B34D004C2DDC /* Place+CoreDataProperties.swift */,
+				A202407B1D74B34D004C2DDC /* Place.swift */,
+			);
+			name = "Model + CoreData";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +283,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A20240481D74A31B004C2DDC /* AppDelegate.swift in Sources */,
+				A20240801D74B3D8004C2DDC /* Stack.swift in Sources */,
+				A202407C1D74B34D004C2DDC /* Place+CoreDataProperties.swift in Sources */,
+				A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */,
+				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +531,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A20240781D74B2E0004C2DDC /* Place.xcdatamodel */,
+			);
+			currentVersion = A20240781D74B2E0004C2DDC /* Place.xcdatamodel */;
+			path = Place.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A202403C1D74A31B004C2DDC /* Project object */;
 }
