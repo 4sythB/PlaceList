@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		A20240481D74A31B004C2DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240471D74A31B004C2DDC /* AppDelegate.swift */; };
-		A202404A1D74A31B004C2DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240491D74A31B004C2DDC /* ViewController.swift */; };
 		A202404D1D74A31B004C2DDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A202404B1D74A31B004C2DDC /* Main.storyboard */; };
 		A202404F1D74A31B004C2DDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A202404E1D74A31B004C2DDC /* Assets.xcassets */; };
 		A20240521D74A31B004C2DDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A20240501D74A31B004C2DDC /* LaunchScreen.storyboard */; };
 		A202405D1D74A31B004C2DDC /* PlaceListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202405C1D74A31B004C2DDC /* PlaceListTests.swift */; };
 		A20240681D74A31B004C2DDC /* PlaceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240671D74A31B004C2DDC /* PlaceListUITests.swift */; };
+		A20240761D74A3AB004C2DDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20240751D74A3AB004C2DDC /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		A20240441D74A31B004C2DDC /* PlaceList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaceList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20240471D74A31B004C2DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A20240491D74A31B004C2DDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A202404C1D74A31B004C2DDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A202404E1D74A31B004C2DDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A20240511D74A31B004C2DDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		A20240631D74A31B004C2DDC /* PlaceListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaceListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20240671D74A31B004C2DDC /* PlaceListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListUITests.swift; sourceTree = "<group>"; };
 		A20240691D74A31B004C2DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20240751D74A3AB004C2DDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20240761D74A3AB004C2DDC /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +78,7 @@
 		A202403B1D74A31B004C2DDC = {
 			isa = PBXGroup;
 			children = (
+				A20240751D74A3AB004C2DDC /* MapKit.framework */,
 				A20240461D74A31B004C2DDC /* PlaceList */,
 				A202405B1D74A31B004C2DDC /* PlaceListTests */,
 				A20240661D74A31B004C2DDC /* PlaceListUITests */,
@@ -98,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				A20240471D74A31B004C2DDC /* AppDelegate.swift */,
-				A20240491D74A31B004C2DDC /* ViewController.swift */,
 				A202404B1D74A31B004C2DDC /* Main.storyboard */,
 				A202404E1D74A31B004C2DDC /* Assets.xcassets */,
 				A20240501D74A31B004C2DDC /* LaunchScreen.storyboard */,
@@ -193,6 +194,11 @@
 				TargetAttributes = {
 					A20240431D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					A20240571D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -256,7 +262,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A202404A1D74A31B004C2DDC /* ViewController.swift in Sources */,
 				A20240481D74A31B004C2DDC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
