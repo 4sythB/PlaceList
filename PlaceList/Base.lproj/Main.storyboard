@@ -246,9 +246,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="s7L-UV-Map">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="s7L-UV-Map">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="275"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="7k5-hO-wFf"/>
                                     <constraint firstAttribute="height" constant="275" id="J0F-te-hyc"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="nGl-xd-xcb"/>
                                 </constraints>
@@ -256,36 +257,36 @@
                                     <outlet property="delegate" destination="z63-gB-6jo" id="R0e-zW-RiS"/>
                                 </connections>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
-                                <rect key="frame" x="20" y="283" width="108" height="84"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
+                                <rect key="frame" x="20" y="283" width="560" height="84"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
-                                        <rect key="frame" x="0.0" y="0.0" width="108" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="26"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
-                                        <rect key="frame" x="0.0" y="34" width="108" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
+                                        <rect key="frame" x="0.0" y="34" width="560" height="21"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
-                                        <rect key="frame" x="0.0" y="63" width="108" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
+                                        <rect key="frame" x="0.0" y="63" width="560" height="21"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
                                 <rect key="frame" x="20" y="375" width="49" height="21"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
                                 <rect key="frame" x="20" y="400" width="560" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -294,9 +295,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="s7L-UV-Map" firstAttribute="leading" secondItem="20o-SW-mmv" secondAttribute="leading" id="04M-pS-F4p"/>
+                            <constraint firstItem="nRF-zZ-R5f" firstAttribute="top" secondItem="s7L-UV-Map" secondAttribute="bottom" constant="8" id="0Fx-fe-6Yy"/>
                             <constraint firstItem="nRF-zZ-R5f" firstAttribute="top" secondItem="s7L-UV-Map" secondAttribute="bottom" constant="8" id="2ky-6E-aZo"/>
+                            <constraint firstAttribute="trailing" secondItem="xL9-rF-KVV" secondAttribute="trailing" constant="20" id="EaK-pC-D3U"/>
+                            <constraint firstItem="Xyi-Vc-vv3" firstAttribute="top" secondItem="nRF-zZ-R5f" secondAttribute="bottom" constant="8" id="M7Y-TR-xKu"/>
+                            <constraint firstAttribute="trailing" secondItem="s7L-UV-Map" secondAttribute="trailing" id="NIW-b9-2Ca"/>
+                            <constraint firstItem="s7L-UV-Map" firstAttribute="top" secondItem="20o-SW-mmv" secondAttribute="top" id="OJE-yc-34A"/>
+                            <constraint firstItem="xL9-rF-KVV" firstAttribute="leading" secondItem="20o-SW-mmv" secondAttribute="leading" constant="20" id="Qap-yJ-azB"/>
                             <constraint firstItem="Xyi-Vc-vv3" firstAttribute="top" secondItem="nRF-zZ-R5f" secondAttribute="bottom" constant="8" id="TN1-cX-ezF"/>
+                            <constraint firstItem="Xyi-Vc-vv3" firstAttribute="leading" secondItem="20o-SW-mmv" secondAttribute="leading" constant="20" id="ZJs-oB-Fux"/>
+                            <constraint firstAttribute="trailing" secondItem="nRF-zZ-R5f" secondAttribute="trailing" constant="20" id="buY-9J-J5I"/>
+                            <constraint firstAttribute="bottom" secondItem="xL9-rF-KVV" secondAttribute="bottom" constant="8" id="c0o-cY-7mV"/>
+                            <constraint firstItem="xL9-rF-KVV" firstAttribute="top" secondItem="Xyi-Vc-vv3" secondAttribute="bottom" constant="4" id="f8A-cr-6RI"/>
                             <constraint firstItem="xL9-rF-KVV" firstAttribute="top" secondItem="Xyi-Vc-vv3" secondAttribute="bottom" constant="4" id="vVU-al-efv"/>
+                            <constraint firstItem="nRF-zZ-R5f" firstAttribute="leading" secondItem="20o-SW-mmv" secondAttribute="leading" constant="20" id="x2L-XD-eMg"/>
                         </constraints>
                     </view>
                 </viewController>
