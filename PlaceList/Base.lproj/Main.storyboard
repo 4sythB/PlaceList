@@ -8,7 +8,7 @@
         <!--Places-->
         <scene sceneID="ouj-Ks-5Yc">
             <objects>
-                <viewController id="I3c-2k-JIx" sceneMemberID="viewController">
+                <viewController id="I3c-2k-JIx" customClass="PlaceListViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oga-Ev-6xH"/>
                         <viewControllerLayoutGuide type="bottom" id="8Qm-0x-FjG"/>
@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="1179" y="341"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Search Results Table View Controller-->
         <scene sceneID="4cJ-Fx-BKC">
             <objects>
-                <tableViewController id="eKS-zc-8q8" sceneMemberID="viewController">
+                <tableViewController id="eKS-zc-8q8" customClass="SearchResultsTableViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="m0u-76-D1z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,7 +134,7 @@
         <!--Add a Place-->
         <scene sceneID="dis-Dp-sv3">
             <objects>
-                <viewController id="7z2-bd-kmx" sceneMemberID="viewController">
+                <viewController id="7z2-bd-kmx" customClass="AddPlaceViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qm1-V4-6JU"/>
                         <viewControllerLayoutGuide type="bottom" id="jER-xN-Yd5"/>
@@ -170,7 +170,7 @@
         <!--Place-->
         <scene sceneID="vVH-Lg-mEx">
             <objects>
-                <viewController id="76t-0G-yUL" sceneMemberID="viewController">
+                <viewController id="76t-0G-yUL" customClass="PlaceDetailViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jlq-X8-1je"/>
                         <viewControllerLayoutGuide type="bottom" id="y5Q-K1-ZaY"/>
@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="367" y="-324"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail Container View Controller-->
         <scene sceneID="6iH-SN-eiq">
             <objects>
-                <viewController id="z63-gB-6jo" sceneMemberID="viewController">
+                <viewController id="z63-gB-6jo" customClass="DetailContainerViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UK5-Pb-p9s"/>
                         <viewControllerLayoutGuide type="bottom" id="ddO-w4-Qe5"/>
@@ -323,6 +323,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hlE-b6-a6B"/>
+        <segue reference="pxE-cE-Tel"/>
     </inferredMetricsTieBreakers>
 </document>

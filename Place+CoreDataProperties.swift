@@ -19,7 +19,8 @@ extension Place {
     @NSManaged var city: String
     @NSManaged var state: String
     @NSManaged var zipCode: String
-    @NSManaged var location: NSData
+    @NSManaged var latitude: Double
     @NSManaged var notes: String?
+    @NSManaged var longitude: Double
 
 }

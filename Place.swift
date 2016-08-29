@@ -12,7 +12,7 @@ import CoreData
 
 class Place: NSManagedObject {
 
-    convenience init?(title: String, streetAddress: String, city: String, state: String, zipCode: String, location: NSData, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+    convenience init?(title: String, streetAddress: String, city: String, state: String, zipCode: String, latitude: Double, longitude: Double, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let entity = NSEntityDescription.entityForName("Place", inManagedObjectContext: context) else {
             fatalError("Unable to initialize entity")
@@ -25,7 +25,8 @@ class Place: NSManagedObject {
         self.city = city
         self.state = state
         self.zipCode = zipCode
-        self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
         self.notes = notes
     }
 }
