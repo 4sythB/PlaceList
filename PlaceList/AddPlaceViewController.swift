@@ -10,8 +10,6 @@ import UIKit
 import MapKit
 
 class AddPlaceViewController: UIViewController {
-
-//    @IBOutlet weak var detailContainerView: UIView!
     
     var place: MKPlacemark? = nil
     
@@ -35,4 +33,26 @@ class AddPlaceViewController: UIViewController {
             detailContainerViewController.place = place
         }
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func saveButtonTapped(sender: AnyObject) {
+        
+        guard let placemark = place else { return }
+        
+        PlaceController.sharedController.addPlace(placemark, notes: nil)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
+
+
+
+
+
+

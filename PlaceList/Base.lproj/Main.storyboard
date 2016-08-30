@@ -202,8 +202,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add a Place" id="uFz-Po-vU4">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="KNx-VI-72N"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="uK3-vZ-gQ2"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="KNx-VI-72N">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="7z2-bd-kmx" id="wCt-UX-qFV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="uK3-vZ-gQ2">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="7z2-bd-kmx" id="kqb-0y-ni6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDA-gp-ARF" userLabel="First Responder" sceneMemberID="firstResponder"/>
