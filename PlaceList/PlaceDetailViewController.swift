@@ -70,6 +70,10 @@ class PlaceDetailViewController: UIViewController {
         mode = .ViewMode
         
         notesTextView.editable = false
+        
+        guard let place = place, notes = notesTextView.text else { return }
+        
+        PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
     
     // MARK: - Action

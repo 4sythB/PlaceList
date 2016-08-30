@@ -58,11 +58,19 @@ class PlaceController {
         self.saveToPersistentStore()
     }
     
-    func updateNotesForPlace(place: Place, notes: String) {
+    func updateNotesForPlace(place: Place, notes: String?) {
         
-        place.notes = notes
+        if let index = places.indexOf(place) {
+            places[index].notes = notes
+            saveToPersistentStore()
+        }
         
-        saveToPersistentStore()
+        /*
+         if let place = getById(place.objectID) {
+            place.notes = notes
+            saveToPersistentStore()
+         }
+         */
     }
     
     func deletePlace(place: Place) {
@@ -79,19 +87,13 @@ class PlaceController {
             print("Unable to save to managed object context.")
         }
     }
-}
-
-class MapPin : NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
     
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
-        self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
+    func getById(id: NSManagedObjectID) -> Place? {
+        return moc.objectWithID(id) as? Place
     }
 }
+
+
 
 
 
