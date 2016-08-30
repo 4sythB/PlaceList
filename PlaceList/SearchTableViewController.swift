@@ -11,7 +11,8 @@ import MapKit
 
 class SearchTableViewController: UITableViewController {
     
-    var resultSearchController: UISearchController? = nil
+//    var resultSearchController: UISearchController? = nil
+    var resultsSearchController: CustomSearchController? = nil
     
     static var region: MKCoordinateRegion?
     
@@ -19,27 +20,31 @@ class SearchTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         
-        guard let resultSearchController = resultSearchController else { return }
+//        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultsSearchController = CustomSearchController(searchViewController: locationSearchTable)
         
-        resultSearchController.searchResultsUpdater = locationSearchTable
+        guard let resultsSearchController = resultsSearchController else { return }
         
-        let searchBar = resultSearchController.searchBar
+        resultsSearchController.searchResultsUpdater = locationSearchTable
+        
+        let searchBar = resultsSearchController.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         searchBar.searchBarStyle = .Minimal
-        tableView.tableHeaderView = resultSearchController.searchBar
-        resultSearchController.searchBar.showsCancelButton = false
-        resultSearchController.active = false
-        if resultSearchController.active == false {
-            navigationController?.popViewControllerAnimated(true)
-        }
+        tableView.tableHeaderView = resultsSearchController.searchBar
         
-        resultSearchController.hidesNavigationBarDuringPresentation = false
-        resultSearchController.dimsBackgroundDuringPresentation = true
+        resultsSearchController.hidesNavigationBarDuringPresentation = false
+        resultsSearchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
     }
+    
+    // MARK: - Action
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -55,42 +60,7 @@ class SearchTableViewController: UITableViewController {
      return cell
      }
      */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
+
     /*
      // MARK: - Navigation
      
@@ -100,5 +70,10 @@ class SearchTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
 }
+
+
+
+
+
+

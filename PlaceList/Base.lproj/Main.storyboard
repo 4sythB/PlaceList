@@ -162,7 +162,13 @@
                             <outlet property="delegate" destination="jcM-qk-LZj" id="rzQ-Cd-bLT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wBR-cL-biB"/>
+                    <navigationItem key="navigationItem" id="wBR-cL-biB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sWh-0g-wdQ">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="jcM-qk-LZj" id="AL7-Ck-oFO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcu-k2-nqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

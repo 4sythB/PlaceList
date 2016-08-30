@@ -26,6 +26,8 @@
 		A20240941D74CD27004C2DDC /* AddPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */; };
 		A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */; };
 		A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240971D75099D004C2DDC /* SearchTableViewController.swift */; };
+		A202409A1D7512A7004C2DDC /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240991D7512A7004C2DDC /* CustomSearchBar.swift */; };
+		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlaceViewController.swift; sourceTree = "<group>"; };
 		A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerViewController.swift; sourceTree = "<group>"; };
 		A20240971D75099D004C2DDC /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		A20240991D7512A7004C2DDC /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				A202408B1D74CC2E004C2DDC /* Model Controllers */,
 				A202408E1D74CC7F004C2DDC /* View Controllers */,
 				A202404E1D74A31B004C2DDC /* Assets.xcassets */,
+				A20240991D7512A7004C2DDC /* CustomSearchBar.swift */,
+				A202409B1D7513C6004C2DDC /* CustomSearchController.swift */,
 				A20240501D74A31B004C2DDC /* LaunchScreen.storyboard */,
 				A20240531D74A31B004C2DDC /* Info.plist */,
 			);
@@ -322,6 +328,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */,
+				A202409A1D7512A7004C2DDC /* CustomSearchBar.swift in Sources */,
 				A20240901D74CCBB004C2DDC /* PlaceDetailViewController.swift in Sources */,
 				A20240941D74CD27004C2DDC /* AddPlaceViewController.swift in Sources */,
 				A202408D1D74CC75004C2DDC /* PlaceListViewController.swift in Sources */,
