@@ -54,9 +54,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let place = PlaceController.sharedController.places[indexPath.row]
         
+        let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        
         if segue.identifier == "toDetailSegue" {
             guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
             destinationVC.place = place
+            destinationVC.placemark = placemark
         }
     }
 }
