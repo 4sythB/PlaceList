@@ -17,7 +17,7 @@ class DetailContainerViewController: UIViewController {
     @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     
-    static var place: MKPlacemark? = nil
+    var place: MKPlacemark? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class DetailContainerViewController: UIViewController {
     
     func setUpContainerView() {
         
-        guard let placemark = DetailContainerViewController.place, title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zip = placemark.postalCode else { return }
+        guard let placemark = place, title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zip = placemark.postalCode else { return }
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         

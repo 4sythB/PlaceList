@@ -101,7 +101,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeSearchCell" textLabel="GWk-8s-lsg" detailTextLabel="hAK-hK-Z6a" style="IBUITableViewCellStyleSubtitle" id="obI-cP-qmz">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="obI-cP-qmz" id="d1C-eD-I7u">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -123,9 +123,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="7z2-bd-kmx" kind="show" identifier="toAddPlaceSegue" id="VIG-XK-4SF"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -169,6 +166,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="7z2-bd-kmx" kind="show" identifier="toAddPlaceSegue" id="QRd-mJ-VNj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcu-k2-nqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,7 +189,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-ho-4hr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
-                                    <segue destination="z63-gB-6jo" kind="embed" id="pxE-cE-Tel"/>
+                                    <segue destination="z63-gB-6jo" kind="embed" identifier="embededDetailSegue" id="pxE-cE-Tel"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -352,24 +352,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DAz-q5-IKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2600" y="373"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="plp-rI-gG7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xwh-SR-E8O" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s1r-pJ-2YO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eKS-zc-8q8" kind="relationship" relationship="rootViewController" id="RIx-6H-pT1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Zf-ea-LrO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="367" y="-1044"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0MK-ZQ-G7Y">

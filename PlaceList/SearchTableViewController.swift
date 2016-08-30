@@ -61,15 +61,18 @@ class SearchTableViewController: UITableViewController {
      }
      */
 
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "toAddPlaceSegue" {
+            guard let destinationVC = segue.destinationViewController as? AddPlaceViewController, resultsController = resultsSearchController?.searchResultsController as? SearchResultsTableViewController, tableView = resultsController.tableView, indexPath = tableView.indexPathForSelectedRow else { return }
+            
+            let place = resultsController.matchingItems[indexPath.row].placemark
+            
+            destinationVC.place = place
+        }
      }
-     */
 }
 
 

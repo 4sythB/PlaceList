@@ -41,10 +41,10 @@ class SearchResultsTableViewController: UITableViewController {
         return cell
     }
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         
@@ -52,10 +52,21 @@ class SearchResultsTableViewController: UITableViewController {
         
         if segue.identifier == "toAddPlaceSegue" {
             
-            DetailContainerViewController.place = place
+            guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
+            
+            destinationVC.place = place
         }
-     }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let presentingVC = self.presentingViewController as? SearchTableViewController, cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+        
+        presentingVC.performSegueWithIdentifier("toAddPlaceSegue", sender: cell)
+    }
 }
+
+
 
 extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
