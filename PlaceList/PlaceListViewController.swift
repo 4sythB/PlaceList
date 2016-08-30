@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PlaceListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlaceListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +27,26 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         PlaceListViewController.locationManager.requestLocation()
         
         SearchTableViewController.region = mapView.region
+        
+        handleAnnotations()
     }
+    
+    // MARK: - Annotations
+    
+    func handleAnnotations() {
+        mapView.addAnnotations(PlaceController.sharedController.annotations)
+    }
+    
+//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+//        var view = mapView.dequeueReusableAnnotationViewWithIdentifier("place")
+//        
+//        if view == nil {
+//            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "place")
+//            view?.canShowCallout = true
+//        }
+//        
+//        return view
+//    }
     
     // MARK: - Table view data source
     
@@ -81,7 +100,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         if let location = locations.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.setRegion(region, animated: true)
+            mapView.setRegion(region, animated: false)
         }
     }
     

@@ -26,6 +26,22 @@ class PlaceController {
         }
     }
     
+    var annotations: [MKAnnotation] {
+        
+        var annotations: [MKAnnotation] = []
+        
+        for place in places {
+            
+            let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+            
+            let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
+            
+            annotations.append(annotation)
+        }
+        
+        return annotations
+    }
+    
     func addPlace(location: MKPlacemark, notes: String?) {
         
         let placemark = location
@@ -65,7 +81,17 @@ class PlaceController {
     }
 }
 
-
+class MapPin : NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    
+    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
+        self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
 
 
 
