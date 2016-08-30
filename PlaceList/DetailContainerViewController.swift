@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailContainerViewController: UIViewController {
+    
+    static var place: MKPlacemark? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,5 +27,10 @@ class DetailContainerViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+
+
+
+
+

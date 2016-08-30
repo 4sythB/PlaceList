@@ -129,13 +129,11 @@
 			children = (
 				A20240471D74A31B004C2DDC /* AppDelegate.swift */,
 				A202404B1D74A31B004C2DDC /* Main.storyboard */,
-				A202407F1D74B3D8004C2DDC /* Stack.swift */,
 				A202407E1D74B357004C2DDC /* Model + CoreData */,
 				A202408B1D74CC2E004C2DDC /* Model Controllers */,
 				A202408E1D74CC7F004C2DDC /* View Controllers */,
+				A202409D1D75181F004C2DDC /* Search Bar */,
 				A202404E1D74A31B004C2DDC /* Assets.xcassets */,
-				A20240991D7512A7004C2DDC /* CustomSearchBar.swift */,
-				A202409B1D7513C6004C2DDC /* CustomSearchController.swift */,
 				A20240501D74A31B004C2DDC /* LaunchScreen.storyboard */,
 				A20240531D74A31B004C2DDC /* Info.plist */,
 			);
@@ -163,6 +161,7 @@
 		A202407E1D74B357004C2DDC /* Model + CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				A202407F1D74B3D8004C2DDC /* Stack.swift */,
 				A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */,
 				A20240871D74CB85004C2DDC /* Place+CoreDataProperties.swift */,
 				A202407B1D74B34D004C2DDC /* Place.swift */,
@@ -190,6 +189,15 @@
 				A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		A202409D1D75181F004C2DDC /* Search Bar */ = {
+			isa = PBXGroup;
+			children = (
+				A20240991D7512A7004C2DDC /* CustomSearchBar.swift */,
+				A202409B1D7513C6004C2DDC /* CustomSearchController.swift */,
+			);
+			name = "Search Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

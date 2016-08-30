@@ -124,7 +124,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="7z2-bd-kmx" kind="show" id="VIG-XK-4SF"/>
+                                    <segue destination="7z2-bd-kmx" kind="show" identifier="toAddPlaceSegue" id="VIG-XK-4SF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
