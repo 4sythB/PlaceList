@@ -31,6 +31,14 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         handleAnnotations()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        tableView.reloadData()
+        mapView.removeAnnotations(PlaceController.sharedController.annotations)
+        handleAnnotations()
+    }
+    
     // MARK: - Annotations
     
     func handleAnnotations() {
