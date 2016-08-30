@@ -48,13 +48,13 @@ class SearchResultsTableViewController: UITableViewController {
         
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         
-        let place = matchingItems[indexPath.row].placemark
+        let placemark = matchingItems[indexPath.row].placemark
         
         if segue.identifier == "toAddPlaceSegue" {
             
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
             
-            destinationVC.place = place
+            destinationVC.placemark = placemark
         }
     }
     

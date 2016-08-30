@@ -32,7 +32,7 @@ class SearchTableViewController: UITableViewController {
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         searchBar.searchBarStyle = .Minimal
-        tableView.tableHeaderView = resultsSearchController.searchBar
+        navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
         resultsSearchController.dimsBackgroundDuringPresentation = true
@@ -47,7 +47,7 @@ class SearchTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return 0
     }
     
@@ -68,9 +68,9 @@ class SearchTableViewController: UITableViewController {
         if segue.identifier == "toAddPlaceSegue" {
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController, resultsController = resultsSearchController?.searchResultsController as? SearchResultsTableViewController, tableView = resultsController.tableView, indexPath = tableView.indexPathForSelectedRow else { return }
             
-            let place = resultsController.matchingItems[indexPath.row].placemark
+            let placemark = resultsController.matchingItems[indexPath.row].placemark
             
-            destinationVC.place = place
+            destinationVC.placemark = placemark
         }
      }
 }

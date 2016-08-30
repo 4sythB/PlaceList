@@ -11,7 +11,7 @@ import MapKit
 
 class AddPlaceViewController: UIViewController {
     
-    var place: MKPlacemark? = nil
+    var placemark: MKPlacemark? = nil
     
     var detailContainerViewController: DetailContainerViewController!
     
@@ -27,10 +27,10 @@ class AddPlaceViewController: UIViewController {
         
         if segue.identifier == "embededDetailSegue" {
             
-            guard let place = place else { return }
+            guard let placemark = placemark else { return }
             
             detailContainerViewController = segue.destinationViewController as? DetailContainerViewController
-            detailContainerViewController.place = place
+            detailContainerViewController.placemark = placemark
         }
     }
     
@@ -43,7 +43,7 @@ class AddPlaceViewController: UIViewController {
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        guard let placemark = place else { return }
+        guard let placemark = placemark else { return }
         
         PlaceController.sharedController.addPlace(placemark, notes: nil)
         
