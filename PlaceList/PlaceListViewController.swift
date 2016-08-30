@@ -17,10 +17,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         PlaceListViewController.locationManager.delegate = self
         PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         PlaceListViewController.locationManager.requestWhenInUseAuthorization()
@@ -42,12 +42,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         cell.textLabel?.text = place.title
         cell.detailTextLabel?.text = "\(place.city), \(place.state)"
-
+        
         return cell
     }
-
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

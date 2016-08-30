@@ -19,10 +19,10 @@ class PlaceDetailViewController: UIViewController {
     
     var place: Place?
     var placemark: MKPlacemark?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
     }
     
@@ -38,14 +38,14 @@ class PlaceDetailViewController: UIViewController {
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
     }
-
-
+    
+    
     // MARK: - Navigation
-
+    
     /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-    }
-    */
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     
+     }
+     */
 }
