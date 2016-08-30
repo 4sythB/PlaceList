@@ -36,7 +36,7 @@ class SearchTableViewController: UITableViewController {
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
         resultsSearchController.dimsBackgroundDuringPresentation = true
-        resultsSearchController.definesPresentationContext = true
+        definesPresentationContext = true
     }
     
     override func viewDidAppear(animated: Bool) {
