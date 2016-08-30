@@ -14,15 +14,19 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     
-    let locationManager = CLLocationManager()
+    static let locationManager = CLLocationManager()
+    
+    var resultSearchController: UISearchController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        PlaceListViewController.locationManager.delegate = self
+        PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        PlaceListViewController.locationManager.requestWhenInUseAuthorization()
+        PlaceListViewController.locationManager.requestLocation()
+        
+        SearchTableViewController.region = mapView.region
     }
     
     // MARK: - Table view data source
@@ -64,14 +68,14 @@ extension PlaceListViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         if status == .AuthorizedWhenInUse {
-            locationManager.requestLocation()
+            PlaceListViewController.locationManager.requestLocation()
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: true)
         }

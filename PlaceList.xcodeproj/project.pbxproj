@@ -25,6 +25,7 @@
 		A20240921D74CCD0004C2DDC /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240911D74CCD0004C2DDC /* SearchResultsTableViewController.swift */; };
 		A20240941D74CD27004C2DDC /* AddPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */; };
 		A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */; };
+		A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240971D75099D004C2DDC /* SearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		A20240911D74CCD0004C2DDC /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlaceViewController.swift; sourceTree = "<group>"; };
 		A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContainerViewController.swift; sourceTree = "<group>"; };
+		A20240971D75099D004C2DDC /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			children = (
 				A202408C1D74CC75004C2DDC /* PlaceListViewController.swift */,
 				A202408F1D74CCBB004C2DDC /* PlaceDetailViewController.swift */,
+				A20240971D75099D004C2DDC /* SearchTableViewController.swift */,
 				A20240911D74CCD0004C2DDC /* SearchResultsTableViewController.swift */,
 				A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */,
 				A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */,
@@ -329,6 +332,7 @@
 				A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */,
 				A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */,
 				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
+				A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */,
 				A20240821D74B620004C2DDC /* PlaceController.swift in Sources */,
 				A202408A1D74CC25004C2DDC /* LocationController.swift in Sources */,
 			);
