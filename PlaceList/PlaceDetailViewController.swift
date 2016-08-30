@@ -34,6 +34,8 @@ class PlaceDetailViewController: UIViewController {
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
+        navigationItem.title = title
+        
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
