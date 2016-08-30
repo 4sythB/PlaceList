@@ -11,7 +11,6 @@ import MapKit
 
 class SearchTableViewController: UITableViewController {
     
-//    var resultSearchController: UISearchController? = nil
     var resultsSearchController: CustomSearchController? = nil
     
     static var region: MKCoordinateRegion?
@@ -21,8 +20,9 @@ class SearchTableViewController: UITableViewController {
         
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
         
-//        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultsSearchController = CustomSearchController(searchViewController: locationSearchTable)
+        
+        resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
         
@@ -36,7 +36,16 @@ class SearchTableViewController: UITableViewController {
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
         resultsSearchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
+        resultsSearchController.definesPresentationContext = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.resultsSearchController?.active = true
+            self.resultsSearchController?.searchBar.becomeFirstResponder()
+        }
     }
     
     // MARK: - Action
@@ -60,11 +69,11 @@ class SearchTableViewController: UITableViewController {
      return cell
      }
      */
-
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toAddPlaceSegue" {
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController, resultsController = resultsSearchController?.searchResultsController as? SearchResultsTableViewController, tableView = resultsController.tableView, indexPath = tableView.indexPathForSelectedRow else { return }
             
@@ -72,7 +81,18 @@ class SearchTableViewController: UITableViewController {
             
             destinationVC.placemark = placemark
         }
-     }
+    }
+}
+
+extension SearchTableViewController: UISearchControllerDelegate {
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.resultsSearchController?.active = true
+            self.resultsSearchController?.searchBar.becomeFirstResponder()
+        }
+    }
 }
 
 
