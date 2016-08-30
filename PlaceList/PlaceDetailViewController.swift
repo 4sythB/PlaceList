@@ -16,9 +16,12 @@ class PlaceDetailViewController: UIViewController {
     @IBOutlet weak var streetAddressLabel: UILabel!
     @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var editDoneButton: UIBarButtonItem!
     
     var place: Place?
     var placemark: MKPlacemark?
+    
+    var mode: ButtonMode = .ViewMode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +42,50 @@ class PlaceDetailViewController: UIViewController {
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
+        
+        editDoneButton.title = "Edit"
+        editDoneButton.style = .Plain
     }
     
+    // MARK: - View mode
+    
+    enum ButtonMode {
+        case ViewMode
+        case EditMode
+    }
+    
+    func goToEditMode() {
+        
+        editDoneButton.title = "Done"
+        editDoneButton.style = .Done
+        mode = .EditMode
+        
+        notesTextView.editable = true
+    }
+    
+    func goToViewMode() {
+        
+        editDoneButton.title = "Edit"
+        editDoneButton.style = .Plain
+        mode = .ViewMode
+        
+        notesTextView.editable = false
+    }
+    
+    // MARK: - Action
+    
+    @IBAction func viewModeButtonTapped(sender: AnyObject) {
+        
+        switch mode {
+        case .ViewMode:
+            goToEditMode()
+            return
+            
+        case .EditMode:
+            goToViewMode()
+            return
+        }
+    }
     
     // MARK: - Navigation
     
@@ -51,3 +96,12 @@ class PlaceDetailViewController: UIViewController {
      }
      */
 }
+
+
+
+
+
+
+
+
+

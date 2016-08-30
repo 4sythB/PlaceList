@@ -271,7 +271,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
                                 <rect key="frame" x="20" y="464" width="560" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -301,10 +301,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="NLq-vl-zok"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="NLq-vl-zok">
+                            <connections>
+                                <action selector="viewModeButtonTapped:" destination="76t-0G-yUL" id="t9i-0D-xFe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cityStateZipLabel" destination="Ldp-Ps-RXn" id="Jxu-jF-ifB"/>
+                        <outlet property="editDoneButton" destination="NLq-vl-zok" id="PLg-b9-QXy"/>
                         <outlet property="mapView" destination="HcR-59-Sgg" id="6kI-YH-Kbc"/>
                         <outlet property="notesTextView" destination="9gR-Gg-zxm" id="Fw1-Xd-FTm"/>
                         <outlet property="placeTitleLabel" destination="0bb-SB-HQK" id="fXZ-Ga-f0H"/>
