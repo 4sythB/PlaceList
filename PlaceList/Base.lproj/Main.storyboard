@@ -78,7 +78,7 @@
                     <navigationItem key="navigationItem" title="Places" id="Ncm-Ph-fNR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cCC-Kh-mnC">
                             <connections>
-                                <segue destination="5Vr-SG-nM5" kind="presentation" id="3VF-SN-W0H"/>
+                                <segue destination="5Vr-SG-nM5" kind="presentation" identifier="toSearchSegue" id="3VF-SN-W0H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

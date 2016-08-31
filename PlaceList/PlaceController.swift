@@ -15,6 +15,8 @@ class PlaceController {
     static let sharedController = PlaceController()
     let moc = Stack.sharedStack.managedObjectContext
     
+    var region: MKCoordinateRegion?
+    
     var places: [Place] {
         let request = NSFetchRequest(entityName: "Place")
         

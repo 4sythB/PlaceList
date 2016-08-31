@@ -25,9 +25,15 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         PlaceListViewController.locationManager.requestWhenInUseAuthorization()
         PlaceListViewController.locationManager.requestLocation()
-        
-        SearchTableViewController.region = mapView.region
     }
+    
+//    func setRegion() {
+//        let location = PlaceListViewController.locationManager.location
+//        let span = mapView.region.span
+//        let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
+//        
+//        PlaceController.sharedController.region = region
+//    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -107,6 +113,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: false)
+            PlaceController.sharedController.region = region
         }
     }
     

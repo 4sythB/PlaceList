@@ -66,12 +66,10 @@ class SearchResultsTableViewController: UITableViewController {
     }
 }
 
-
-
 extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-        guard let region = SearchTableViewController.region,
+        guard let region = PlaceController.sharedController.region,
             searchBarText = searchController.searchBar.text else {
                 return
         }

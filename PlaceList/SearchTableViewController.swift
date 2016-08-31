@@ -13,8 +13,6 @@ class SearchTableViewController: UITableViewController {
     
     var resultsSearchController: CustomSearchController? = nil
     
-    static var region: MKCoordinateRegion?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
