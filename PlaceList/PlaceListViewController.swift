@@ -27,8 +27,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         PlaceListViewController.locationManager.requestLocation()
         
         SearchTableViewController.region = mapView.region
-        
-        handleAnnotations()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,17 +42,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     func handleAnnotations() {
         mapView.addAnnotations(PlaceController.sharedController.annotations)
     }
-    
-//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        var view = mapView.dequeueReusableAnnotationViewWithIdentifier("place")
-//        
-//        if view == nil {
-//            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "place")
-//            view?.canShowCallout = true
-//        }
-//        
-//        return view
-//    }
     
     // MARK: - Table view data source
     

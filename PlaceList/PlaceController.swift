@@ -64,13 +64,6 @@ class PlaceController {
             places[index].notes = notes
             saveToPersistentStore()
         }
-        
-        /*
-         if let place = getById(place.objectID) {
-            place.notes = notes
-            saveToPersistentStore()
-         }
-         */
     }
     
     func deletePlace(place: Place) {
