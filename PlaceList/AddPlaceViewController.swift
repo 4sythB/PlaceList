@@ -43,9 +43,9 @@ class AddPlaceViewController: UIViewController {
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        guard let placemark = placemark else { return }
+        guard let placemark = placemark, notes = detailContainerViewController.notesTextView.text else { return }
         
-        PlaceController.sharedController.addPlace(placemark, notes: nil)
+        PlaceController.sharedController.addPlace(placemark, notes: notes)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
