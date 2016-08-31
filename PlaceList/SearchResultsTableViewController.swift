@@ -75,20 +75,23 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
             searchBarText = searchController.searchBar.text else {
                 return
         }
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchBarText
-        request.region = region
         
-        let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { (response, error) in
-            if error != nil {
-                print("Error: \(error?.localizedDescription)")
-            } else {
-                guard let response = response else { return }
-                self.matchingItems = response.mapItems
-                self.tableView.reloadData()
+        if searchBarText.characters.count > 0 {
+            let request = MKLocalSearchRequest()
+            request.naturalLanguageQuery = searchBarText
+            request.region = region
+            
+            let search = MKLocalSearch(request: request)
+            search.startWithCompletionHandler { (response, error) in
+                if error != nil {
+                    print("Error: \(error?.localizedDescription)")
+                } else {
+                    guard let response = response else { return }
+                    self.matchingItems = response.mapItems
+                    self.tableView.reloadData()
+                }
             }
-        }
+        }   
     }
 }
 
