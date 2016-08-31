@@ -73,6 +73,16 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let place = PlaceController.sharedController.places[indexPath.row]
+            
+            PlaceController.sharedController.deletePlace(place)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
