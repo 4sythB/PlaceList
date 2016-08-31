@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PlaceDetailViewController: UIViewController {
+class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var placeTitleLabel: UILabel!
@@ -17,6 +17,7 @@ class PlaceDetailViewController: UIViewController {
     @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var editDoneButton: UIBarButtonItem!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var place: Place?
     var placemark: MKPlacemark?
@@ -26,12 +27,21 @@ class PlaceDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notesTextView.delegate = self
+        
         setUpView()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func setUpView() {
         
-        guard let placemark = placemark, place = place else { return }
+        guard let placemark = placemark, place = place, notes = place.notes else { return }
         
         let title = place.title, streetAddress = place.streetAddress, city = place.city, state = place.state, zip = place.zipCode
         
@@ -42,6 +52,7 @@ class PlaceDetailViewController: UIViewController {
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
+        notesTextView.text = notes
         
         editDoneButton.title = "Edit"
         editDoneButton.style = .Plain
@@ -91,14 +102,52 @@ class PlaceDetailViewController: UIViewController {
         }
     }
     
-    // MARK: - Navigation
+    // MARK: - Keyboard
     
-    /*
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     
-     }
-     */
+    func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
+        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = value.CGRectValue()
+        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 20) * (show ? 1 : -1)
+        scrollView.contentInset.bottom += adjustmentHeight
+        scrollView.scrollIndicatorInsets.bottom += adjustmentHeight
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        adjustInsetForKeyboardShow(true, notification: notification)
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        adjustInsetForKeyboardShow(false, notification: notification)
+    }
+    
+//    func keyboardWillShow(notification: NSNotification) {
+//        
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//            animateViewMoving(true, moveValue: keyboardSize.height)
+//        }
+//    }
+
+//    func textViewDidBeginEditing(textView: UITextView) {
+//        animateViewMoving(true, moveValue: 150)
+//    }
+//    
+//    func textViewDidEndEditing(textView: UITextView) {
+//        animateViewMoving(false, moveValue: 150)
+//    }
+//    
+//    func animateViewMoving (up:Bool, moveValue :CGFloat){
+//        let movementDuration:NSTimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//        
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//        
+//        self.view.frame = CGRectOffset(self.view.frame, 0, movement)
+//        UIView.commitAnimations()
+//    }
+    
+
 }
 
 

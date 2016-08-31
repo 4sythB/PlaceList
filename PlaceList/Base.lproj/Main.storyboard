@@ -221,7 +221,7 @@
         <!--Place-->
         <scene sceneID="vVH-Lg-mEx">
             <objects>
-                <viewController id="76t-0G-yUL" customClass="PlaceDetailViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="76t-0G-yUL" customClass="PlaceDetailViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jlq-X8-1je"/>
                         <viewControllerLayoutGuide type="bottom" id="y5Q-K1-ZaY"/>
@@ -230,74 +230,110 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HcR-59-Sgg">
-                                <rect key="frame" x="0.0" y="64" width="600" height="275"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="RkS-Zu-bVR"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="WX4-46-H3v"/>
-                                    <constraint firstAttribute="height" constant="275" id="adV-ck-Drg"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="e8J-dd-6J0"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="z63-gB-6jo" id="ExR-yg-mU9"/>
-                                </connections>
-                            </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-pd-Wfk">
-                                <rect key="frame" x="20" y="347" width="560" height="84"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ca-Wh-LuS">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bb-SB-HQK">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="26"/>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="312-R4-VPU">
-                                        <rect key="frame" x="0.0" y="34" width="560" height="21"/>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldp-Ps-RXn">
-                                        <rect key="frame" x="0.0" y="63" width="560" height="21"/>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QOy-eI-fly">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HcR-59-Sgg">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="275"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="RkS-Zu-bVR"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="WX4-46-H3v"/>
+                                                    <constraint firstAttribute="height" constant="275" id="adV-ck-Drg"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="e8J-dd-6J0"/>
+                                                    <constraint firstAttribute="height" constant="275" id="wQs-Me-iLq"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="RkS-Zu-bVR"/>
+                                                        <exclude reference="WX4-46-H3v"/>
+                                                        <exclude reference="adV-ck-Drg"/>
+                                                        <exclude reference="e8J-dd-6J0"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="z63-gB-6jo" id="ExR-yg-mU9"/>
+                                                </connections>
+                                            </mapView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-pd-Wfk">
+                                                <rect key="frame" x="8" y="283" width="108" height="84"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bb-SB-HQK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="108" height="26"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="312-R4-VPU">
+                                                        <rect key="frame" x="0.0" y="34" width="108" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldp-Ps-RXn">
+                                                        <rect key="frame" x="0.0" y="63" width="108" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlA-OM-wNU">
+                                                <rect key="frame" x="8" y="375" width="49" height="21"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
+                                                <rect key="frame" x="8" y="404" width="584" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="214-lh-eBt"/>
+                                                    <constraint firstAttribute="height" constant="50" id="xNj-z6-1Uq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="xNj-z6-1Uq"/>
+                                                    </mask>
+                                                </variation>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="top" secondItem="HcR-59-Sgg" secondAttribute="bottom" constant="8" id="47U-fB-oTB"/>
+                                            <constraint firstItem="jlA-OM-wNU" firstAttribute="top" secondItem="pvL-pd-Wfk" secondAttribute="bottom" constant="8" id="8jd-ct-hBZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="9gR-Gg-zxm" secondAttribute="trailing" constant="8" id="Lxs-fw-Dcu"/>
+                                            <constraint firstItem="HcR-59-Sgg" firstAttribute="width" secondItem="QOy-eI-fly" secondAttribute="width" id="Lzx-Oj-w6I"/>
+                                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="top" secondItem="jlA-OM-wNU" secondAttribute="bottom" constant="8" id="NJn-im-tzj"/>
+                                            <constraint firstItem="HcR-59-Sgg" firstAttribute="top" secondItem="QOy-eI-fly" secondAttribute="top" id="Prc-By-eec"/>
+                                            <constraint firstItem="jlA-OM-wNU" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="8" id="Q7s-lz-fQ9"/>
+                                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="8" id="Ux4-6J-F8m"/>
+                                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="8" id="Ywh-n8-bll"/>
+                                            <constraint firstItem="HcR-59-Sgg" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" id="gOL-Ww-GAn"/>
+                                            <constraint firstAttribute="trailing" secondItem="HcR-59-Sgg" secondAttribute="trailing" id="lCw-HI-1m5"/>
+                                            <constraint firstAttribute="height" constant="500" id="qnh-WW-7Vn"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlA-OM-wNU">
-                                <rect key="frame" x="20" y="439" width="49" height="21"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Type your notes here:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
-                                <rect key="frame" x="20" y="464" width="560" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <constraints>
+                                    <constraint firstItem="QOy-eI-fly" firstAttribute="top" secondItem="8ca-Wh-LuS" secondAttribute="top" id="1Pz-eW-zbl"/>
+                                    <constraint firstAttribute="bottom" secondItem="QOy-eI-fly" secondAttribute="bottom" id="JLE-JV-l8R"/>
+                                    <constraint firstItem="QOy-eI-fly" firstAttribute="leading" secondItem="8ca-Wh-LuS" secondAttribute="leading" id="q6J-i1-8Y4"/>
+                                    <constraint firstAttribute="trailing" secondItem="QOy-eI-fly" secondAttribute="trailing" id="uLy-95-SDe"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="HcR-59-Sgg" firstAttribute="top" secondItem="jlq-X8-1je" secondAttribute="bottom" id="0Cx-dO-peh"/>
-                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="top" secondItem="HcR-59-Sgg" secondAttribute="bottom" constant="8" id="0dD-Dx-jOu"/>
-                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="top" secondItem="jlA-OM-wNU" secondAttribute="bottom" constant="4" id="4oS-Rz-VlH"/>
-                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="top" secondItem="HcR-59-Sgg" secondAttribute="bottom" constant="8" id="4zB-bA-Foy"/>
-                            <constraint firstAttribute="trailing" secondItem="9gR-Gg-zxm" secondAttribute="trailing" constant="20" id="DIh-gs-4k2"/>
-                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="top" secondItem="HcR-59-Sgg" secondAttribute="bottom" constant="8" id="Hst-dO-zA0"/>
-                            <constraint firstItem="jlA-OM-wNU" firstAttribute="top" secondItem="pvL-pd-Wfk" secondAttribute="bottom" constant="8" id="NKj-YX-iEH"/>
-                            <constraint firstAttribute="trailing" secondItem="HcR-59-Sgg" secondAttribute="trailing" id="NQg-N9-a3q"/>
-                            <constraint firstAttribute="trailing" secondItem="pvL-pd-Wfk" secondAttribute="trailing" constant="20" id="Nqr-Vg-euf"/>
-                            <constraint firstItem="jlA-OM-wNU" firstAttribute="top" secondItem="pvL-pd-Wfk" secondAttribute="bottom" constant="8" id="Q2G-v8-NMj"/>
-                            <constraint firstItem="y5Q-K1-ZaY" firstAttribute="top" secondItem="9gR-Gg-zxm" secondAttribute="bottom" constant="8" id="QL7-38-WVL"/>
-                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="top" secondItem="jlA-OM-wNU" secondAttribute="bottom" constant="4" id="R7a-i6-4Lh"/>
-                            <constraint firstItem="jlA-OM-wNU" firstAttribute="leading" secondItem="sGZ-Eo-lbL" secondAttribute="leading" constant="20" id="WTp-mw-CYm"/>
-                            <constraint firstItem="HcR-59-Sgg" firstAttribute="leading" secondItem="sGZ-Eo-lbL" secondAttribute="leading" id="Zs4-lX-Xu0"/>
-                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="leading" secondItem="sGZ-Eo-lbL" secondAttribute="leading" constant="20" id="lCZ-NY-HvF"/>
-                            <constraint firstItem="9gR-Gg-zxm" firstAttribute="top" secondItem="jlA-OM-wNU" secondAttribute="bottom" constant="4" id="v8k-Xg-5Is"/>
-                            <constraint firstItem="pvL-pd-Wfk" firstAttribute="leading" secondItem="sGZ-Eo-lbL" secondAttribute="leading" constant="20" id="yij-oL-J4g"/>
-                            <constraint firstItem="jlA-OM-wNU" firstAttribute="top" secondItem="pvL-pd-Wfk" secondAttribute="bottom" constant="8" id="z2t-nM-99L"/>
+                            <constraint firstItem="8ca-Wh-LuS" firstAttribute="top" secondItem="jlq-X8-1je" secondAttribute="bottom" id="8Fu-IN-89h"/>
+                            <constraint firstItem="QOy-eI-fly" firstAttribute="width" secondItem="sGZ-Eo-lbL" secondAttribute="width" id="hT1-7Y-fmR"/>
+                            <constraint firstItem="8ca-Wh-LuS" firstAttribute="leading" secondItem="sGZ-Eo-lbL" secondAttribute="leading" id="wmO-Gl-8jn"/>
+                            <constraint firstItem="y5Q-K1-ZaY" firstAttribute="top" secondItem="8ca-Wh-LuS" secondAttribute="bottom" id="xR5-p2-VKo"/>
+                            <constraint firstAttribute="trailing" secondItem="8ca-Wh-LuS" secondAttribute="trailing" id="yTs-jF-AkL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ">
@@ -313,6 +349,7 @@
                         <outlet property="mapView" destination="HcR-59-Sgg" id="6kI-YH-Kbc"/>
                         <outlet property="notesTextView" destination="9gR-Gg-zxm" id="Fw1-Xd-FTm"/>
                         <outlet property="placeTitleLabel" destination="0bb-SB-HQK" id="fXZ-Ga-f0H"/>
+                        <outlet property="scrollView" destination="8ca-Wh-LuS" id="LAd-Vi-ZI8"/>
                         <outlet property="streetAddressLabel" destination="312-R4-VPU" id="3PB-hC-wdC"/>
                     </connections>
                 </viewController>
