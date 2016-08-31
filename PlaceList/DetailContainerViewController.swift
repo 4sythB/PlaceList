@@ -20,12 +20,16 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
     
     var placemark: MKPlacemark? = nil
     
+    let placeholderText = "Type your notes here"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpContainerView()
+        
         notesTextView.delegate = self
         
-        setUpContainerView()
+        applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
@@ -46,6 +50,75 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
+    }
+    
+    // MARK: - TextView placeholder
+    
+    func applyPlaceholderStyle(textView: UITextView, placeholderText: String) {
+        
+        // make it look (initially) like a placeholder
+        textView.textColor = UIColor.lightGrayColor()
+        textView.text = placeholderText
+    }
+    
+    func applyNonPlaceholderStyle(textView: UITextView) {
+        
+        // make it look like normal text instead of a placeholder
+        textView.textColor = UIColor.darkTextColor()
+        textView.alpha = 1.0
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        if textView == notesTextView && textView.text == placeholderText {
+            // move cursor to start
+            moveCursorToStart(textView)
+        }
+        return true
+    }
+    
+    func moveCursorToStart(textView: UITextView) {
+        dispatch_async(dispatch_get_main_queue(), {
+            textView.selectedRange = NSMakeRange(0, 0);
+        })
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        // remove the placeholder text when they start typing
+        // first, see if the field is empty
+        // if it's not empty, then the text should be black and not italic
+        // BUT, we also need to remove the placeholder text if that's the only text
+        // if it is empty, then the text should be the placeholder
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        if newLength > 0 { // have text, so don't show the placeholder
+            // check if the only text is the placeholder and remove it if needed
+            // unless they've hit the delete button with the placeholder displayed
+            if textView == notesTextView && textView.text == placeholderText {
+                if text.utf16.count == 0 { // they hit the back button
+                    return false // ignore it
+                }
+                applyNonPlaceholderStyle(textView)
+                textView.text = ""
+            }
+            return true
+        } else {  // no text, so show the placeholder
+            applyPlaceholderStyle(textView, placeholderText: placeholderText)
+            moveCursorToStart(textView)
+            return false
+        }
+    }
+    
+    func textViewDidChangeSelection (textView: UITextView) {
+        // if placeholder is shown, prevent positioning of cursor within or selection of placeholder text
+        if textView == notesTextView && textView.text == placeholderText {
+            moveCursorToStart(textView)
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        if notesTextView.text.characters.count == 0 {
+            notesTextView.text = placeholderText
+            notesTextView.textColor = .lightGrayColor()
+        }
     }
     
     // MARK: - Keyboard
