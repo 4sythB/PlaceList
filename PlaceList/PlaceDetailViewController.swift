@@ -104,50 +104,27 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Keyboard
     
-    func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
-        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = value.CGRectValue()
-        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 20) * (show ? 1 : -1)
-        scrollView.contentInset.bottom += adjustmentHeight
-        scrollView.scrollIndicatorInsets.bottom += adjustmentHeight
-    }
-    
     func keyboardWillShow(notification: NSNotification) {
-        adjustInsetForKeyboardShow(true, notification: notification)
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.size.height, 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+            
+            scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
+            
+            scrollView.scrollRectToVisible((notesTextView.superview?.frame)!, animated: true)
+        }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        adjustInsetForKeyboardShow(false, notification: notification)
+        
+        let contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+        
+        scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
     }
-    
-//    func keyboardWillShow(notification: NSNotification) {
-//        
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-//            animateViewMoving(true, moveValue: keyboardSize.height)
-//        }
-//    }
-
-//    func textViewDidBeginEditing(textView: UITextView) {
-//        animateViewMoving(true, moveValue: 150)
-//    }
-//    
-//    func textViewDidEndEditing(textView: UITextView) {
-//        animateViewMoving(false, moveValue: 150)
-//    }
-//    
-//    func animateViewMoving (up:Bool, moveValue :CGFloat){
-//        let movementDuration:NSTimeInterval = 0.3
-//        let movement:CGFloat = ( up ? -moveValue : moveValue)
-//        
-//        UIView.beginAnimations("animateView", context: nil)
-//        UIView.setAnimationBeginsFromCurrentState(true)
-//        UIView.setAnimationDuration(movementDuration)
-//        
-//        self.view.frame = CGRectOffset(self.view.frame, 0, movement)
-//        UIView.commitAnimations()
-//    }
-    
-
 }
 
 

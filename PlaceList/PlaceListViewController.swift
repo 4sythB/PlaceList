@@ -34,12 +34,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.reloadData()
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
-        handleAnnotations()
-    }
-    
-    // MARK: - Annotations
-    
-    func handleAnnotations() {
         mapView.addAnnotations(PlaceController.sharedController.annotations)
     }
     
@@ -64,7 +58,14 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         if editingStyle == .Delete {
             let place = PlaceController.sharedController.places[indexPath.row]
             
+            let annotations = mapView.annotations
+            for annotation in annotations {
+                mapView.removeAnnotation(annotation)
+            }
+            
             PlaceController.sharedController.deletePlace(place)
+            
+            mapView.addAnnotations(PlaceController.sharedController.annotations)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }

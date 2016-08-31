@@ -16,7 +16,6 @@ class PlaceController {
     let moc = Stack.sharedStack.managedObjectContext
     
     var places: [Place] {
-        
         let request = NSFetchRequest(entityName: "Place")
         
         do {
@@ -27,19 +26,23 @@ class PlaceController {
     }
     
     var annotations: [MKAnnotation] {
-        
-        var annotations: [MKAnnotation] = []
-        
-        for place in places {
+        get {
+            var annotations: [MKAnnotation] = []
             
-            let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+            for place in places {
+                
+                let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+                
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
+                
+                annotations.append(annotation)
+            }
             
-            let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
-            
-            annotations.append(annotation)
+            return annotations
         }
-        
-        return annotations
+        set {
+            
+        }
     }
     
     func addPlace(location: MKPlacemark, notes: String?) {
