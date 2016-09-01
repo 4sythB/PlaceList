@@ -177,7 +177,7 @@
         <!--Add a Place-->
         <scene sceneID="dis-Dp-sv3">
             <objects>
-                <viewController id="7z2-bd-kmx" customClass="AddPlaceViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="7z2-bd-kmx" customClass="AddPlaceViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qm1-V4-6JU"/>
                         <viewControllerLayoutGuide type="bottom" id="jER-xN-Yd5"/>
@@ -379,7 +379,7 @@
         <!--Detail Container View Controller-->
         <scene sceneID="6iH-SN-eiq">
             <objects>
-                <viewController id="z63-gB-6jo" customClass="DetailContainerViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="z63-gB-6jo" customClass="DetailContainerViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UK5-Pb-p9s"/>
                         <viewControllerLayoutGuide type="bottom" id="ddO-w4-Qe5"/>
