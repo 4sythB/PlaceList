@@ -27,14 +27,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         PlaceListViewController.locationManager.requestLocation()
     }
     
-//    func setRegion() {
-//        let location = PlaceListViewController.locationManager.location
-//        let span = mapView.region.span
-//        let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
-//        
-//        PlaceController.sharedController.region = region
-//    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
