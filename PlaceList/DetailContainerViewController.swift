@@ -27,6 +27,8 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         
         setUpContainerView()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         notesTextView.delegate = self
         
         applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
