@@ -26,6 +26,14 @@
                                     <outlet property="delegate" destination="I3c-2k-JIx" id="2yv-ez-YWh"/>
                                 </connections>
                             </mapView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAo-xP-Fg9">
+                                <rect key="frame" x="0.0" y="363" width="600" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.29999999999999999"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="l8a-qi-qz4"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OMA-w3-mgo">
                                 <rect key="frame" x="0.0" y="364" width="600" height="236"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,8 +75,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="top" secondItem="Oga-Ev-6xH" secondAttribute="bottom" id="3e2-ve-Pk4"/>
+                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8Er-n2-UZU"/>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8HJ-xq-iwv"/>
+                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="bottom" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="8wv-uI-jKU"/>
                             <constraint firstAttribute="trailing" secondItem="qxj-oD-SGS" secondAttribute="trailing" id="Hxh-pr-r0D"/>
+                            <constraint firstAttribute="trailing" secondItem="IAo-xP-Fg9" secondAttribute="trailing" id="e7A-dS-J4r"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="top" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="pjM-v5-vdG"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="tN7-Lk-QFu"/>
                             <constraint firstAttribute="trailing" secondItem="OMA-w3-mgo" secondAttribute="trailing" id="wot-JE-b7m"/>
@@ -258,8 +269,8 @@
                                                     <outlet property="delegate" destination="z63-gB-6jo" id="ExR-yg-mU9"/>
                                                 </connections>
                                             </mapView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hp-a8-7PY">
-                                                <rect key="frame" x="0.0" y="299" width="600" height="1"/>
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hp-a8-7PY">
+                                                <rect key="frame" x="0.0" y="299" width="600" height="0.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.29999999999999999"/>
                                                 <constraints>
@@ -430,7 +441,7 @@
                                                     <outlet property="delegate" destination="z63-gB-6jo" id="R0e-zW-RiS"/>
                                                 </connections>
                                             </mapView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oop-cL-ek2">
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oop-cL-ek2">
                                                 <rect key="frame" x="0.0" y="300" width="600" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.29999999999999999"/>
