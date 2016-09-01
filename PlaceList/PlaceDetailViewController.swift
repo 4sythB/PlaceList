@@ -55,6 +55,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         navigationItem.title = title
         
+        
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
@@ -115,6 +116,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         // make it look (initially) like a placeholder
         textView.textColor = UIColor.lightGrayColor()
         textView.text = placeholderText
+        textView.font = UIFont(name: "aventir", size: 18)
     }
     
     func applyNonPlaceholderStyle(textView: UITextView) {

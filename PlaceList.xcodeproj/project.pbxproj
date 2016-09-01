@@ -271,7 +271,7 @@
 				TargetAttributes = {
 					A20240431D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = K39P899U44;
+						DevelopmentTeam = XV5S682VFJ;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -503,9 +503,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PlaceList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -517,9 +518,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PlaceList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -588,6 +590,7 @@
 				A202406E1D74A31B004C2DDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A202406F1D74A31B004C2DDC /* Build configuration list for PBXNativeTarget "PlaceListTests" */ = {
 			isa = XCConfigurationList;
@@ -596,6 +599,7 @@
 				A20240711D74A31B004C2DDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A20240721D74A31B004C2DDC /* Build configuration list for PBXNativeTarget "PlaceListUITests" */ = {
 			isa = XCConfigurationList;
@@ -604,6 +608,7 @@
 				A20240741D74A31B004C2DDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -15,7 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        guard let titleFont = UIFont(name: "avenir", size: 20),
+            font = UIFont(name: "avenir", size: 18) else { return true }
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: titleFont]
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: font], forState: .Normal)
+        
         return true
     }
 
