@@ -52,6 +52,8 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         placeTitleLabel.text = title
         streetAddressLabel.text = streetAddress
         cityStateZipLabel.text = "\(city), \(state) \(zip)"
+        
+        notesTextView.font = UIFont(name: "avenir", size: 14)
     }
     
     // MARK: - TextView placeholder

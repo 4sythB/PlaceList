@@ -116,7 +116,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         // make it look (initially) like a placeholder
         textView.textColor = UIColor.lightGrayColor()
         textView.text = placeholderText
-        textView.font = UIFont(name: "aventir", size: 18)
+        textView.font = UIFont(name: "avenir", size: 14)
     }
     
     func applyNonPlaceholderStyle(textView: UITextView) {
@@ -124,6 +124,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         // make it look like normal text instead of a placeholder
         textView.textColor = UIColor.darkTextColor()
         textView.alpha = 1.0
+        textView.font = UIFont(name: "avenir", size: 14)
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
