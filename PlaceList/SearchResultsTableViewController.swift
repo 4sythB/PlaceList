@@ -74,12 +74,14 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
                 return
         }
         
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchBarText
+        request.region = region
+        
+        let search = MKLocalSearch(request: request)
+        
         if searchBarText.characters.count > 0 {
-            let request = MKLocalSearchRequest()
-            request.naturalLanguageQuery = searchBarText
-            request.region = region
             
-            let search = MKLocalSearch(request: request)
             search.startWithCompletionHandler { (response, error) in
                 if error != nil {
                     print("Error: \(error?.localizedDescription)")
@@ -89,7 +91,10 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
                     self.tableView.reloadData()
                 }
             }
-        }   
+        } else if searchBarText.characters.count == 0 {
+            
+            search.cancel()
+        }
     }
 }
 
