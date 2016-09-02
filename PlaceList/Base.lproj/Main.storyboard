@@ -71,14 +71,37 @@
                                     <outlet property="delegate" destination="I3c-2k-JIx" id="QjN-XM-P5a"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hgb-Jl-kR5">
+                                <rect key="frame" x="560" y="325" width="30" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXj-Is-cWi">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <state key="normal" image="NearMeFilled"/>
+                                        <connections>
+                                            <action selector="currentLocationButtonTapped:" destination="I3c-2k-JIx" eventType="touchUpInside" id="564-RX-C1k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="MF3-Ig-56v"/>
+                                    <constraint firstItem="tXj-Is-cWi" firstAttribute="top" secondItem="Hgb-Jl-kR5" secondAttribute="top" id="dhG-yx-Bnw"/>
+                                    <constraint firstAttribute="height" constant="30" id="jKW-C5-yxS"/>
+                                    <constraint firstItem="tXj-Is-cWi" firstAttribute="leading" secondItem="Hgb-Jl-kR5" secondAttribute="leading" id="uhL-fJ-7fo"/>
+                                    <constraint firstAttribute="bottom" secondItem="tXj-Is-cWi" secondAttribute="bottom" id="wo8-fS-YHT"/>
+                                    <constraint firstAttribute="trailing" secondItem="tXj-Is-cWi" secondAttribute="trailing" id="wv2-92-Ce6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Hgb-Jl-kR5" secondAttribute="trailing" constant="10" id="38B-fU-Ztf"/>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="top" secondItem="Oga-Ev-6xH" secondAttribute="bottom" id="3e2-ve-Pk4"/>
                             <constraint firstItem="IAo-xP-Fg9" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8Er-n2-UZU"/>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8HJ-xq-iwv"/>
                             <constraint firstItem="IAo-xP-Fg9" firstAttribute="bottom" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="8wv-uI-jKU"/>
                             <constraint firstAttribute="trailing" secondItem="qxj-oD-SGS" secondAttribute="trailing" id="Hxh-pr-r0D"/>
+                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="top" secondItem="Hgb-Jl-kR5" secondAttribute="bottom" constant="8" id="QWS-y8-EzI"/>
                             <constraint firstAttribute="trailing" secondItem="IAo-xP-Fg9" secondAttribute="trailing" id="e7A-dS-J4r"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="top" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="pjM-v5-vdG"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="tN7-Lk-QFu"/>
@@ -95,6 +118,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentLocationButton" destination="tXj-Is-cWi" id="ctD-Lc-cgn"/>
                         <outlet property="mapView" destination="qxj-oD-SGS" id="tvP-0h-ZdH"/>
                         <outlet property="tableView" destination="OMA-w3-mgo" id="GGf-gU-Zfc"/>
                     </connections>
@@ -570,4 +594,7 @@
             <point key="canvasLocation" x="367" y="-357"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NearMeFilled" width="100" height="100"/>
+    </resources>
 </document>

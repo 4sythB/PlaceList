@@ -13,10 +13,25 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var currentLocationButton: UIButton!
     
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
+    
+    var mapIsCentered: Bool = true {
+        didSet {
+            if mapIsCentered == true {
+                let image = UIImage(named: "NearMeFilled")?.imageWithRenderingMode(.AlwaysTemplate)
+                currentLocationButton.setImage(image, forState: .Normal)
+                currentLocationButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+            } else if mapIsCentered == false {
+                let image = UIImage(named: "NearMe")?.imageWithRenderingMode(.AlwaysTemplate)
+                currentLocationButton.setImage(image, forState: .Normal)
+                currentLocationButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +84,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // MARK: - Map Delegate
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        mapIsCentered = false
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -85,6 +107,19 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             destinationVC.place = place
             destinationVC.placemark = placemark
         }
+    }
+    
+    // MARK: - Action
+    
+    @IBAction func currentLocationButtonTapped(sender: AnyObject) {
+        
+        if let location = PlaceListViewController.locationManager.location {
+            let span = mapView.region.span
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+            PlaceController.sharedController.region = region
+        }
+        mapIsCentered = true
     }
 }
 
@@ -114,6 +149,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         print("Error: \(error.localizedDescription)")
     }
 }
+
 
 
 
