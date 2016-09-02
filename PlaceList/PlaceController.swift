@@ -38,21 +38,16 @@ class PlaceController {
     }
     
     var annotations: [MKAnnotation] {
-        get {
-            var annotations: [MKAnnotation] = []
+        var annotations: [MKAnnotation] = []
+        
+        for place in places {
             
-            for place in places {
-                
-                let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
-                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
-                
-                annotations.append(annotation)
-            }
-            return annotations
-        }
-        set {
+            let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+            let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
             
+            annotations.append(annotation)
         }
+        return annotations
     }
     
     // MARK: - Functions

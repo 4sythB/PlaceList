@@ -54,7 +54,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let place = PlaceController.sharedController.places[indexPath.row]
+            let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
             
             let annotations = mapView.annotations
             for annotation in annotations {
@@ -75,7 +75,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let place = PlaceController.sharedController.places[indexPath.row]
+        let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
         
         let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
