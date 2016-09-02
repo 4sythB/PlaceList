@@ -27,6 +27,16 @@ class PlaceController {
         }
     }
     
+    var sortedPlaces: [Place] {
+        var sortedPlaces: [Place] = []
+        
+        guard let currentLocation = PlaceListViewController.locationManager.location else { return sortedPlaces }
+        
+        sortedPlaces = places.sort({ $0.0.clLocation?.distanceFromLocation(currentLocation) < $0.1.clLocation?.distanceFromLocation(currentLocation) })
+        
+        return sortedPlaces
+    }
+    
     var annotations: [MKAnnotation] {
         get {
             var annotations: [MKAnnotation] = []
@@ -34,12 +44,10 @@ class PlaceController {
             for place in places {
                 
                 let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
-                
                 let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
                 
                 annotations.append(annotation)
             }
-            
             return annotations
         }
         set {
@@ -47,18 +55,18 @@ class PlaceController {
         }
     }
     
-    func addPlace(location: MKPlacemark, notes: String?) {
+    // MARK: - Functions
+    
+    func addPlace(placemark: MKPlacemark, notes: String?) {
         
-        let placemark = location
+        let latitude = placemark.coordinate.latitude
+        let longitude = placemark.coordinate.longitude
         
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
-        
-        guard let title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zip = placemark.postalCode else { return }
+        guard let title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode else { return }
         
         let streetAddress = "\(subThoroughfare) \(thoroughfare)"
         
-        let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zip, latitude: latitude, longitude: longitude, notes: notes)
+        let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
         
         self.saveToPersistentStore()
     }

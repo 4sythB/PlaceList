@@ -38,13 +38,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PlaceController.sharedController.places.count
+        return PlaceController.sharedController.sortedPlaces.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("placeListCell", forIndexPath: indexPath)
         
-        let place = PlaceController.sharedController.places[indexPath.row]
+        let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
         
         cell.textLabel?.text = place.title
         cell.detailTextLabel?.text = "\(place.city), \(place.state)"
