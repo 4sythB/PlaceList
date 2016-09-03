@@ -43,16 +43,26 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
     
     func setUpContainerView() {
         
-        guard let placemark = placemark, title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zip = placemark.postalCode else { return }
+        guard let placemark = placemark else { return }
+        
+        if let title = placemark.name {
+            placeTitleLabel.text = title
+        }
+        if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
+            let streetAddress = "\(subThoroughfare) \(thoroughfare)"
+            streetAddressLabel.text = streetAddress
+            LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
+        } else {
+            streetAddressLabel.hidden = true
+        }
+        if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+            cityStateZipLabel.text = "\(city), \(state) \(zipCode)"
+        } else {
+            cityStateZipLabel.hidden = true
+        }
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
-        
-        let streetAddress = "\(subThoroughfare) \(thoroughfare)"
-        
-        placeTitleLabel.text = title
-        streetAddressLabel.text = streetAddress
-        cityStateZipLabel.text = "\(city), \(state) \(zip)"
-        
+
         notesTextView.font = UIFont(name: "avenir", size: 14)
     }
     
