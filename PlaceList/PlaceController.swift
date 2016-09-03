@@ -59,17 +59,33 @@ class PlaceController {
         
         guard let title = placemark.name else { return }
         
-        let subThoroughfare = placemark.subThoroughfare
-        let thoroughfare = placemark.thoroughfare
-        let city = placemark.locality
-        let state = placemark.administrativeArea
-        let zipCode = placemark.postalCode
+        if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
+            let streetAddress = "\(subThoroughfare) \(thoroughfare)"
+            
+            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+                let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            } else {
+                let _ = Place(title: title, streetAddress: streetAddress, city: nil, state: nil, zipCode: nil, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            }
+        } else {
+            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+                let _ = Place(title: title, streetAddress: nil, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            } else {
+                let _ = Place(title: title, streetAddress: nil, city: nil, state: nil, zipCode: nil, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            }
+        }
         
-        let streetAddress = "\(subThoroughfare) \(thoroughfare)"
-        
-        let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
-        
-        self.saveToPersistentStore()
+//        let city = placemark.locality
+//        let state = placemark.administrativeArea
+//        let zipCode = placemark.postalCode
+//        
+//        let _ = Place(title: title, streetAddress: nil, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
+//        
+//        self.saveToPersistentStore()
     }
     
     func updateNotesForPlace(place: Place, notes: String?) {
