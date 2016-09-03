@@ -78,14 +78,6 @@ class PlaceController {
                 saveToPersistentStore()
             }
         }
-        
-//        let city = placemark.locality
-//        let state = placemark.administrativeArea
-//        let zipCode = placemark.postalCode
-//        
-//        let _ = Place(title: title, streetAddress: nil, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
-//        
-//        self.saveToPersistentStore()
     }
     
     func updateNotesForPlace(place: Place, notes: String?) {

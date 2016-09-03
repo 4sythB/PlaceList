@@ -52,6 +52,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Table view data source
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PlaceController.sharedController.sortedPlaces.count
     }
@@ -87,6 +91,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "My Saved Places"
     }
     
     // MARK: - Map Delegate
