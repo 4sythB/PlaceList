@@ -49,16 +49,28 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         guard let placemark = placemark, place = place, notes = place.notes else { return }
         
-        let title = place.title, streetAddress = place.streetAddress, city = place.city, state = place.state, zip = place.zipCode
+        let title = place.title
+        
+        if place.streetAddress == nil {
+            streetAddressLabel.hidden = true
+        } else {
+            let streetAddress = place.streetAddress
+            streetAddressLabel.text = streetAddress
+        }
+        
+        if place.city == nil || place.state == nil || place.zipCode == nil {
+            cityStateZipLabel.hidden = true
+        } else {
+            if let city = place.city, state = place.state, zipCode = place.zipCode {
+                cityStateZipLabel.text = "\(city), \(state) \(zipCode)"
+            }
+        }
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
         navigationItem.title = title
         
-        
         placeTitleLabel.text = title
-        streetAddressLabel.text = streetAddress
-        cityStateZipLabel.text = "\(city), \(state) \(zip)"
         notesTextView.text = notes
         
         editDoneButton.title = "Edit"

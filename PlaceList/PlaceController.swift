@@ -57,7 +57,13 @@ class PlaceController {
         let latitude = placemark.coordinate.latitude
         let longitude = placemark.coordinate.longitude
         
-        guard let title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode else { return }
+        guard let title = placemark.name else { return }
+        
+        let subThoroughfare = placemark.subThoroughfare
+        let thoroughfare = placemark.thoroughfare
+        let city = placemark.locality
+        let state = placemark.administrativeArea
+        let zipCode = placemark.postalCode
         
         let streetAddress = "\(subThoroughfare) \(thoroughfare)"
         

@@ -28,7 +28,7 @@
 		A202409A1D7512A7004C2DDC /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240991D7512A7004C2DDC /* CustomSearchBar.swift */; };
 		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 		A20240E41D765271004C2DDC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240E31D765271004C2DDC /* MapPin.swift */; };
-		A26871271D79F47B00A561ED /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26871261D79F47B00A561ED /* Place+CoreDataProperties.swift */; };
+		A2FA8BA21D7B5564004EFFA7 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 		A20240991D7512A7004C2DDC /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		A20240E31D765271004C2DDC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
-		A26871261D79F47B00A561ED /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Place+CoreDataProperties.swift"; path = "../Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Place+CoreDataProperties.swift"; path = "../Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +165,7 @@
 			children = (
 				A202407F1D74B3D8004C2DDC /* Stack.swift */,
 				A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */,
-				A26871261D79F47B00A561ED /* Place+CoreDataProperties.swift */,
+				A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */,
 				A202407B1D74B34D004C2DDC /* Place.swift */,
 			);
 			name = "Model + CoreData";
@@ -349,7 +349,7 @@
 				A20240481D74A31B004C2DDC /* AppDelegate.swift in Sources */,
 				A20240801D74B3D8004C2DDC /* Stack.swift in Sources */,
 				A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */,
-				A26871271D79F47B00A561ED /* Place+CoreDataProperties.swift in Sources */,
+				A2FA8BA21D7B5564004EFFA7 /* Place+CoreDataProperties.swift in Sources */,
 				A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */,
 				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
 				A20240E41D765271004C2DDC /* MapPin.swift in Sources */,

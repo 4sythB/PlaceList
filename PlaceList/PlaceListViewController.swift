@@ -62,7 +62,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
         
         cell.textLabel?.text = place.title
-        cell.detailTextLabel?.text = "\(place.city), \(place.state)"
+        
+        if let city = place.city, state = place.state {
+            cell.detailTextLabel?.text = "\(city), \(state)"
+        } else {
+            cell.detailTextLabel?.text = place.title
+        }
         
         return cell
     }
