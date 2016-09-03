@@ -114,7 +114,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func currentLocationButtonTapped(sender: AnyObject) {
         
         if let location = PlaceListViewController.locationManager.location {
-            let span = mapView.region.span
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: true)
             PlaceController.sharedController.region = region
