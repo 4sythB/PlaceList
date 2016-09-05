@@ -30,6 +30,7 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         self.automaticallyAdjustsScrollViewInsets = false
         
         notesTextView.delegate = self
+        notesTextView.layer.cornerRadius = 8.0
         
         applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
         

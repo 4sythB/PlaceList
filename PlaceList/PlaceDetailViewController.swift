@@ -34,6 +34,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         notesTextView.delegate = self
         notesTextView.editable = true
+        notesTextView.layer.cornerRadius = 8.0
         
         if notesTextView.text == placeholderText {
             applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
