@@ -18,6 +18,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var editDoneButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var directionsButton: UIButton!
     
     var place: Place?
     var placemark: MKPlacemark?
@@ -47,6 +48,14 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func setUpView() {
+        
+        // Directions Button
+        
+        let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
+        directionsButton.setImage(image, forState: .Normal)
+        directionsButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+        
+        // Labels/MapView
         
         guard let placemark = placemark, place = place, notes = place.notes else { return }
         
@@ -112,6 +121,24 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     // MARK: - Action
+    
+    @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
+        
+        let latitude: CLLocationDegrees =  (place?.latitude)!
+        let longitude: CLLocationDegrees =  (place?.longitude)!
+        
+        let regionDistance: CLLocationDistance = 0.1
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+        ]
+        
+        let mapItem = MKMapItem(placemark: placemark!)
+        mapItem.name = place?.title
+        mapItem.openInMapsWithLaunchOptions(options)
+    }
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         
