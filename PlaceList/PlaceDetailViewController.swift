@@ -32,6 +32,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         setUpView()
         
         notesTextView.delegate = self
+        notesTextView.editable = true
         
         if notesTextView.text == placeholderText {
             applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
@@ -73,7 +74,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         placeTitleLabel.text = title
         notesTextView.text = notes
         
-        editDoneButton.title = "Edit"
+        editDoneButton.title = ""
         editDoneButton.style = .Plain
     }
     
@@ -86,8 +87,10 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func goToEditMode() {
         
+        editDoneButton.enabled = true
         editDoneButton.title = "Done"
         editDoneButton.style = .Done
+        
         mode = .EditMode
         
         notesTextView.editable = true
@@ -95,11 +98,13 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func goToViewMode() {
         
-        editDoneButton.title = "Edit"
+        editDoneButton.enabled = false
+        editDoneButton.title = ""
         editDoneButton.style = .Plain
+        
         mode = .ViewMode
         
-        notesTextView.editable = false
+        notesTextView.resignFirstResponder()
         
         guard let place = place, notes = notesTextView.text else { return }
         
@@ -108,17 +113,21 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Action
     
-    @IBAction func viewModeButtonTapped(sender: AnyObject) {
+    @IBAction func doneButtonTapped(sender: AnyObject) {
         
-        switch mode {
-        case .ViewMode:
-            goToEditMode()
-            return
-            
-        case .EditMode:
-            goToViewMode()
-            return
-        }
+        goToViewMode()
+    }
+    
+    // MARK: - Editing/saving
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        goToEditMode()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        guard let place = place, notes = notesTextView.text else { return }
+        
+        PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
     
     // MARK: - TextView placeholder

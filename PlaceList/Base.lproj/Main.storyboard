@@ -394,7 +394,7 @@
                     <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="NLq-vl-zok">
                             <connections>
-                                <action selector="viewModeButtonTapped:" destination="76t-0G-yUL" id="t9i-0D-xFe"/>
+                                <action selector="doneButtonTapped:" destination="76t-0G-yUL" id="y8c-Ae-Y2I"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
