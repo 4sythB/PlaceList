@@ -87,6 +87,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = UIColor.blackColor()
+        header.textLabel?.font = UIFont(name: "avenir-medium", size: 16)!
+    }
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "My Saved Places"
     }
