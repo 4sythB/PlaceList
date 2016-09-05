@@ -127,20 +127,9 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func getDirections() {
         
-        let latitude: CLLocationDegrees =  (place?.latitude)!
-        let longitude: CLLocationDegrees =  (place?.longitude)!
-        
-        let regionDistance: CLLocationDistance = 0.1
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-        let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
-        ]
-        
         let mapItem = MKMapItem(placemark: placemark!)
         mapItem.name = place?.title
-        mapItem.openInMapsWithLaunchOptions(options)
+        mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     // MARK: - Action
