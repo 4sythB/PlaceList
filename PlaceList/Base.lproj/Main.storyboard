@@ -349,36 +349,13 @@
                                                     <constraint firstAttribute="trailing" secondItem="9gR-Gg-zxm" secondAttribute="trailing" id="ocg-Gt-KOo"/>
                                                 </constraints>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlf-jD-jOX">
-                                                <rect key="frame" x="10" y="10" width="30" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBC-UI-zbi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                        <state key="normal" image="Arrow"/>
-                                                        <connections>
-                                                            <action selector="getDirectionsButtonTapped:" destination="76t-0G-yUL" eventType="touchUpInside" id="jHu-kw-cJB"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="3fg-09-u35"/>
-                                                    <constraint firstAttribute="width" constant="30" id="Ob4-R7-86S"/>
-                                                    <constraint firstItem="PBC-UI-zbi" firstAttribute="leading" secondItem="hlf-jD-jOX" secondAttribute="leading" id="SBe-3p-TNG"/>
-                                                    <constraint firstItem="PBC-UI-zbi" firstAttribute="top" secondItem="hlf-jD-jOX" secondAttribute="top" id="Wic-bl-fYB"/>
-                                                    <constraint firstAttribute="trailing" secondItem="PBC-UI-zbi" secondAttribute="trailing" id="ZS3-eN-omj"/>
-                                                    <constraint firstAttribute="bottom" secondItem="PBC-UI-zbi" secondAttribute="bottom" id="wei-tM-BLe"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="hlf-jD-jOX" firstAttribute="top" secondItem="QOy-eI-fly" secondAttribute="top" constant="10" id="48M-XD-BNb"/>
                                             <constraint firstItem="Gi5-QQ-NjP" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="16" id="4LK-Sf-sfa"/>
                                             <constraint firstItem="pvL-pd-Wfk" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="16" id="9Su-vz-m4f"/>
                                             <constraint firstItem="pvL-pd-Wfk" firstAttribute="top" secondItem="3hp-a8-7PY" secondAttribute="bottom" constant="10" id="Bxw-dp-02P"/>
                                             <constraint firstAttribute="bottom" secondItem="Gi5-QQ-NjP" secondAttribute="bottom" constant="8" id="F91-Th-xuj"/>
-                                            <constraint firstItem="hlf-jD-jOX" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" constant="10" id="I6R-km-2hD"/>
                                             <constraint firstItem="HcR-59-Sgg" firstAttribute="width" secondItem="QOy-eI-fly" secondAttribute="width" id="Lzx-Oj-w6I"/>
                                             <constraint firstItem="3hp-a8-7PY" firstAttribute="leading" secondItem="QOy-eI-fly" secondAttribute="leading" id="NaX-Rl-PVC"/>
                                             <constraint firstItem="Gi5-QQ-NjP" firstAttribute="top" secondItem="pvL-pd-Wfk" secondAttribute="bottom" constant="8" id="Out-Rm-W8z"/>
@@ -410,17 +387,9 @@
                             <constraint firstAttribute="trailing" secondItem="8ca-Wh-LuS" secondAttribute="trailing" id="yTs-jF-AkL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="NLq-vl-zok">
-                            <connections>
-                                <action selector="doneButtonTapped:" destination="76t-0G-yUL" id="y8c-Ae-Y2I"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ"/>
                     <connections>
                         <outlet property="cityStateZipLabel" destination="Ldp-Ps-RXn" id="Jxu-jF-ifB"/>
-                        <outlet property="directionsButton" destination="PBC-UI-zbi" id="Qsj-Rq-ZAk"/>
-                        <outlet property="editDoneButton" destination="NLq-vl-zok" id="PLg-b9-QXy"/>
                         <outlet property="mapView" destination="HcR-59-Sgg" id="6kI-YH-Kbc"/>
                         <outlet property="notesTextView" destination="9gR-Gg-zxm" id="Fw1-Xd-FTm"/>
                         <outlet property="placeTitleLabel" destination="0bb-SB-HQK" id="fXZ-Ga-f0H"/>
@@ -611,7 +580,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Arrow" width="100" height="100"/>
         <image name="NearMeFilled" width="100" height="100"/>
     </resources>
 </document>

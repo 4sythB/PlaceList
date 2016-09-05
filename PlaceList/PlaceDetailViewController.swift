@@ -16,12 +16,12 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var streetAddressLabel: UILabel!
     @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var editDoneButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var directionsButton: UIButton!
     
     var place: Place?
     var placemark: MKPlacemark?
+    
+    let directionsButton = UIButton()
     
     let placeholderText = "Type your notes here"
     
@@ -52,8 +52,14 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         // Directions Button
         
         let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
+        directionsButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
         directionsButton.setImage(image, forState: .Normal)
         directionsButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+        directionsButton.addTarget(self, action: #selector(PlaceDetailViewController.getDirections), forControlEvents: .TouchUpInside)
+        
+        let barButton = UIBarButtonItem()
+        barButton.customView = directionsButton
+        self.navigationItem.rightBarButtonItem = barButton
         
         // Labels/MapView
         
@@ -82,9 +88,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         placeTitleLabel.text = title
         notesTextView.text = notes
-        
-        editDoneButton.title = ""
-        editDoneButton.style = .Plain
     }
     
     // MARK: - View mode
@@ -96,9 +99,10 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func goToEditMode() {
         
-        editDoneButton.enabled = true
-        editDoneButton.title = "Done"
-        editDoneButton.style = .Done
+        directionsButton.removeFromSuperview()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(PlaceDetailViewController.goToViewMode))
+        self.navigationItem.rightBarButtonItem = doneButton
         
         mode = .EditMode
         
@@ -107,9 +111,9 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func goToViewMode() {
         
-        editDoneButton.enabled = false
-        editDoneButton.title = ""
-        editDoneButton.style = .Plain
+        let barButton = UIBarButtonItem()
+        barButton.customView = directionsButton
+        self.navigationItem.rightBarButtonItem = barButton
         
         mode = .ViewMode
         
@@ -120,9 +124,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
     
-    // MARK: - Action
-    
-    @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
+    func getDirections() {
         
         let latitude: CLLocationDegrees =  (place?.latitude)!
         let longitude: CLLocationDegrees =  (place?.longitude)!
@@ -139,6 +141,8 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         mapItem.name = place?.title
         mapItem.openInMapsWithLaunchOptions(options)
     }
+    
+    // MARK: - Action
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         
