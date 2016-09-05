@@ -446,10 +446,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <subviews>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="s7L-UV-Map">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="275"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="7k5-hO-wFf"/>
-                                                    <constraint firstAttribute="height" constant="300" id="J0F-te-hyc"/>
+                                                    <constraint firstAttribute="height" constant="275" id="J0F-te-hyc"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="nGl-xd-xcb"/>
                                                 </constraints>
                                                 <variation key="default">
@@ -463,7 +463,7 @@
                                                 </connections>
                                             </mapView>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oop-cL-ek2">
-                                                <rect key="frame" x="0.0" y="300" width="600" height="1"/>
+                                                <rect key="frame" x="0.0" y="275" width="600" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.29999999999999999"/>
                                                 <constraints>
@@ -471,7 +471,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
-                                                <rect key="frame" x="16" y="311" width="568" height="79.5"/>
+                                                <rect key="frame" x="16" y="286" width="568" height="79.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
                                                         <rect key="frame" x="0.0" y="0.0" width="568" height="27.5"/>
@@ -494,7 +494,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="48H-F5-zcI">
-                                                <rect key="frame" x="16" y="398.5" width="568" height="129.5"/>
+                                                <rect key="frame" x="16" y="373.5" width="568" height="154.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
                                                         <rect key="frame" x="0.0" y="0.0" width="568" height="22"/>
@@ -503,7 +503,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
-                                                        <rect key="frame" x="0.0" y="22" width="568" height="107.5"/>
+                                                        <rect key="frame" x="0.0" y="22" width="568" height="132.5"/>
                                                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.25" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
