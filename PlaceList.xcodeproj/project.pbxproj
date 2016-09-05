@@ -29,6 +29,7 @@
 		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 		A20240E41D765271004C2DDC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240E31D765271004C2DDC /* MapPin.swift */; };
 		A2FA8BA21D7B5564004EFFA7 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */; };
+		A2FA8BC81D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		A20240E31D765271004C2DDC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Place+CoreDataProperties.swift"; path = "../Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				A202408C1D74CC75004C2DDC /* PlaceListViewController.swift */,
+				A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */,
 				A202408F1D74CCBB004C2DDC /* PlaceDetailViewController.swift */,
 				A20240971D75099D004C2DDC /* SearchTableViewController.swift */,
 				A20240911D74CCD0004C2DDC /* SearchResultsTableViewController.swift */,
@@ -340,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2FA8BC81D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift in Sources */,
 				A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */,
 				A202409A1D7512A7004C2DDC /* CustomSearchBar.swift in Sources */,
 				A20240901D74CCBB004C2DDC /* PlaceDetailViewController.swift in Sources */,

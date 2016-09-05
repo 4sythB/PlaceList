@@ -61,17 +61,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("placeListCell", forIndexPath: indexPath)
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("placeListCell", forIndexPath: indexPath) as? PlaceListTableViewCell else { return UITableViewCell() }
         
         let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
         
-        cell.textLabel?.text = place.title
-        
-        if let city = place.city, state = place.state {
-            cell.detailTextLabel?.text = "\(city), \(state)"
-        } else {
-            cell.detailTextLabel?.text = place.title
-        }
+        cell.updateWithPlace(place)
         
         return cell
     }
