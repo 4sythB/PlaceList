@@ -26,6 +26,9 @@ class PlaceListTableViewCell: UITableViewCell {
 
     func updateWithPlace(place: Place) {
         
+        placeTitleLabel.textColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0)
+        placeAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        
         placeTitleLabel.text = place.title
         
         if let city = place.city, state = place.state {

@@ -24,11 +24,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             if mapIsCentered == true {
                 let image = UIImage(named: "NearMeFilled")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+                currentLocationButton.tintColor = UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
             } else if mapIsCentered == false {
                 let image = UIImage(named: "NearMe")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+                currentLocationButton.tintColor = UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
             }
         }
     }
@@ -89,7 +89,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = UIColor.blackColor()
+        header.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         header.textLabel?.font = UIFont(name: "avenir-medium", size: 16)!
     }
     

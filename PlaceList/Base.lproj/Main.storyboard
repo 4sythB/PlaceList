@@ -309,31 +309,31 @@
                                                     <constraint firstAttribute="height" constant="1" id="ok2-2f-fIo"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-pd-Wfk">
-                                                <rect key="frame" x="16" y="285" width="568" height="79.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-pd-Wfk">
+                                                <rect key="frame" x="16" y="285" width="568" height="79"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bb-SB-HQK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="568" height="27.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bb-SB-HQK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="568" height="27"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="312-R4-VPU">
-                                                        <rect key="frame" x="0.0" y="31.5" width="568" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="312-R4-VPU">
+                                                        <rect key="frame" x="0.0" y="31" width="568" height="22"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldp-Ps-RXn">
-                                                        <rect key="frame" x="0.0" y="57.5" width="568" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldp-Ps-RXn">
+                                                        <rect key="frame" x="0.0" y="57" width="568" height="22"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Gi5-QQ-NjP">
-                                                <rect key="frame" x="16" y="372.5" width="568" height="155.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Gi5-QQ-NjP">
+                                                <rect key="frame" x="16" y="372" width="568" height="156"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlA-OM-wNU">
                                                         <rect key="frame" x="0.0" y="0.0" width="568" height="22"/>
@@ -341,8 +341,8 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
-                                                        <rect key="frame" x="0.0" y="22" width="568" height="133.5"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gR-Gg-zxm">
+                                                        <rect key="frame" x="0.0" y="22" width="568" height="134"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.25366379310344828" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -398,7 +398,9 @@
                     <navigationItem key="navigationItem" title="Place" id="wdQ-ak-ggJ"/>
                     <connections>
                         <outlet property="cityStateZipLabel" destination="Ldp-Ps-RXn" id="Jxu-jF-ifB"/>
+                        <outlet property="containerView" destination="QOy-eI-fly" id="v7R-QE-n1G"/>
                         <outlet property="mapView" destination="HcR-59-Sgg" id="6kI-YH-Kbc"/>
+                        <outlet property="notesHeadingLabel" destination="jlA-OM-wNU" id="A4G-Gw-KwL"/>
                         <outlet property="notesTextView" destination="9gR-Gg-zxm" id="Fw1-Xd-FTm"/>
                         <outlet property="placeTitleLabel" destination="0bb-SB-HQK" id="fXZ-Ga-f0H"/>
                         <outlet property="scrollView" destination="8ca-Wh-LuS" id="LAd-Vi-ZI8"/>

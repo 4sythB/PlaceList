@@ -16,11 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        guard let titleFont = UIFont(name: "avenir", size: 20),
+        guard let titleFont = UIFont(name: "avenir-medium", size: 20),
             font = UIFont(name: "avenir", size: 18) else { return true }
         
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: titleFont]
+        UINavigationBar.appearance().barTintColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0), NSFontAttributeName: titleFont]
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: font], forState: .Normal)
+        
+        UITableView.appearance().backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
+        UITableViewCell.appearance().backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
         
         return true
     }

@@ -15,8 +15,10 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var placeTitleLabel: UILabel!
     @IBOutlet weak var streetAddressLabel: UILabel!
     @IBOutlet weak var cityStateZipLabel: UILabel!
+    @IBOutlet weak var notesHeadingLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
     
     var place: Place?
     var placemark: MKPlacemark?
@@ -50,12 +52,24 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     func setUpView() {
         
+        // Appearance
+        
+        view.backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
+        containerView.backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
+        
+        placeTitleLabel.textColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0)
+        streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        cityStateZipLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        notesHeadingLabel.textColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0)
+        notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
+        notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        
         // Directions Button
         
         let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
         directionsButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
         directionsButton.setImage(image, forState: .Normal)
-        directionsButton.tintColor = UIColor.init(red: 0.02, green: 0.49, blue: 1.00, alpha: 1.0)
+        directionsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         directionsButton.addTarget(self, action: #selector(PlaceDetailViewController.getDirections), forControlEvents: .TouchUpInside)
         
         let barButton = UIBarButtonItem()
