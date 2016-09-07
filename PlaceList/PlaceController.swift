@@ -43,9 +43,19 @@ class PlaceController {
         for place in places {
             
             let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
-            let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(place.streetAddress), \(place.city)")
             
-            annotations.append(annotation)
+            if place.streetAddress == nil && place.city == nil {
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: nil)
+                annotations.append(annotation)
+            } else if place.streetAddress == nil && place.city != nil {
+                guard let city = place.city else { return [] }
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: city)
+                annotations.append(annotation)
+            } else if place.streetAddress != nil && place.city != nil {
+                guard let streetAddress = place.streetAddress, city = place.city else { return [] }
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(streetAddress), \(city)")
+                annotations.append(annotation)
+            }
         }
         return annotations
     }
