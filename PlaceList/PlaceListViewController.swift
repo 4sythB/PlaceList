@@ -14,10 +14,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationButton: UIButton!
+    @IBOutlet weak var mapBarButton: UIBarButtonItem!
     
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
+    
+    let mapButton = UIButton()
     
     var mapIsCentered: Bool = true {
         didSet {
@@ -45,9 +48,32 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        setUpButton()
+        
         tableView.reloadData()
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
         mapView.addAnnotations(PlaceController.sharedController.annotations)
+    }
+    
+    // MARK: - Map Button
+    
+    func setUpButton() {
+        
+        let image = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+        mapButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
+        mapButton.setImage(image, forState: .Normal)
+        mapButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        mapButton.addTarget(self, action: #selector(showMapView), forControlEvents: .TouchUpInside)
+        
+        let barButton = UIBarButtonItem()
+        barButton.customView = mapButton
+        self.navigationItem.leftBarButtonItem = barButton
+    }
+    
+    func showMapView() {
+        
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MapViewController") as? MapViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Table view data source

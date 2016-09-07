@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let titleFont = UIFont(name: "avenir-medium", size: 20),
             font = UIFont(name: "avenir", size: 18) else { return true }
         
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         UINavigationBar.appearance().barTintColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0), NSFontAttributeName: titleFont]

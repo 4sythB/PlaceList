@@ -135,6 +135,41 @@
             </objects>
             <point key="canvasLocation" x="1179" y="341"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="d8P-dG-8cM">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="Gwg-Ck-7EW" customClass="MapViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0lj-8u-H5g"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fys-0C-Uiw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FfE-FQ-Pea">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bG9-V0-wx9">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Gwg-Ck-7EW" id="XLv-d6-uKb"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bG9-V0-wx9" secondAttribute="trailing" id="0eW-Bn-QjE"/>
+                            <constraint firstItem="Fys-0C-Uiw" firstAttribute="top" secondItem="bG9-V0-wx9" secondAttribute="bottom" id="BS8-gr-jic"/>
+                            <constraint firstItem="bG9-V0-wx9" firstAttribute="top" secondItem="0lj-8u-H5g" secondAttribute="bottom" id="UFZ-5y-yET"/>
+                            <constraint firstItem="bG9-V0-wx9" firstAttribute="leading" secondItem="FfE-FQ-Pea" secondAttribute="leading" id="zZb-R2-5aq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="bG9-V0-wx9" id="bhU-1X-xzY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tIn-x0-tCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1179" y="1050"/>
+        </scene>
         <!--Search-->
         <scene sceneID="4cJ-Fx-BKC">
             <objects>

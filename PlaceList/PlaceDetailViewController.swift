@@ -70,7 +70,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         directionsButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
         directionsButton.setImage(image, forState: .Normal)
         directionsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        directionsButton.addTarget(self, action: #selector(PlaceDetailViewController.getDirections), forControlEvents: .TouchUpInside)
+        directionsButton.addTarget(self, action: #selector(getDirections), forControlEvents: .TouchUpInside)
         
         let barButton = UIBarButtonItem()
         barButton.customView = directionsButton
