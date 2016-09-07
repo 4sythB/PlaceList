@@ -14,7 +14,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationButton: UIButton!
-    @IBOutlet weak var mapBarButton: UIBarButtonItem!
     
     static let locationManager = CLLocationManager()
     
