@@ -52,6 +52,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
         mapView.addAnnotations(PlaceController.sharedController.annotations)
+        
+        guard let location = PlaceListViewController.locationManager.location else { return }
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        PlaceController.sharedController.region = region
     }
     
     // MARK: - Map Button
