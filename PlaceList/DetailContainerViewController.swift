@@ -48,13 +48,13 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         
         // Appearance
         
-        view.backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
-        containerView.backgroundColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
+        view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        containerView.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         
-        placeTitleLabel.textColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0)
+        placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
         streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         cityStateZipLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        notesHeadingLabel.textColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1.0)
+        notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
         notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
         notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
@@ -97,7 +97,7 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
     func applyNonPlaceholderStyle(textView: UITextView) {
         
         // make it look like normal text instead of a placeholder
-        textView.textColor = UIColor.darkTextColor()
+        textView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         textView.alpha = 1.0
     }
     
