@@ -31,14 +31,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(item.placemark)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let mapRegion = region {
             mapView.setRegion(mapRegion, animated: true)
         }
-
+        
         setupSearchController()
     }
     
@@ -53,17 +53,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func longPressAction(sender: UILongPressGestureRecognizer) {
         
-        let location = sender.locationInView(self.mapView)
-        let coordinate = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
+        if sender.state == .Began {
+            let location = sender.locationInView(mapView)
+            let coordinate = mapView.convertPoint(location,toCoordinateFromView: mapView)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "New Location"
+            annotation.subtitle = "Tap to add location"
+            
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
-        let annotation = MKPointAnnotation()
+        if annotation is MKUserLocation {
+            return nil
+        }
         
-        annotation.coordinate = coordinate
-        annotation.title = "New Location"
-        annotation.subtitle = "Tap to add location"
+        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         
-        self.mapView.removeAnnotations(mapView.annotations)
-        self.mapView.addAnnotation(annotation)
+        pinView.canShowCallout = true
+        pinView.animatesDrop = true
+        
+        return pinView
     }
     
     // MARK: - Search
@@ -74,7 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         resultsSearchController = UISearchController(searchResultsController: locationSearchTable)
         
-//        resultsSearchController?.delegate = self
+        //        resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
         
@@ -98,23 +113,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         PlaceController.sharedController.region = mapView.region
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 //extension MapViewController: UISearchControllerDelegate {
-//    
+//
 //    func didPresentSearchController(searchController: UISearchController) {
-//        
+//
 //        dispatch_async(dispatch_get_main_queue()) {
 //            self.resultsSearchController?.active = true
 //            self.resultsSearchController?.searchBar.becomeFirstResponder()
