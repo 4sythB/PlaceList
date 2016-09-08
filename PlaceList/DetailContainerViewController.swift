@@ -58,6 +58,8 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
         notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
+        notesTextView.keyboardAppearance = .Dark
+        
         // Labels/MapView
         
         guard let placemark = placemark else { return }

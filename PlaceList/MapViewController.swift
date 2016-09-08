@@ -115,6 +115,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         searchBar.searchBarStyle = .Default
+        searchBar.keyboardAppearance = .Dark
         navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
