@@ -42,7 +42,7 @@ class AddPlaceViewController: UIViewController {
         
         PlaceController.sharedController.addPlace(placemark, notes: notes)
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("toPlaceListSegue", sender: self)
     }
 }
 

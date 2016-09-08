@@ -339,8 +339,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="YuC-H6-sXr" kind="unwind" identifier="toPlaceListSegue" unwindAction="prepareForUnwind:" id="orC-18-LIM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDA-gp-ARF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="YuC-H6-sXr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1860" y="-1044"/>
         </scene>
@@ -682,6 +686,6 @@
         <image name="NearMeFilled" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QRd-mJ-VNj"/>
+        <segue reference="lfI-bG-bB1"/>
     </inferredMetricsTieBreakers>
 </document>
