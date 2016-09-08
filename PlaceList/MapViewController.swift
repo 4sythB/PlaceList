@@ -16,6 +16,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var resultsSearchController: UISearchController? = nil
     
     var region = PlaceController.sharedController.region
+    
+    static var matchingItems: [MKMapItem] = []
+    
+    var item: MKMapItem? {
+        didSet {
+            guard let item = item else { return }
+            
+            let coordinates = CLLocationCoordinate2DMake(item.placemark.coordinate.latitude, item.placemark.coordinate.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            let region = MKCoordinateRegion(center: coordinates, span: span)
+            mapView.setRegion(region, animated: true)
+            
+            mapView.addAnnotation(item.placemark)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +39,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.setRegion(mapRegion, animated: true)
         }
 
-        let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
+        setupSearchController()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        guard let item = item else { return }
+        mapView.addAnnotation(item.placemark)
+    }
+    
+    // MARK: - Search
+    
+    func setupSearchController() {
+        
+        let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("ResultsTableViewController") as? ResultsTableViewController
         
         resultsSearchController = UISearchController(searchResultsController: locationSearchTable)
         
-        resultsSearchController?.delegate = self
+//        resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
         
@@ -65,16 +94,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
 }
 
-extension MapViewController: UISearchControllerDelegate {
-    
-    func didPresentSearchController(searchController: UISearchController) {
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.resultsSearchController?.active = true
-            self.resultsSearchController?.searchBar.becomeFirstResponder()
-        }
-    }
-}
+//extension MapViewController: UISearchControllerDelegate {
+//    
+//    func didPresentSearchController(searchController: UISearchController) {
+//        
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.resultsSearchController?.active = true
+//            self.resultsSearchController?.searchBar.becomeFirstResponder()
+//        }
+//    }
+//}
 
 
 
