@@ -35,7 +35,7 @@ class AddPlaceViewController: UIViewController {
             detailContainerViewController.placemark = placemark
         }
     }
-
+    
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
         guard let placemark = placemark, notes = detailContainerViewController.notesTextView.text else { return }
