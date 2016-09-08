@@ -29,7 +29,7 @@ class SearchTableViewController: UITableViewController {
         let searchBar = resultsSearchController.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
-        searchBar.searchBarStyle = .Minimal
+        searchBar.searchBarStyle = .Default
         navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
