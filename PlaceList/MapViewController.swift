@@ -90,13 +90,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         guard let annotation = self.annotation else { return }
         
         let seconds = 0.5
-        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
             
             mapView.selectAnnotation(annotation, animated: false)
-            
         })
     }
     
