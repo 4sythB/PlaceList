@@ -17,6 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var region = PlaceController.sharedController.region
     
+    var annotation: MKAnnotation?
+    
     static var matchingItems: [MKMapItem] = []
     
     var item: MKMapItem? {
@@ -62,6 +64,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotation.title = "New Location"
             annotation.subtitle = "Tap to add location"
             
+            self.annotation = annotation
+            
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotation(annotation)
         }
@@ -81,6 +85,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        
+        guard let annotation = self.annotation else { return }
+        
+        let seconds = 0.5
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            mapView.selectAnnotation(annotation, animated: false)
+            
+        })
+    }
+    
     // MARK: - Search
     
     func setupSearchController() {
@@ -88,8 +107,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("ResultsTableViewController") as? ResultsTableViewController
         
         resultsSearchController = UISearchController(searchResultsController: locationSearchTable)
-        
-        //        resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
         
@@ -126,16 +143,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
 }
 
-//extension MapViewController: UISearchControllerDelegate {
-//
-//    func didPresentSearchController(searchController: UISearchController) {
-//
-//        dispatch_async(dispatch_get_main_queue()) {
-//            self.resultsSearchController?.active = true
-//            self.resultsSearchController?.searchBar.becomeFirstResponder()
-//        }
-//    }
-//}
 
 
 
