@@ -20,7 +20,7 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var notesHeadingLabel: UILabel!
     
-    var placemark: MKPlacemark? = nil
+    var placemark: MKPlacemark?
     
     let placeholderText = "Type your notes here"
     
@@ -58,15 +58,23 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
         notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
+        notesTextView.font = UIFont(name: "avenir", size: 14)
+        
         notesTextView.keyboardAppearance = .Dark
         
         // Labels/MapView
         
-        guard let placemark = placemark else { return }
+        guard let placemark = placemark else {
+            print("Placemark is nil")
+            return
+        }
+        
+        LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
         if let title = placemark.name {
             placeTitleLabel.text = title
         }
+        
         if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
             let streetAddress = "\(subThoroughfare) \(thoroughfare)"
             streetAddressLabel.text = streetAddress
@@ -79,10 +87,6 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         } else {
             cityStateZipLabel.hidden = true
         }
-        
-        LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
-
-        notesTextView.font = UIFont(name: "avenir", size: 14)
     }
     
     // MARK: - TextView placeholder

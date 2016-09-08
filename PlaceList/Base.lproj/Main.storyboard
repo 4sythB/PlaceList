@@ -166,6 +166,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="bG9-V0-wx9" id="bhU-1X-xzY"/>
+                        <segue destination="7z2-bd-kmx" kind="show" identifier="savePinSegue" id="lfI-bG-bB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIn-x0-tCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -219,7 +220,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p5f-cq-Yea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1860" y="1050"/>
+            <point key="canvasLocation" x="367" y="1050"/>
         </scene>
         <!--Search-->
         <scene sceneID="4cJ-Fx-BKC">
@@ -307,7 +308,7 @@
         <!--Add a Place-->
         <scene sceneID="dis-Dp-sv3">
             <objects>
-                <viewController id="7z2-bd-kmx" customClass="AddPlaceViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlaceViewController" id="7z2-bd-kmx" customClass="AddPlaceViewController" customModule="PlaceList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qm1-V4-6JU"/>
                         <viewControllerLayoutGuide type="bottom" id="jER-xN-Yd5"/>
@@ -332,11 +333,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add a Place" id="uFz-Po-vU4">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="KNx-VI-72N">
-                            <connections>
-                                <action selector="cancelButtonTapped:" destination="7z2-bd-kmx" id="wCt-UX-qFV"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="uK3-vZ-gQ2">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="7z2-bd-kmx" id="kqb-0y-ni6"/>
@@ -558,31 +554,31 @@
                                                     <constraint firstAttribute="height" constant="1" id="Xwb-HK-eSW"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
-                                                <rect key="frame" x="16" y="286" width="568" height="79.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
+                                                <rect key="frame" x="16" y="286" width="568" height="79"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="568" height="27.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="568" height="27"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
-                                                        <rect key="frame" x="0.0" y="31.5" width="568" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
+                                                        <rect key="frame" x="0.0" y="31" width="568" height="22"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
-                                                        <rect key="frame" x="0.0" y="57.5" width="568" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
+                                                        <rect key="frame" x="0.0" y="57" width="568" height="22"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="48H-F5-zcI">
-                                                <rect key="frame" x="16" y="373.5" width="568" height="154.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="48H-F5-zcI">
+                                                <rect key="frame" x="16" y="374" width="568" height="155"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
                                                         <rect key="frame" x="0.0" y="0.0" width="568" height="22"/>
@@ -590,8 +586,8 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
-                                                        <rect key="frame" x="0.0" y="22" width="568" height="132.5"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
+                                                        <rect key="frame" x="0.0" y="22" width="568" height="133"/>
                                                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.25" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -605,6 +601,11 @@
                                                     <constraint firstItem="Xyi-Vc-vv3" firstAttribute="leading" secondItem="48H-F5-zcI" secondAttribute="leading" id="sgJ-i9-r6t"/>
                                                     <constraint firstAttribute="trailing" secondItem="xL9-rF-KVV" secondAttribute="trailing" id="wAD-sy-BBu"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="iU1-8p-G2f"/>
+                                                    </mask>
+                                                </variation>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -680,4 +681,7 @@
     <resources>
         <image name="NearMeFilled" width="100" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="QRd-mJ-VNj"/>
+    </inferredMetricsTieBreakers>
 </document>

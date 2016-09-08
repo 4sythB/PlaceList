@@ -11,7 +11,7 @@ import MapKit
 
 class AddPlaceViewController: UIViewController {
     
-    var placemark: MKPlacemark? = nil
+    var placemark: MKPlacemark?
     
     var detailContainerViewController: DetailContainerViewController!
     
@@ -19,6 +19,7 @@ class AddPlaceViewController: UIViewController {
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
+        
     }
     
     // MARK: - Navigation
@@ -34,14 +35,7 @@ class AddPlaceViewController: UIViewController {
             detailContainerViewController.placemark = placemark
         }
     }
-    
-    // MARK: - Actions
-    
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
         guard let placemark = placemark, notes = detailContainerViewController.notesTextView.text else { return }
