@@ -49,6 +49,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(item.placemark)
     }
     
+    // MARK: - Long press gesture action
+    
+    @IBAction func longPressAction(sender: UILongPressGestureRecognizer) {
+        
+        let location = sender.locationInView(self.mapView)
+        let coordinate = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
+        
+        let annotation = MKPointAnnotation()
+        
+        annotation.coordinate = coordinate
+        annotation.title = "New Location"
+        annotation.subtitle = "Tap to add location"
+        
+        self.mapView.removeAnnotations(mapView.annotations)
+        self.mapView.addAnnotation(annotation)
+    }
+    
     // MARK: - Search
     
     func setupSearchController() {
