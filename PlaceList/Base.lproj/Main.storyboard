@@ -645,7 +645,9 @@
                     </view>
                     <connections>
                         <outlet property="cityStateZipLabel" destination="ypa-ku-ncv" id="hB8-Fq-Nzj"/>
+                        <outlet property="containerView" destination="XjM-wQ-Hvc" id="0MW-cz-XJB"/>
                         <outlet property="mapView" destination="s7L-UV-Map" id="6Ha-8T-Na0"/>
+                        <outlet property="notesHeadingLabel" destination="Xyi-Vc-vv3" id="4AZ-FG-Wgw"/>
                         <outlet property="notesTextView" destination="xL9-rF-KVV" id="g0i-cK-jXc"/>
                         <outlet property="placeTitleLabel" destination="ufM-IN-NRy" id="S9Y-ff-Je1"/>
                         <outlet property="scrollView" destination="g5B-eV-r6z" id="hsN-vZ-3Gj"/>
