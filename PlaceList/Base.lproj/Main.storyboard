@@ -299,9 +299,11 @@
                     </navigationItem>
                     <connections>
                         <segue destination="7z2-bd-kmx" kind="show" identifier="toAddPlaceSegue" id="QRd-mJ-VNj"/>
+                        <segue destination="4MO-lo-HN4" kind="unwind" identifier="toListSegue" unwindAction="prepareForUnwind:" id="h3c-9g-nXv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcu-k2-nqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4MO-lo-HN4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1179" y="-357"/>
         </scene>
@@ -317,7 +319,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-ho-4hr">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-ho-4hr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
                                     <segue destination="z63-gB-6jo" kind="embed" identifier="embededDetailSegue" id="pxE-cE-Tel"/>
@@ -686,6 +688,6 @@
         <image name="NearMeFilled" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lfI-bG-bB1"/>
+        <segue reference="QRd-mJ-VNj"/>
     </inferredMetricsTieBreakers>
 </document>

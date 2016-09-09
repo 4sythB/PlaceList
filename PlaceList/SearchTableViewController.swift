@@ -50,7 +50,8 @@ class SearchTableViewController: UITableViewController {
     // MARK: - Action
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        resultsSearchController?.searchBar.resignFirstResponder()
+        self.performSegueWithIdentifier("toListSegue", sender: self)
     }
     
     
