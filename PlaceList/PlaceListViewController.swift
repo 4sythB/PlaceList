@@ -189,6 +189,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
             mapView.setRegion(region, animated: false)
             PlaceController.sharedController.region = region
         }
+        self.tableView.reloadData()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
