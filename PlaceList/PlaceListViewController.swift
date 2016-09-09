@@ -14,12 +14,22 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationButton: UIButton!
+    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
     
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
     
     let mapButton = UIButton()
+    
+    var mode: MapViewMode = .HalfScreenMode
+    
+    var regionSet: Bool = false
+    
+    enum MapViewMode {
+        case FullScreenMode
+        case HalfScreenMode
+    }
     
     var mapIsCentered: Bool = true {
         didSet {
@@ -76,8 +86,23 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func showMapView() {
         
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MapViewController") as? MapViewController else { return }
-        self.navigationController?.pushViewController(vc, animated: true)
+        switch mode {
+        case .HalfScreenMode:
+            mapViewHeightConstraint.constant = 275
+            
+            
+            mode = .FullScreenMode
+            return
+            
+        case .FullScreenMode:
+            let viewHeight = self.view.frame.size.height
+            mapViewHeightConstraint.constant = viewHeight
+            
+            
+            mode = .HalfScreenMode
+            return
+        }
+        
     }
     
     // MARK: - Table view data source
@@ -183,11 +208,13 @@ extension PlaceListViewController: CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if let location = locations.first {
+        if regionSet == false {
+            guard let location = locations.first else { return }
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: false)
             PlaceController.sharedController.region = region
+            regionSet = true
         }
         self.tableView.reloadData()
     }

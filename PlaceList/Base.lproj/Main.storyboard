@@ -128,6 +128,7 @@
                     <connections>
                         <outlet property="currentLocationButton" destination="tXj-Is-cWi" id="ctD-Lc-cgn"/>
                         <outlet property="mapView" destination="qxj-oD-SGS" id="tvP-0h-ZdH"/>
+                        <outlet property="mapViewHeightConstraint" destination="nzT-dS-yDl" id="C6P-mW-3N2"/>
                         <outlet property="tableView" destination="OMA-w3-mgo" id="GGf-gU-Zfc"/>
                     </connections>
                 </viewController>
@@ -319,7 +320,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-ho-4hr">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-ho-4hr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
                                     <segue destination="z63-gB-6jo" kind="embed" identifier="embededDetailSegue" id="pxE-cE-Tel"/>
