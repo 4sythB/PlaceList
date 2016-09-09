@@ -18,24 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-oD-SGS">
-                                <rect key="frame" x="0.0" y="64" width="600" height="275"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="275" id="nzT-dS-yDl"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="64" width="600" height="268"/>
                                 <connections>
                                     <outlet property="delegate" destination="I3c-2k-JIx" id="2yv-ez-YWh"/>
                                 </connections>
                             </mapView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAo-xP-Fg9">
-                                <rect key="frame" x="0.0" y="338" width="600" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.29999999999999999"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="l8a-qi-qz4"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OMA-w3-mgo">
-                                <rect key="frame" x="0.0" y="339" width="600" height="261"/>
+                                <rect key="frame" x="0.0" y="332" width="600" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="placeListCell" rowHeight="62" id="dFg-t9-ikt" customClass="PlaceListTableViewCell" customModule="PlaceList" customModuleProvider="target">
@@ -80,7 +69,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hgb-Jl-kR5">
-                                <rect key="frame" x="560" y="298" width="30" height="30"/>
+                                <rect key="frame" x="560" y="285" width="30" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXj-Is-cWi">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -105,16 +94,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Hgb-Jl-kR5" secondAttribute="trailing" constant="10" id="38B-fU-Ztf"/>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="top" secondItem="Oga-Ev-6xH" secondAttribute="bottom" id="3e2-ve-Pk4"/>
-                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8Er-n2-UZU"/>
                             <constraint firstItem="qxj-oD-SGS" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="8HJ-xq-iwv"/>
-                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="bottom" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="8wv-uI-jKU"/>
                             <constraint firstAttribute="trailing" secondItem="qxj-oD-SGS" secondAttribute="trailing" id="Hxh-pr-r0D"/>
-                            <constraint firstItem="IAo-xP-Fg9" firstAttribute="top" secondItem="Hgb-Jl-kR5" secondAttribute="bottom" constant="10" id="QWS-y8-EzI"/>
-                            <constraint firstAttribute="trailing" secondItem="IAo-xP-Fg9" secondAttribute="trailing" id="e7A-dS-J4r"/>
+                            <constraint firstItem="8Qm-0x-FjG" firstAttribute="top" secondItem="qxj-oD-SGS" secondAttribute="bottom" priority="750" constant="268" id="XVD-sX-VoI"/>
+                            <constraint firstItem="qxj-oD-SGS" firstAttribute="height" secondItem="OMA-w3-mgo" secondAttribute="height" id="Zl9-nj-GZI"/>
+                            <constraint firstItem="Hgb-Jl-kR5" firstAttribute="centerY" secondItem="i5z-kM-4Ie" secondAttribute="centerY" id="ikl-fa-vuZ"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="top" secondItem="qxj-oD-SGS" secondAttribute="bottom" id="pjM-v5-vdG"/>
                             <constraint firstItem="OMA-w3-mgo" firstAttribute="leading" secondItem="i5z-kM-4Ie" secondAttribute="leading" id="tN7-Lk-QFu"/>
                             <constraint firstAttribute="trailing" secondItem="OMA-w3-mgo" secondAttribute="trailing" id="wot-JE-b7m"/>
-                            <constraint firstItem="8Qm-0x-FjG" firstAttribute="top" secondItem="OMA-w3-mgo" secondAttribute="bottom" id="z6D-bU-IH0"/>
+                            <constraint firstItem="8Qm-0x-FjG" firstAttribute="top" secondItem="OMA-w3-mgo" secondAttribute="bottom" priority="750" id="z6D-bU-IH0"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -126,9 +114,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomMapToViewConstraint" destination="XVD-sX-VoI" id="aZb-wv-44H"/>
+                        <outlet property="bottomTableViewConstraint" destination="z6D-bU-IH0" id="hsJ-Mj-0NY"/>
+                        <outlet property="constraintBetweenMapAndTableView" destination="pjM-v5-vdG" id="7BX-Nh-10a"/>
                         <outlet property="currentLocationButton" destination="tXj-Is-cWi" id="ctD-Lc-cgn"/>
                         <outlet property="mapView" destination="qxj-oD-SGS" id="tvP-0h-ZdH"/>
-                        <outlet property="mapViewHeightConstraint" destination="nzT-dS-yDl" id="C6P-mW-3N2"/>
                         <outlet property="tableView" destination="OMA-w3-mgo" id="GGf-gU-Zfc"/>
                     </connections>
                 </viewController>

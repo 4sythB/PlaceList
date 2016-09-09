@@ -14,7 +14,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationButton: UIButton!
-    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomTableViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var constraintBetweenMapAndTableView: NSLayoutConstraint!
+    @IBOutlet weak var bottomMapToViewConstraint: NSLayoutConstraint!
+    
     
     static let locationManager = CLLocationManager()
     
@@ -47,6 +50,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateConstraintsForMode()
         
         PlaceListViewController.locationManager.delegate = self
         PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -84,25 +89,30 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationItem.leftBarButtonItem = barButton
     }
     
-    func showMapView() {
+    func updateConstraintsForMode() {
         
-        switch mode {
-        case .HalfScreenMode:
-            mapViewHeightConstraint.constant = 275
-            
+        if mode == .HalfScreenMode {
+            constraintBetweenMapAndTableView.constant = 0
+            bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh+1
             
             mode = .FullScreenMode
-            return
-            
-        case .FullScreenMode:
-            let viewHeight = self.view.frame.size.height
-            mapViewHeightConstraint.constant = viewHeight
-            
+        } else if mode == .FullScreenMode {
+            bottomMapToViewConstraint.constant = 0
+            constraintBetweenMapAndTableView.constant = 0
+            bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh-1
             
             mode = .HalfScreenMode
-            return
         }
+    }
+    
+    func showMapView() {
         
+        self.view.layoutIfNeeded()
+        
+        UIView.animateWithDuration(0.6) {
+            self.updateConstraintsForMode()
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - Table view data source
