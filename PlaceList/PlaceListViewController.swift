@@ -17,6 +17,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var bottomTableViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var constraintBetweenMapAndTableView: NSLayoutConstraint!
     @IBOutlet weak var bottomMapToViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonView: UIView!
     
     
     static let locationManager = CLLocationManager()
@@ -40,19 +41,22 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var mapIsCentered: Bool = true {
         didSet {
             if mapIsCentered == true {
-                let image = UIImage(named: "NearMeFilled")?.imageWithRenderingMode(.AlwaysTemplate)
+                let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
+                currentLocationButton.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             } else if mapIsCentered == false {
-                let image = UIImage(named: "NearMe")?.imageWithRenderingMode(.AlwaysTemplate)
+                let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
+                currentLocationButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        buttonView.layer.cornerRadius = 8
+        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
         
         updateConstraintsForMode()
         
