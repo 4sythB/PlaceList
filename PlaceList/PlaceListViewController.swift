@@ -19,7 +19,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var bottomMapToViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonView: UIView!
     
-    
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
@@ -71,6 +70,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(true)
         
         setUpButton()
+        
+        if droppedPinAnnotation != nil {
+            mapView.removeAnnotation(droppedPinAnnotation!)
+        }
         
         tableView.reloadData()
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
@@ -349,7 +352,6 @@ extension PlaceListViewController: MKMapViewDelegate {
             
             if title == "New Location" {
                 self.performSegueWithIdentifier("savePinSegue", sender: self)
-//                mapView.removeAnnotation(droppedPinAnnotation!)
             } else {
                 self.performSegueWithIdentifier("toDetailSegue", sender: self)
             }
