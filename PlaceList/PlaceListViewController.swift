@@ -202,7 +202,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 pinView.canShowCallout = true
                 pinView.animatesDrop = false
-                pinView.pinTintColor = .purpleColor()
+                pinView.pinTintColor = .redColor()
                 
 //                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
                 
@@ -214,7 +214,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             
             pinView.canShowCallout = true
             pinView.animatesDrop = true
-            pinView.pinTintColor = .redColor()
+            pinView.pinTintColor = .purpleColor()
             
             pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
             
