@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PlaceListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+class PlaceListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -191,88 +191,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    // MARK: - Map Delegate
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        if annotation is MKUserLocation {
-            return nil
-        }
-        
-        if let mapPin = annotation as? MapPin {
-            
-            if mapPin.isSaved == true {
-                
-                let pinView = MKPinAnnotationView(annotation: mapPin, reuseIdentifier: "pin")
-                
-                pinView.canShowCallout = true
-                pinView.animatesDrop = false
-                pinView.pinTintColor = .redColor()
-                
-//                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-                
-                return pinView
-            }
-        } else {
-            
-            let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            
-            pinView.canShowCallout = true
-            pinView.animatesDrop = true
-            pinView.pinTintColor = .purpleColor()
-            
-            pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-            
-            return pinView
-        }
-        
-        return nil
-    }
-    
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-        
-        guard let annotation = self.droppedPinAnnotation else { return }
-        
-        let latitude = annotation.coordinate.latitude, longitude = annotation.coordinate.longitude
-        
-        LocationController.sharedController.reverseGeocoding(latitude, longitude: longitude, completion: { (placemark) in
-            guard let clPlacemark = placemark else { return }
-            
-            let pm = MKPlacemark(placemark: clPlacemark)
-            
-            self.droppedPinPlacemark = pm
-        })
-        
-        let seconds = 0.5
-        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            
-            mapView.selectAnnotation(annotation, animated: false)
-        })
-    }
-    
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-        mapIsCentered = false
-    }
-    
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        if control == view.rightCalloutAccessoryView {
-            
-            guard let annotation = view.annotation, title = annotation.title else { print("Unable to create annotation"); return }
-            
-            if title == "New Location" {
-                self.performSegueWithIdentifier("savePinSegue", sender: self)
-                mapView.removeAnnotation(droppedPinAnnotation!)
-            } else {
-                self.performSegueWithIdentifier("toDetailSegue", sender: self)
-            }
-        }
-    }
-    
     // MARK: - Navigation
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -348,6 +266,107 @@ extension PlaceListViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
         print("Error: \(error.localizedDescription)")
+    }
+}
+
+extension PlaceListViewController: MKMapViewDelegate {
+    
+    // MARK: - Map Delegate
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        if let mapPin = annotation as? MapPin {
+            
+            if mapPin.isSaved == true {
+                
+                let pinView = MKPinAnnotationView(annotation: mapPin, reuseIdentifier: "pin")
+                
+                pinView.canShowCallout = true
+                pinView.animatesDrop = false
+                pinView.pinTintColor = .redColor()
+                
+                //                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                
+                return pinView
+            }
+        } else {
+            
+            let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            
+            pinView.canShowCallout = true
+            pinView.animatesDrop = true
+            pinView.pinTintColor = .purpleColor()
+            
+            pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            
+            return pinView
+        }
+        
+        return nil
+    }
+    
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        
+        guard let annotation = self.droppedPinAnnotation else { return }
+        
+        let latitude = annotation.coordinate.latitude, longitude = annotation.coordinate.longitude
+        
+        LocationController.sharedController.reverseGeocoding(latitude, longitude: longitude, completion: { (placemark) in
+            guard let clPlacemark = placemark else { return }
+            
+            let pm = MKPlacemark(placemark: clPlacemark)
+            
+            self.droppedPinPlacemark = pm
+        })
+        
+        let seconds = 0.5
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            mapView.selectAnnotation(annotation, animated: false)
+        })
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        mapIsCentered = false
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+            
+            guard let annotation = view.annotation, title = annotation.title else { print("Unable to create annotation"); return }
+            
+            if title == "New Location" {
+                self.performSegueWithIdentifier("savePinSegue", sender: self)
+                mapView.removeAnnotation(droppedPinAnnotation!)
+            } else {
+                self.performSegueWithIdentifier("toDetailSegue", sender: self)
+            }
+        }
+    }
+    
+    func mapViewWillStartLoadingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+    
+    func mapViewWillStartRenderingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 }
 

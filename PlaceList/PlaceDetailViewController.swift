@@ -263,7 +263,24 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
 }
 
-
+extension PlaceDetailViewController: MKMapViewDelegate {
+    
+    func mapViewWillStartLoadingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+    
+    func mapViewWillStartRenderingMap(mapView: MKMapView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+}
 
 
 
