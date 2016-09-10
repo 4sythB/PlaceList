@@ -122,6 +122,7 @@
                         <outlet property="currentLocationButton" destination="tXj-Is-cWi" id="ctD-Lc-cgn"/>
                         <outlet property="mapView" destination="qxj-oD-SGS" id="tvP-0h-ZdH"/>
                         <outlet property="tableView" destination="OMA-w3-mgo" id="GGf-gU-Zfc"/>
+                        <segue destination="7z2-bd-kmx" kind="show" identifier="savePinSegue" id="MMl-67-Kxv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn7-lO-kUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -686,6 +687,6 @@
         <image name="NearMeFilled" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QRd-mJ-VNj"/>
+        <segue reference="MMl-67-Kxv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -202,10 +202,9 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 pinView.canShowCallout = true
                 pinView.animatesDrop = false
-                
-                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-                
                 pinView.pinTintColor = .purpleColor()
+                
+//                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
                 
                 return pinView
             }
@@ -215,15 +214,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             
             pinView.canShowCallout = true
             pinView.animatesDrop = true
+            pinView.pinTintColor = .redColor()
             
             pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
             
-            pinView.pinTintColor = .redColor()
-            
             return pinView
         }
-        
-        
         
         return nil
     }
@@ -257,6 +253,21 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         mapIsCentered = false
     }
     
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+            
+            guard let annotation = view.annotation, title = annotation.title else { print("Unable to create annotation"); return }
+            
+            if title == "New Location" {
+                self.performSegueWithIdentifier("savePinSegue", sender: self)
+                mapView.removeAnnotation(droppedPinAnnotation!)
+            } else {
+                self.performSegueWithIdentifier("toDetailSegue", sender: self)
+            }
+        }
+    }
+    
     // MARK: - Navigation
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -266,16 +277,29 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
-        
-        let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
-        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        
-        if segue.identifier == "toDetailSegue" {
-            guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
-            destinationVC.place = place
-            destinationVC.placemark = placemark
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
+            
+            let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            
+            if segue.identifier == "toDetailSegue" {
+                guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
+                destinationVC.place = place
+                destinationVC.placemark = placemark
+            }
+        } else {
+//            if segue.identifier == "toDetailSegue" {
+//                guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
+//                destinationVC.place = place
+//                destinationVC.placemark = placemark
+//            }
+            
+            if segue.identifier == "savePinSegue" {
+                guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
+                
+                destinationVC.placemark = droppedPinPlacemark
+            }
         }
     }
     
