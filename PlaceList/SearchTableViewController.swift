@@ -16,6 +16,8 @@ class SearchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .None
+        
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
         
         resultsSearchController = CustomSearchController(searchViewController: locationSearchTable)
