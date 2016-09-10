@@ -19,8 +19,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-oD-SGS">
                                 <rect key="frame" x="0.0" y="64" width="600" height="268"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="I3c-2k-JIx" id="2yv-ez-YWh"/>
+                                    <outletCollection property="gestureRecognizers" destination="aCX-XZ-gQi" appends="YES" id="Aob-NR-dQw"/>
                                 </connections>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OMA-w3-mgo">
@@ -123,6 +125,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn7-lO-kUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="aCX-XZ-gQi">
+                    <connections>
+                        <action selector="longPressGesture:" destination="I3c-2k-JIx" id="3nO-RH-tMg"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1179" y="341"/>
         </scene>

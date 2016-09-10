@@ -25,6 +25,9 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let mapButton = UIButton()
     
+    var droppedPinAnnotation: MKAnnotation?
+    var droppedPinPlacemark: MKPlacemark?
+    
     var mode: MapViewMode = .HalfScreenMode
     
     var regionSet: Bool = false
@@ -162,7 +165,92 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         return "My Saved Places"
     }
     
+    @IBAction func longPressGesture(sender: AnyObject) {
+        
+        if sender.state == .Began {
+            if droppedPinAnnotation != nil {
+                mapView.removeAnnotation(droppedPinAnnotation!)
+            }
+            
+            let location = sender.locationInView(mapView)
+            let coordinate = mapView.convertPoint(location,toCoordinateFromView: mapView)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "New Location"
+            annotation.subtitle = "Tap to add location"
+            
+            self.droppedPinAnnotation = annotation
+            
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
     // MARK: - Map Delegate
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        if let mapPin = annotation as? MapPin {
+            
+            if mapPin.isSaved == true {
+                
+                let pinView = MKPinAnnotationView(annotation: mapPin, reuseIdentifier: "pin")
+                
+                pinView.canShowCallout = true
+                pinView.animatesDrop = false
+                
+                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                
+                pinView.pinTintColor = .purpleColor()
+                
+                return pinView
+            }
+        } else {
+            
+            let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            
+            pinView.canShowCallout = true
+            pinView.animatesDrop = true
+            
+            pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            
+            pinView.pinTintColor = .redColor()
+            
+            return pinView
+        }
+        
+        
+        
+        return nil
+    }
+    
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        
+        guard let annotation = self.droppedPinAnnotation else { return }
+        
+        let latitude = annotation.coordinate.latitude, longitude = annotation.coordinate.longitude
+        
+        LocationController.sharedController.reverseGeocoding(latitude, longitude: longitude, completion: { (placemark) in
+            guard let clPlacemark = placemark else { return }
+            
+            let pm = MKPlacemark(placemark: clPlacemark)
+            
+            self.droppedPinPlacemark = pm
+        })
+        
+        let seconds = 0.5
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            mapView.selectAnnotation(annotation, animated: false)
+        })
+    }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
@@ -226,7 +314,6 @@ extension PlaceListViewController: CLLocationManagerDelegate {
             PlaceController.sharedController.region = region
             regionSet = true
         }
-        self.tableView.reloadData()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -234,6 +321,13 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         print("Error: \(error.localizedDescription)")
     }
 }
+
+
+
+
+
+
+
 
 
 

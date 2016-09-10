@@ -41,8 +41,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if let mapRegion = region {
             mapView.setRegion(mapRegion, animated: true)
         }
-        
-        setupSearchController()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -117,30 +115,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             self.performSegueWithIdentifier("savePinSegue", sender: self)
         }
-    }
-    
-    // MARK: - Search
-    
-    func setupSearchController() {
-        
-        let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("ResultsTableViewController") as? ResultsTableViewController
-        
-        resultsSearchController = UISearchController(searchResultsController: locationSearchTable)
-        
-        guard let resultsSearchController = resultsSearchController else { return }
-        
-        resultsSearchController.searchResultsUpdater = locationSearchTable
-        
-        let searchBar = resultsSearchController.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search for places"
-        searchBar.searchBarStyle = .Default
-        searchBar.keyboardAppearance = .Dark
-        navigationItem.titleView = resultsSearchController.searchBar
-        
-        resultsSearchController.hidesNavigationBarDuringPresentation = false
-        resultsSearchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
     }
     
     // MARK: - Map Delegate

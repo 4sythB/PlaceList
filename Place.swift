@@ -9,9 +9,10 @@
 import Foundation
 import CoreData
 import CoreLocation
+import MapKit
 
 class Place: NSManagedObject {
-
+    
     convenience init?(title: String, streetAddress: String?, city: String?, state: String?, zipCode: String?, latitude: Double, longitude: Double, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let entity = NSEntityDescription.entityForName("Place", inManagedObjectContext: context) else {

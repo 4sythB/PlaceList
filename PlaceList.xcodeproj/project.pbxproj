@@ -29,8 +29,7 @@
 		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 		A20240E41D765271004C2DDC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240E31D765271004C2DDC /* MapPin.swift */; };
 		A21DF2681D80716A00364917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DF2671D80716A00364917 /* MapViewController.swift */; };
-		A21DF29B1D80DB0400364917 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DF29A1D80DB0400364917 /* ResultsTableViewController.swift */; };
-		A2FA8BA21D7B5564004EFFA7 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */; };
+		A2EF0E801D838E2A00B25970 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */; };
 		A2FA8BC81D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,8 +79,7 @@
 		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		A20240E31D765271004C2DDC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		A21DF2671D80716A00364917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		A21DF29A1D80DB0400364917 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
-		A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Place+CoreDataProperties.swift"; path = "../Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +169,7 @@
 			children = (
 				A202407F1D74B3D8004C2DDC /* Stack.swift */,
 				A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */,
-				A2FA8BA11D7B5564004EFFA7 /* Place+CoreDataProperties.swift */,
+				A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */,
 				A202407B1D74B34D004C2DDC /* Place.swift */,
 			);
 			name = "Model + CoreData";
@@ -197,7 +195,6 @@
 				A20240931D74CD27004C2DDC /* AddPlaceViewController.swift */,
 				A20240951D74CD88004C2DDC /* DetailContainerViewController.swift */,
 				A21DF2671D80716A00364917 /* MapViewController.swift */,
-				A21DF29A1D80DB0400364917 /* ResultsTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -359,11 +356,10 @@
 				A20240481D74A31B004C2DDC /* AppDelegate.swift in Sources */,
 				A20240801D74B3D8004C2DDC /* Stack.swift in Sources */,
 				A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */,
-				A21DF29B1D80DB0400364917 /* ResultsTableViewController.swift in Sources */,
-				A2FA8BA21D7B5564004EFFA7 /* Place+CoreDataProperties.swift in Sources */,
 				A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */,
 				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
 				A21DF2681D80716A00364917 /* MapViewController.swift in Sources */,
+				A2EF0E801D838E2A00B25970 /* Place+CoreDataProperties.swift in Sources */,
 				A20240E41D765271004C2DDC /* MapPin.swift in Sources */,
 				A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */,
 				A20240821D74B620004C2DDC /* PlaceController.swift in Sources */,

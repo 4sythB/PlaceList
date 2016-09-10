@@ -45,15 +45,15 @@ class PlaceController {
             let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
             
             if place.streetAddress == nil && place.city == nil {
-                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: nil)
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: nil, isSaved: true)
                 annotations.append(annotation)
             } else if place.streetAddress == nil && place.city != nil {
                 guard let city = place.city else { return [] }
-                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: city)
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: city, isSaved: true)
                 annotations.append(annotation)
             } else if place.streetAddress != nil && place.city != nil {
                 guard let streetAddress = place.streetAddress, city = place.city else { return [] }
-                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(streetAddress), \(city)")
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(streetAddress), \(city)", isSaved: true)
                 annotations.append(annotation)
             }
         }
