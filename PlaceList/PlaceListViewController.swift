@@ -178,7 +178,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             
             let location = sender.locationInView(mapView)
-            let coordinate = mapView.convertPoint(location,toCoordinateFromView: mapView)
+            let coordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -201,6 +201,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if let indexPath = tableView.indexPathForSelectedRow {
+            
             let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
             
             let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
@@ -212,11 +213,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 destinationVC.placemark = placemark
             }
         } else {
-//            if segue.identifier == "toDetailSegue" {
-//                guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
-//                destinationVC.place = place
-//                destinationVC.placemark = placemark
-//            }
             
             if segue.identifier == "savePinSegue" {
                 guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
@@ -264,7 +260,6 @@ extension PlaceListViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
         print("Error: \(error.localizedDescription)")
     }
 }
@@ -280,32 +275,25 @@ extension PlaceListViewController: MKMapViewDelegate {
         }
         
         if let mapPin = annotation as? MapPin {
-            
             if mapPin.isSaved == true {
                 
                 let pinView = MKPinAnnotationView(annotation: mapPin, reuseIdentifier: "pin")
-                
                 pinView.canShowCallout = true
                 pinView.animatesDrop = false
                 pinView.pinTintColor = .redColor()
                 
-                //                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-                
                 return pinView
             }
         } else {
-            
             let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            
             pinView.canShowCallout = true
+            pinView.draggable = true
             pinView.animatesDrop = true
             pinView.pinTintColor = .purpleColor()
-            
             pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
             
             return pinView
         }
-        
         return nil
     }
     
@@ -333,8 +321,23 @@ extension PlaceListViewController: MKMapViewDelegate {
         })
     }
     
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        if newState == .Ending {
+            guard let coordinate = view.annotation?.coordinate else { return }
+            
+            let latitude = coordinate.latitude, longitude = coordinate.longitude
+            
+            LocationController.sharedController.reverseGeocoding(latitude, longitude: longitude, completion: { (placemark) in
+                guard let clPlacemark = placemark else { return }
+                
+                let pm = MKPlacemark(placemark: clPlacemark)
+                
+                self.droppedPinPlacemark = pm
+            })
+        }
+    }
+    
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
         mapIsCentered = false
     }
     
@@ -346,7 +349,7 @@ extension PlaceListViewController: MKMapViewDelegate {
             
             if title == "New Location" {
                 self.performSegueWithIdentifier("savePinSegue", sender: self)
-                mapView.removeAnnotation(droppedPinAnnotation!)
+//                mapView.removeAnnotation(droppedPinAnnotation!)
             } else {
                 self.performSegueWithIdentifier("toDetailSegue", sender: self)
             }
