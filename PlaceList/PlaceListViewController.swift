@@ -43,11 +43,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             if mapIsCentered == true {
                 let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+                currentLocationButton.tintColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+                buttonView.backgroundColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             } else if mapIsCentered == false {
                 let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+                currentLocationButton.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+                buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
             }
         }
     }
@@ -56,7 +58,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         buttonView.layer.cornerRadius = 8
-        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
         
         updateConstraintsForMode()
         
