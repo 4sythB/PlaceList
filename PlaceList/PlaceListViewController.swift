@@ -30,6 +30,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var mode: MapViewMode = .HalfScreenMode
     
+    var locationAuthorizationStatus: CLAuthorizationStatus?
+    
     var regionSet: Bool = false
     
     enum MapViewMode {
@@ -129,35 +131,49 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PlaceController.sharedController.sortedPlaces.count
+        
+        if locationAuthorizationStatus == .AuthorizedWhenInUse {
+            return PlaceController.sharedController.sortedPlaces.count
+        } else {
+            return PlaceController.sharedController.places.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCellWithIdentifier("placeListCell", forIndexPath: indexPath) as? PlaceListTableViewCell else { return UITableViewCell() }
         
-        let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
-        
-        cell.updateWithPlace(place)
-        
-        return cell
+        if locationAuthorizationStatus == .AuthorizedWhenInUse {
+            let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
+            cell.updateWithPlace(place)
+            return cell
+        } else {
+            let place = PlaceController.sharedController.places[indexPath.row]
+            cell.updateWithPlace(place)
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
-            
             let annotations = mapView.annotations
             for annotation in annotations {
                 mapView.removeAnnotation(annotation)
             }
             
-            PlaceController.sharedController.deletePlace(place)
-            
             mapView.addAnnotations(PlaceController.sharedController.annotations)
+            
+            if locationAuthorizationStatus == .AuthorizedWhenInUse {
+                let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
+                PlaceController.sharedController.deletePlace(place)
+            } else {
+                let place = PlaceController.sharedController.places[indexPath.row]
+                PlaceController.sharedController.deletePlace(place)
+            }
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
@@ -205,21 +221,30 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if let indexPath = tableView.indexPathForSelectedRow {
             
-            let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
-            
-            let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
-            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-            
-            if segue.identifier == "toDetailSegue" {
-                guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
-                destinationVC.place = place
-                destinationVC.placemark = placemark
+            if locationAuthorizationStatus == .AuthorizedWhenInUse {
+                let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
+                let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+                let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                
+                if segue.identifier == "toDetailSegue" {
+                    guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
+                    destinationVC.place = place
+                    destinationVC.placemark = placemark
+                }
+            } else {
+                let place = PlaceController.sharedController.places[indexPath.row]
+                let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+                let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                
+                if segue.identifier == "toDetailSegue" {
+                    guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
+                    destinationVC.place = place
+                    destinationVC.placemark = placemark
+                }
             }
         } else {
-            
             if segue.identifier == "savePinSegue" {
                 guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
-                
                 destinationVC.placemark = droppedPinPlacemark
             }
         }
@@ -248,6 +273,8 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         if status == .AuthorizedWhenInUse {
             PlaceListViewController.locationManager.requestLocation()
         }
+        self.locationAuthorizationStatus = status
+        self.tableView.reloadData()
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

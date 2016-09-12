@@ -19,6 +19,8 @@ class PlaceController {
     
     var places: [Place] {
         let request = NSFetchRequest(entityName: "Place")
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
         
         do {
             return try moc.executeFetchRequest(request) as? [Place] ?? []
