@@ -2,7 +2,7 @@
 //  Place+CoreDataProperties.swift
 //  PlaceList
 //
-//  Created by Brad on 8/29/16.
+//  Created by Brad on 9/3/16.
 //  Copyright © 2016 Brad Forsyth. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,13 +14,13 @@ import CoreData
 
 extension Place {
 
-    @NSManaged var title: String
-    @NSManaged var streetAddress: String
-    @NSManaged var city: String
-    @NSManaged var state: String
-    @NSManaged var zipCode: String
+    @NSManaged var city: String?
     @NSManaged var latitude: Double
-    @NSManaged var notes: String?
     @NSManaged var longitude: Double
+    @NSManaged var notes: String?
+    @NSManaged var state: String?
+    @NSManaged var streetAddress: String?
+    @NSManaged var title: String
+    @NSManaged var zipCode: String?
 
 }

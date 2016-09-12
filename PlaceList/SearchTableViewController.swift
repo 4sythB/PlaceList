@@ -11,18 +11,18 @@ import MapKit
 
 class SearchTableViewController: UITableViewController {
     
-//    var resultSearchController: UISearchController? = nil
     var resultsSearchController: CustomSearchController? = nil
-    
-    static var region: MKCoordinateRegion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .None
+        
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
         
-//        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultsSearchController = CustomSearchController(searchViewController: locationSearchTable)
+        
+        resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
         
@@ -31,7 +31,8 @@ class SearchTableViewController: UITableViewController {
         let searchBar = resultsSearchController.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
-        searchBar.searchBarStyle = .Minimal
+        searchBar.searchBarStyle = .Default
+        searchBar.keyboardAppearance = .Dark
         navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
@@ -39,10 +40,20 @@ class SearchTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.resultsSearchController?.active = true
+            self.resultsSearchController?.searchBar.becomeFirstResponder()
+        }
+    }
+    
     // MARK: - Action
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        resultsSearchController?.searchBar.resignFirstResponder()
+        self.performSegueWithIdentifier("toListSegue", sender: self)
     }
     
     
@@ -51,20 +62,10 @@ class SearchTableViewController: UITableViewController {
         return 0
     }
     
-    /*
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toAddPlaceSegue" {
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController, resultsController = resultsSearchController?.searchResultsController as? SearchResultsTableViewController, tableView = resultsController.tableView, indexPath = tableView.indexPathForSelectedRow else { return }
             
@@ -72,7 +73,18 @@ class SearchTableViewController: UITableViewController {
             
             destinationVC.placemark = placemark
         }
-     }
+    }
+}
+
+extension SearchTableViewController: UISearchControllerDelegate {
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.resultsSearchController?.active = true
+            self.resultsSearchController?.searchBar.becomeFirstResponder()
+        }
+    }
 }
 
 

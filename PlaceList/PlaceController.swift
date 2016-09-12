@@ -15,9 +15,12 @@ class PlaceController {
     static let sharedController = PlaceController()
     let moc = Stack.sharedStack.managedObjectContext
     
+    var region: MKCoordinateRegion?
+    
     var places: [Place] {
-        
         let request = NSFetchRequest(entityName: "Place")
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
         
         do {
             return try moc.executeFetchRequest(request) as? [Place] ?? []
@@ -26,27 +29,75 @@ class PlaceController {
         }
     }
     
-    func addPlace(location: MKPlacemark, notes: String?) {
+    var sortedPlaces: [Place] {
+        var sortedPlaces: [Place] = []
         
-        let placemark = location
+        guard let currentLocation = PlaceListViewController.locationManager.location else { return sortedPlaces }
         
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
+        sortedPlaces = places.sort({ $0.0.clLocation?.distanceFromLocation(currentLocation) < $0.1.clLocation?.distanceFromLocation(currentLocation) })
         
-        guard let title = placemark.name, subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare, city = placemark.locality, state = placemark.administrativeArea, zip = placemark.postalCode else { return }
-        
-        let streetAddress = "\(subThoroughfare) \(thoroughfare)"
-        
-        let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zip, latitude: latitude, longitude: longitude, notes: notes)
-        
-        self.saveToPersistentStore()
+        return sortedPlaces
     }
     
-    func updateNotesForPlace(place: Place, notes: String) {
+    var annotations: [MKAnnotation] {
+        var annotations: [MKAnnotation] = []
         
-        place.notes = notes
+        for place in places {
+            
+            let coordinate = CLLocationCoordinate2DMake(place.latitude, place.longitude)
+            
+            if place.streetAddress == nil && place.city == nil {
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: nil, isSaved: true)
+                annotations.append(annotation)
+            } else if place.streetAddress == nil && place.city != nil {
+                guard let city = place.city else { return [] }
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: city, isSaved: true)
+                annotations.append(annotation)
+            } else if place.streetAddress != nil && place.city != nil {
+                guard let streetAddress = place.streetAddress, city = place.city else { return [] }
+                let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(streetAddress), \(city)", isSaved: true)
+                annotations.append(annotation)
+            }
+        }
+        return annotations
+    }
+    
+    // MARK: - Functions
+    
+    func addPlace(placemark: MKPlacemark, notes: String?) {
         
-        saveToPersistentStore()
+        let latitude = placemark.coordinate.latitude
+        let longitude = placemark.coordinate.longitude
+        
+        guard let title = placemark.name else { return }
+        
+        if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
+            let streetAddress = "\(subThoroughfare) \(thoroughfare)"
+            
+            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+                let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            } else {
+                let _ = Place(title: title, streetAddress: streetAddress, city: nil, state: nil, zipCode: nil, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            }
+        } else {
+            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+                let _ = Place(title: title, streetAddress: nil, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            } else {
+                let _ = Place(title: title, streetAddress: nil, city: nil, state: nil, zipCode: nil, latitude: latitude, longitude: longitude, notes: notes)
+                saveToPersistentStore()
+            }
+        }
+    }
+    
+    func updateNotesForPlace(place: Place, notes: String?) {
+        
+        if let index = places.indexOf(place) {
+            places[index].notes = notes
+            saveToPersistentStore()
+        }
     }
     
     func deletePlace(place: Place) {
@@ -62,6 +113,10 @@ class PlaceController {
         } catch {
             print("Unable to save to managed object context.")
         }
+    }
+    
+    func getById(id: NSManagedObjectID) -> Place? {
+        return moc.objectWithID(id) as? Place
     }
 }
 

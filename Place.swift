@@ -8,11 +8,12 @@
 
 import Foundation
 import CoreData
-
+import CoreLocation
+import MapKit
 
 class Place: NSManagedObject {
-
-    convenience init?(title: String, streetAddress: String, city: String, state: String, zipCode: String, latitude: Double, longitude: Double, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+    
+    convenience init?(title: String, streetAddress: String?, city: String?, state: String?, zipCode: String?, latitude: Double, longitude: Double, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let entity = NSEntityDescription.entityForName("Place", inManagedObjectContext: context) else {
             fatalError("Unable to initialize entity")
@@ -28,5 +29,9 @@ class Place: NSManagedObject {
         self.latitude = latitude
         self.longitude = longitude
         self.notes = notes
+    }
+    
+    var clLocation: CLLocation? {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
 }

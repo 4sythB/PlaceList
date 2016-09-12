@@ -36,7 +36,9 @@ class SearchResultsTableViewController: UITableViewController {
         let item = matchingItems[indexPath.row].placemark
         
         cell.textLabel?.text = item.name
+        cell.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         cell.detailTextLabel?.text = LocationController.sharedController.parseAddress(item)
+        cell.detailTextLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
         return cell
     }
@@ -66,28 +68,34 @@ class SearchResultsTableViewController: UITableViewController {
     }
 }
 
-
-
 extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-        guard let region = SearchTableViewController.region,
+        guard let region = PlaceController.sharedController.region,
             searchBarText = searchController.searchBar.text else {
                 return
         }
+        
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
         request.region = region
         
         let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { (response, error) in
-            if error != nil {
-                print("Error: \(error?.localizedDescription)")
-            } else {
-                guard let response = response else { return }
-                self.matchingItems = response.mapItems
-                self.tableView.reloadData()
+        
+        if searchBarText.characters.count > 0 {
+            
+            search.startWithCompletionHandler { (response, error) in
+                if error != nil {
+                    print("Error: \(error?.localizedDescription)")
+                } else {
+                    guard let response = response else { return }
+                    self.matchingItems = response.mapItems
+                    self.tableView.reloadData()
+                }
             }
+        } else if searchBarText.characters.count == 0 {
+            
+            search.cancel()
         }
     }
 }

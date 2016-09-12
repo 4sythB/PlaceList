@@ -11,17 +11,19 @@ import MapKit
 
 class AddPlaceViewController: UIViewController {
     
-    var placemark: MKPlacemark? = nil
+    var placemark: MKPlacemark?
     
     var detailContainerViewController: DetailContainerViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
     }
-
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -34,20 +36,13 @@ class AddPlaceViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        guard let placemark = placemark else { return }
+        guard let placemark = placemark, notes = detailContainerViewController.notesTextView.text else { return }
         
-        PlaceController.sharedController.addPlace(placemark, notes: nil)
+        PlaceController.sharedController.addPlace(placemark, notes: notes)
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("toPlaceListSegue", sender: self)
     }
 }
 
