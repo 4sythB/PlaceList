@@ -19,6 +19,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var bottomMapToViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonView: UIView!
     
+    static let sharedController = PlaceListViewController()
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
@@ -71,6 +72,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadView), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
         setUpButton()
         
         if droppedPinAnnotation != nil {
@@ -85,6 +88,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         PlaceController.sharedController.region = region
+    }
+    
+    // MARK: - Reload View
+    
+    func reloadView() {
+        self.reloadInputViews()
+        tableView.reloadData()
     }
     
     // MARK: - Map Button
