@@ -108,11 +108,17 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh+1
             
+            let image = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+            mapButton.setImage(image, forState: .Normal)
+            
             mode = .FullScreenMode
         } else if mode == .FullScreenMode {
             bottomMapToViewConstraint.constant = 0
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh-1
+            
+            let image = UIImage(named: "ListScreen")?.imageWithRenderingMode(.AlwaysTemplate)
+            mapButton.setImage(image, forState: .Normal)
             
             mode = .HalfScreenMode
         }
@@ -122,7 +128,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.view.layoutIfNeeded()
         
-        UIView.animateWithDuration(0.6) {
+        UIView.animateWithDuration(0.5) {
             self.updateConstraintsForMode()
             self.view.layoutIfNeeded()
         }
