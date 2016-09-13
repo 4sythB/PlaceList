@@ -14,7 +14,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var placeTitleLabel: UILabel!
     @IBOutlet weak var streetAddressLabel: UILabel!
-    @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var notesHeadingLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -59,7 +58,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
         streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        cityStateZipLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
         notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
         notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
@@ -82,29 +80,31 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         guard let placemark = placemark, place = place, notes = place.notes else { return }
         
-        let title = place.title
-        
-        if place.streetAddress == nil {
-            streetAddressLabel.hidden = true
-        } else {
-            let streetAddress = place.streetAddress
-            streetAddressLabel.text = streetAddress
-        }
-        
-        if place.city == nil || place.state == nil || place.zipCode == nil {
-            cityStateZipLabel.hidden = true
-        } else {
-            if let city = place.city, state = place.state, zipCode = place.zipCode {
-                cityStateZipLabel.text = "\(city), \(state) \(zipCode)"
-            }
-        }
-        
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
+        let title = place.title
         navigationItem.title = title
-        
         placeTitleLabel.text = title
         notesTextView.text = notes
+        
+        if place.streetAddress != nil && place.city != nil && place.state != nil && place.zipCode != nil {
+            guard let streetAddress = place.streetAddress, city = place.city, state = place.state, zipCode = place.zipCode else { return }
+            streetAddressLabel.text = "\(streetAddress)\n\(city), \(state) \(zipCode)"
+        } else if place.streetAddress == nil && place.city != nil && place.state != nil && place.zipCode != nil {
+            guard let city = place.city, state = place.state, zipCode = place.zipCode else { return }
+            streetAddressLabel.text = "\(city), \(state) \(zipCode)"
+        } else if place.streetAddress != nil && place.city == nil && place.state != nil && place.zipCode != nil {
+            guard let streetAddress = place.streetAddress, state = place.state, zipCode = place.zipCode else { return }
+            streetAddressLabel.text = "\(streetAddress)\n\(state) \(zipCode)"
+        } else if place.streetAddress != nil && place.city != nil && place.state == nil && place.zipCode != nil {
+            guard let streetAddress = place.streetAddress, city = place.city, zipCode = place.zipCode else { return }
+            streetAddressLabel.text = "\(streetAddress)\n\(city), \(zipCode)"
+        } else if place.streetAddress != nil && place.city != nil && place.state != nil && place.zipCode == nil {
+            guard let streetAddress = place.streetAddress, city = place.city, state = place.state else { return }
+            streetAddressLabel.text = "\(streetAddress)\n\(city), \(state)"
+        } else if place.streetAddress == nil && place.city == nil && place.state == nil && place.zipCode == nil {
+            streetAddressLabel.hidden = true
+        }
     }
     
     // MARK: - View mode
