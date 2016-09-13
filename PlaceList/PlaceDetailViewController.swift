@@ -18,11 +18,14 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var mapViewTopConstraint: NSLayoutConstraint!
     
     var place: Place?
     var placemark: MKPlacemark?
     
-    let directionsButton = UIButton()
+    var directionsButton = UIButton()
+//    var shareButton = UIButton()
     
     let placeholderText = "Type your notes here"
     
@@ -64,6 +67,8 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         notesTextView.keyboardAppearance = .Dark
         
+        
+        
         // Directions Button
         
         let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
@@ -72,9 +77,9 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         directionsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         directionsButton.addTarget(self, action: #selector(getDirections), forControlEvents: .TouchUpInside)
         
-        let barButton = UIBarButtonItem()
-        barButton.customView = directionsButton
-        self.navigationItem.rightBarButtonItem = barButton
+        let directionsBarButton = UIBarButtonItem()
+        directionsBarButton.customView = directionsButton
+                self.navigationItem.rightBarButtonItem = directionsBarButton
         
         // Labels/MapView
         
@@ -167,6 +172,22 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
     
+    // MARK: - Sharing
+    
+    @IBAction func shareButtonTapped(sender: AnyObject) {
+        
+        let textToShare = "Check out this great place!"
+        
+        guard let placemark = placemark else { return }
+        
+        let objectsToShare = [textToShare, placemark]
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.presentViewController(activityVC, animated: true, completion: nil)
+    }
+    
     // MARK: - TextView placeholder
     
     func applyPlaceholderStyle(textView: UITextView, placeholderText: String) {
@@ -243,23 +264,24 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            let contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.size.height, 0)
-            scrollView.contentInset = contentInset
-            scrollView.scrollIndicatorInsets = contentInset
             
-            scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
+            self.view.layoutIfNeeded()
             
-            scrollView.scrollRectToVisible((notesTextView.superview?.frame)!, animated: true)
+            UIView.animateWithDuration(0.5) {
+                self.mapViewTopConstraint.constant = -keyboardSize.size.height
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         
-        let contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        self.view.layoutIfNeeded()
         
-        scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
+        UIView.animateWithDuration(0.5) {
+            self.mapViewTopConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
