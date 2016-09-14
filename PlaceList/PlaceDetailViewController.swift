@@ -54,16 +54,34 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         // Appearance
         
-        view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-        containerView.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        if SettingsController.sharedController.theme == .darkTheme {
+            
+            view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            containerView.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            
+            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
+            notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            
+            notesTextView.keyboardAppearance = .Dark
+            
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            
+            view.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+            containerView.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+            
+            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            streetAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
+            notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            
+            notesTextView.keyboardAppearance = .Default
+        }
         
-        placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
-        streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
-        notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
-        notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
-        notesTextView.keyboardAppearance = .Dark
         
         // Directions Button
         

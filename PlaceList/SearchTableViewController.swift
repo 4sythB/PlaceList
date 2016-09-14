@@ -32,7 +32,13 @@ class SearchTableViewController: UITableViewController {
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         searchBar.searchBarStyle = .Default
-        searchBar.keyboardAppearance = .Dark
+        
+        if SettingsController.sharedController.theme == .darkTheme {
+            searchBar.keyboardAppearance = .Dark
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            searchBar.keyboardAppearance = .Default
+        }
+
         navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false

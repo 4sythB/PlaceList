@@ -15,7 +15,7 @@ class PlaceListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -26,10 +26,15 @@ class PlaceListTableViewCell: UITableViewCell {
 
     func updateWithPlace(place: Place) {
         
-        placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
-        placeAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        
         placeTitleLabel.text = place.title
+        
+        if SettingsController.sharedController.theme == .darkTheme {
+            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            placeAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+            placeAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        }
         
         if let city = place.city, state = place.state {
             placeAddressLabel.text = "\(city), \(state)"
@@ -38,3 +43,15 @@ class PlaceListTableViewCell: UITableViewCell {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

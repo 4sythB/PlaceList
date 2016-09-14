@@ -25,6 +25,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var resultSearchController: UISearchController? = nil
     
     let mapButton = UIButton()
+    let settingsButton = UIButton()
     
     var droppedPinAnnotation: MKAnnotation?
     var droppedPinPlacemark: MKPlacemark?
@@ -97,20 +98,32 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
-    // MARK: - Map Button
+    // MARK: - Setup Buttons
     
     func setUpButton() {
         
         let image = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
-        mapButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
+        mapButton.frame = CGRectMake(0, 0, 23, 23) // won't work if you don't set frame
         mapButton.setImage(image, forState: .Normal)
         mapButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         mapButton.addTarget(self, action: #selector(showMapView), forControlEvents: .TouchUpInside)
         
         let barButton = UIBarButtonItem()
         barButton.customView = mapButton
-        self.navigationItem.leftBarButtonItem = barButton
+        
+        let settingsImage = UIImage(named: "Settings")?.imageWithRenderingMode(.AlwaysTemplate)
+        settingsButton.frame = CGRectMake(0, 0, 23, 23)
+        settingsButton.setImage(settingsImage, forState: .Normal)
+        settingsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        settingsButton.addTarget(self, action: #selector(presentSettingsViewController), forControlEvents: .TouchUpInside)
+        
+        let settingsBarButton = UIBarButtonItem()
+        settingsBarButton.customView = settingsButton
+        
+        self.navigationItem.leftBarButtonItems = [barButton, settingsBarButton]
     }
+    
+    // MARK: - Map Button
     
     func updateConstraintsForMode() {
         
@@ -142,6 +155,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             self.updateConstraintsForMode()
             self.view.layoutIfNeeded()
         }
+    }
+    
+    // MARK: - Settings Button
+    
+    func presentSettingsViewController() {
+        guard let settingsVC = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsNavController") else { return }
+        self.presentViewController(settingsVC, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

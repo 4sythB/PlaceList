@@ -35,10 +35,16 @@ class SearchResultsTableViewController: UITableViewController {
         
         let item = matchingItems[indexPath.row].placemark
         
+        if SettingsController.sharedController.theme == .darkTheme {
+            cell.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            cell.detailTextLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            cell.textLabel?.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            cell.detailTextLabel?.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        }
+        
         cell.textLabel?.text = item.name
-        cell.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         cell.detailTextLabel?.text = LocationController.sharedController.parseAddress(item)
-        cell.detailTextLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
         return cell
     }
