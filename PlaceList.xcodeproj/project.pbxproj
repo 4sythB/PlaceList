@@ -29,6 +29,7 @@
 		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 		A20240E41D765271004C2DDC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240E31D765271004C2DDC /* MapPin.swift */; };
 		A25975B31D88530000020961 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25975B21D88530000020961 /* CopyableLabel.swift */; };
+		A2A6516A1D89C7A700A4976D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A651691D89C7A700A4976D /* SettingsController.swift */; };
 		A2EF0E801D838E2A00B25970 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */; };
 		A2FA8BC81D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		A20240E31D765271004C2DDC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		A25975B21D88530000020961 /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
+		A2A651691D89C7A700A4976D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A2FA8BC71D7E2F2E004EFFA7 /* PlaceListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +182,7 @@
 			children = (
 				A20240811D74B620004C2DDC /* PlaceController.swift */,
 				A20240891D74CC25004C2DDC /* LocationController.swift */,
+				A2A651691D89C7A700A4976D /* SettingsController.swift */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
 				A2EF0E801D838E2A00B25970 /* Place+CoreDataProperties.swift in Sources */,
 				A20240E41D765271004C2DDC /* MapPin.swift in Sources */,
+				A2A6516A1D89C7A700A4976D /* SettingsController.swift in Sources */,
 				A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */,
 				A20240821D74B620004C2DDC /* PlaceController.swift in Sources */,
 				A202408A1D74CC25004C2DDC /* LocationController.swift in Sources */,
@@ -518,6 +522,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PlaceList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,6 +539,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PlaceList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
