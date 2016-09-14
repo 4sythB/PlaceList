@@ -444,71 +444,57 @@
                                                     <constraint firstAttribute="height" constant="1" id="Xwb-HK-eSW"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nRF-zZ-R5f">
-                                                <frame key="frameInset" minX="16" minY="286" width="343" height="79"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
-                                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
-                                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
-                                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
-                                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
-                                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="48H-F5-zcI">
-                                                <frame key="frameInset" minX="16" minY="374" width="343" height="155"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
-                                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
-                                                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    </textView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="Xyi-Vc-vv3" firstAttribute="top" secondItem="48H-F5-zcI" secondAttribute="top" id="2HW-J1-OZa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Xyi-Vc-vv3" secondAttribute="trailing" id="Htl-Jh-225"/>
-                                                    <constraint firstItem="xL9-rF-KVV" firstAttribute="leading" secondItem="48H-F5-zcI" secondAttribute="leading" id="Lot-5s-lcs"/>
-                                                    <constraint firstAttribute="bottom" secondItem="xL9-rF-KVV" secondAttribute="bottom" id="iU1-8p-G2f"/>
-                                                    <constraint firstItem="Xyi-Vc-vv3" firstAttribute="leading" secondItem="48H-F5-zcI" secondAttribute="leading" id="sgJ-i9-r6t"/>
-                                                    <constraint firstAttribute="trailing" secondItem="xL9-rF-KVV" secondAttribute="trailing" id="wAD-sy-BBu"/>
-                                                </constraints>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="iU1-8p-G2f"/>
-                                                    </mask>
-                                                </variation>
-                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Place Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufM-IN-NRy">
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfP-1i-ZOE">
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
+                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypa-ku-ncv">
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
+                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-rF-KVV">
+                                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Vc-vv3">
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="nRF-zZ-R5f" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="0HN-Hr-Pkq"/>
+                                            <constraint firstItem="xL9-rF-KVV" firstAttribute="top" secondItem="Xyi-Vc-vv3" secondAttribute="bottom" constant="8" id="1rS-9F-NB5"/>
                                             <constraint firstAttribute="trailing" secondItem="Oop-cL-ek2" secondAttribute="trailing" id="1xS-6v-db4"/>
-                                            <constraint firstItem="48H-F5-zcI" firstAttribute="top" secondItem="nRF-zZ-R5f" secondAttribute="bottom" constant="8" id="4hU-hs-LRO"/>
-                                            <constraint firstAttribute="trailing" secondItem="48H-F5-zcI" secondAttribute="trailing" constant="16" id="6pR-EJ-YYH"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZfP-1i-ZOE" secondAttribute="trailing" constant="16" id="4LH-dh-TCV"/>
                                             <constraint firstItem="s7L-UV-Map" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" id="6vn-cT-sdi"/>
-                                            <constraint firstItem="nRF-zZ-R5f" firstAttribute="top" secondItem="Oop-cL-ek2" secondAttribute="bottom" constant="10" id="A5f-L9-OkJ"/>
+                                            <constraint firstItem="ZfP-1i-ZOE" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="9K0-JU-fq5"/>
+                                            <constraint firstItem="ZfP-1i-ZOE" firstAttribute="top" secondItem="ufM-IN-NRy" secondAttribute="bottom" constant="6" id="ECu-bJ-phG"/>
                                             <constraint firstItem="Oop-cL-ek2" firstAttribute="top" secondItem="s7L-UV-Map" secondAttribute="bottom" id="F1l-MT-dVf"/>
+                                            <constraint firstItem="ypa-ku-ncv" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="LLV-dK-srk"/>
+                                            <constraint firstAttribute="bottom" secondItem="xL9-rF-KVV" secondAttribute="bottom" constant="8" id="Ll5-Nt-BGW"/>
+                                            <constraint firstItem="Xyi-Vc-vv3" firstAttribute="top" secondItem="ypa-ku-ncv" secondAttribute="bottom" constant="6" id="MHR-cW-Qp0"/>
+                                            <constraint firstItem="xL9-rF-KVV" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="NcV-1y-Ru5"/>
                                             <constraint firstAttribute="trailing" secondItem="s7L-UV-Map" secondAttribute="trailing" id="OLG-fN-Bjk"/>
-                                            <constraint firstAttribute="bottom" secondItem="48H-F5-zcI" secondAttribute="bottom" constant="8" id="RTc-uq-rQ6"/>
-                                            <constraint firstAttribute="trailing" secondItem="nRF-zZ-R5f" secondAttribute="trailing" constant="16" id="cPJ-g6-whG"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xyi-Vc-vv3" secondAttribute="trailing" constant="16" id="OpY-Yy-0Fr"/>
+                                            <constraint firstItem="xL9-rF-KVV" firstAttribute="top" secondItem="Xyi-Vc-vv3" secondAttribute="bottom" constant="8" id="R3a-vX-jyf"/>
+                                            <constraint firstAttribute="trailing" secondItem="ufM-IN-NRy" secondAttribute="trailing" constant="16" id="SI5-VE-obk"/>
+                                            <constraint firstItem="ufM-IN-NRy" firstAttribute="top" secondItem="Oop-cL-ek2" secondAttribute="bottom" constant="8" id="Ukb-HO-xdg"/>
+                                            <constraint firstAttribute="trailing" secondItem="ypa-ku-ncv" secondAttribute="trailing" constant="16" id="VwW-XN-h1i"/>
+                                            <constraint firstItem="Xyi-Vc-vv3" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="Zrx-Ai-PFJ"/>
+                                            <constraint firstItem="ufM-IN-NRy" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="dFz-ke-jmm"/>
+                                            <constraint firstAttribute="trailing" secondItem="xL9-rF-KVV" secondAttribute="trailing" constant="16" id="gk3-v2-VtY"/>
                                             <constraint firstItem="Oop-cL-ek2" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" id="jFy-K5-Xiq"/>
-                                            <constraint firstAttribute="height" constant="536" id="mV2-9e-a9U"/>
+                                            <constraint firstItem="ypa-ku-ncv" firstAttribute="top" secondItem="ZfP-1i-ZOE" secondAttribute="bottom" constant="3" id="krq-rq-C1E"/>
                                             <constraint firstItem="s7L-UV-Map" firstAttribute="top" secondItem="XjM-wQ-Hvc" secondAttribute="top" id="ufh-Wq-BOA"/>
-                                            <constraint firstItem="48H-F5-zcI" firstAttribute="leading" secondItem="XjM-wQ-Hvc" secondAttribute="leading" constant="16" id="uvb-Hs-oZy"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -522,6 +508,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ddO-w4-Qe5" firstAttribute="top" secondItem="xL9-rF-KVV" secondAttribute="bottom" constant="8" id="2j1-bt-kEc"/>
                             <constraint firstItem="XjM-wQ-Hvc" firstAttribute="width" secondItem="20o-SW-mmv" secondAttribute="width" id="FQH-gr-Awe"/>
                             <constraint firstAttribute="trailing" secondItem="g5B-eV-r6z" secondAttribute="trailing" id="LQ7-Qi-oOq"/>
                             <constraint firstItem="ddO-w4-Qe5" firstAttribute="top" secondItem="g5B-eV-r6z" secondAttribute="bottom" id="YjJ-8r-6yW"/>
