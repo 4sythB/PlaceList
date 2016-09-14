@@ -18,14 +18,12 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var mapViewTopConstraint: NSLayoutConstraint!
     
     var place: Place?
     var placemark: MKPlacemark?
     
     var directionsButton = UIButton()
-//    var shareButton = UIButton()
     
     let placeholderText = "Type your notes here"
     
@@ -67,19 +65,17 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         notesTextView.keyboardAppearance = .Dark
         
-        
-        
         // Directions Button
         
         let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
-        directionsButton.frame = CGRectMake(0, 0, 23, 23) //won't work if you don't set frame
+        directionsButton.frame = CGRectMake(0, 0, 23, 23)
         directionsButton.setImage(image, forState: .Normal)
         directionsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         directionsButton.addTarget(self, action: #selector(getDirections), forControlEvents: .TouchUpInside)
         
         let directionsBarButton = UIBarButtonItem()
         directionsBarButton.customView = directionsButton
-                self.navigationItem.rightBarButtonItem = directionsBarButton
+        self.navigationItem.rightBarButtonItem = directionsBarButton
         
         // Labels/MapView
         
@@ -156,7 +152,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     // MARK: - Action
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
-        
         goToViewMode()
     }
     
@@ -170,22 +165,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         guard let place = place, notes = notesTextView.text else { return }
         
         PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
-    }
-    
-    // MARK: - Sharing
-    
-    @IBAction func shareButtonTapped(sender: AnyObject) {
-        
-        let textToShare = "Check out this great place!"
-        
-        guard let placemark = placemark else { return }
-        
-        let objectsToShare = [textToShare, placemark]
-        
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        
-        activityVC.popoverPresentationController?.sourceView = self.view
-        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
     // MARK: - TextView placeholder

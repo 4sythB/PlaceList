@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         guard let titleFont = UIFont(name: "avenir-medium", size: 20),
-            font = UIFont(name: "avenir", size: 18) else { return true }
+            let font = UIFont(name: "avenir", size: 18) else { return true }
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
