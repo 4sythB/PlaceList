@@ -40,6 +40,7 @@ class AddPlaceViewController: UIViewController {
         
         PlaceController.sharedController.addPlace(placemark, notes: notes)
         
+        detailContainerViewController.notesTextView.resignFirstResponder()
         self.performSegueWithIdentifier("toPlaceListSegue", sender: self)
     }
 }
