@@ -51,7 +51,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 currentLocationButtonImageView.image = image
                 currentLocationButtonImageView.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             } else if mapIsCentered == false {
-                let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
+                let image = UIImage(named: "location")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButtonImageView.image = image
                 if SettingsController.sharedController.theme == .darkTheme {
                     currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
