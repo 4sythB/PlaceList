@@ -106,12 +106,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
     }
-    
 
-    
-    
-    
-    
     // MARK: - Reload View
     
     func reloadView() {
