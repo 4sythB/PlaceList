@@ -201,15 +201,41 @@
                                     <action selector="darkModeSwitchChanged:" destination="Hej-sQ-41a" eventType="valueChanged" id="b1K-SC-sPQ"/>
                                 </connections>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpm-ZE-Zv3">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="5DB-rO-0mB"/>
+                                    <constraint firstAttribute="height" constant="31" id="cvC-pk-t3F"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Wd-7C-t5w">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="ylu-Tq-hYr"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapTypeControlChanged:" destination="Hej-sQ-41a" eventType="valueChanged" id="ivK-Np-RMW"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5yF-2P-mA7" secondAttribute="trailing" constant="16" id="1Wc-hd-8aS"/>
                             <constraint firstItem="5yF-2P-mA7" firstAttribute="centerY" secondItem="37g-IE-CbH" secondAttribute="centerY" id="Bco-yA-kcb"/>
+                            <constraint firstItem="7Wd-7C-t5w" firstAttribute="top" secondItem="qpm-ZE-Zv3" secondAttribute="bottom" constant="19" id="HPj-b5-2oD"/>
+                            <constraint firstItem="qpm-ZE-Zv3" firstAttribute="leading" secondItem="GbK-aN-EQG" secondAttribute="leading" constant="16" id="MzR-5s-MYp"/>
                             <constraint firstItem="37g-IE-CbH" firstAttribute="top" secondItem="HRI-St-VK5" secondAttribute="bottom" constant="19" id="aWL-TT-LdI"/>
+                            <constraint firstItem="7Wd-7C-t5w" firstAttribute="leading" secondItem="GbK-aN-EQG" secondAttribute="leading" constant="16" id="aWu-eg-Jgd"/>
                             <constraint firstItem="HRI-St-VK5" firstAttribute="top" secondItem="CG8-Bv-nlt" secondAttribute="bottom" constant="20" id="ccv-YP-67b"/>
                             <constraint firstItem="HRI-St-VK5" firstAttribute="leading" secondItem="GbK-aN-EQG" secondAttribute="leading" constant="16" id="fc7-jd-0rg"/>
+                            <constraint firstItem="qpm-ZE-Zv3" firstAttribute="top" secondItem="37g-IE-CbH" secondAttribute="bottom" constant="50" id="grr-V2-lw9"/>
                             <constraint firstItem="37g-IE-CbH" firstAttribute="leading" secondItem="GbK-aN-EQG" secondAttribute="leadingMargin" id="hwf-Df-ikj"/>
+                            <constraint firstAttribute="trailing" secondItem="7Wd-7C-t5w" secondAttribute="trailing" constant="16" id="pef-aL-p5W"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="gPO-c2-0LB">
@@ -222,11 +248,15 @@
                     <connections>
                         <outlet property="darkModeSwitch" destination="5yF-2P-mA7" id="3ZB-zt-mez"/>
                         <outlet property="doneButton" destination="j9l-cN-vce" id="uFt-qJ-PVE"/>
+                        <outlet property="mapTypeHeadingLabel" destination="qpm-ZE-Zv3" id="oJW-dp-v32"/>
+                        <outlet property="mapTypeSegmentedControl" destination="7Wd-7C-t5w" id="YSB-7c-3fM"/>
+                        <outlet property="themeHeadingLabel" destination="HRI-St-VK5" id="NYl-GZ-Zdg"/>
+                        <outlet property="themeModeLabel" destination="37g-IE-CbH" id="BXO-tV-qtU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sT-KF-7BH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1178" y="1049"/>
+            <point key="canvasLocation" x="1176.8" y="1048.4257871064469"/>
         </scene>
         <!--Search-->
         <scene sceneID="4cJ-Fx-BKC">
