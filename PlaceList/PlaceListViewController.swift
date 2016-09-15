@@ -57,39 +57,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        guard let location = PlaceListViewController.locationManager.location else { return }
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: location.coordinate, span: span)
-        let biggerSpan = MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0)
-        let biggerRegion = MKCoordinateRegion(center: location.coordinate, span: biggerSpan)
-        mapView.setRegion(biggerRegion, animated: false)
-        
-        PlaceController.sharedController.region = region
-        
-        let seconds = 2.0
-        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.mapView.setRegion(region, animated: true)
-        })
-        
-        self.view.layoutIfNeeded()
-        
-        buttonView.layer.cornerRadius = 8
-        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
-        
-        updateConstraintsForMode()
-        
-        PlaceListViewController.locationManager.delegate = self
-        PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        PlaceListViewController.locationManager.requestWhenInUseAuthorization()
-        PlaceListViewController.locationManager.requestLocation()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
@@ -111,6 +78,24 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         PlaceController.sharedController.region = region
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setUpMapView()
+        
+        self.view.layoutIfNeeded()
+        
+        buttonView.layer.cornerRadius = 8
+        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+        
+        updateConstraintsForMode()
+        
+        PlaceListViewController.locationManager.delegate = self
+        PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        PlaceListViewController.locationManager.requestWhenInUseAuthorization()
+        PlaceListViewController.locationManager.requestLocation()
+    }
+    
     // MARK: - Reload View
     
     func reloadView() {
@@ -118,7 +103,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
-    // MARK: - Setup Buttons
+    // MARK: - Setup
     
     func setUpButton() {
         
@@ -136,6 +121,26 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         settingsBarButton.customView = settingsButton
         
         self.navigationItem.leftBarButtonItem = settingsBarButton
+    }
+    
+    func setUpMapView() {
+        
+        guard let location = PlaceListViewController.locationManager.location else { return }
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        let biggerSpan = MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0)
+        let biggerRegion = MKCoordinateRegion(center: location.coordinate, span: biggerSpan)
+        mapView.setRegion(biggerRegion, animated: false)
+        
+        PlaceController.sharedController.region = region
+        
+        let seconds = 1.5
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.mapView.setRegion(region, animated: true)
+        })
     }
     
     // MARK: - Map Button
