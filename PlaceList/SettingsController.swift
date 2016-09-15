@@ -13,7 +13,11 @@ class SettingsController {
     
     static let sharedController = SettingsController()
     
-    var mapType: MKMapType = .Standard
+    var mapType: MKMapType = .Standard {
+        didSet {
+            saveSettings()
+        }
+    }
     
     var theme: appearanceTheme = .darkTheme {
         didSet {
@@ -60,14 +64,18 @@ class SettingsController {
     func saveSettings() {
         
         NSUserDefaults.standardUserDefaults().setObject(theme.rawValue, forKey: "theme")
-        // NSUserDefaults.standardUserDefaults().setObject(mapType, forKey: "mapType")
+        NSUserDefaults.standardUserDefaults().setObject(mapType.rawValue, forKey: "mapType")
     }
     
     func loadSettings() {
         
-        guard let themeRawValue = NSUserDefaults.standardUserDefaults().objectForKey("theme") as? appearanceTheme.RawValue, visualTheme = appearanceTheme(rawValue: themeRawValue) else { return }
+        guard let themeRawValue = NSUserDefaults.standardUserDefaults().objectForKey("theme") as? appearanceTheme.RawValue,
+            visualTheme = appearanceTheme(rawValue: themeRawValue),
+            mapTypeRawValue = NSUserDefaults.standardUserDefaults().objectForKey("mapType") as? MKMapType.RawValue,
+            mapTypeSelection = MKMapType(rawValue: mapTypeRawValue) else { return }
         
         self.theme = visualTheme
+        self.mapType = mapTypeSelection
     }
 }
 
