@@ -26,7 +26,6 @@ class SearchResultsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return matchingItems.count
     }
     
@@ -51,17 +50,13 @@ class SearchResultsTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
         let placemark = matchingItems[indexPath.row].placemark
         
         if segue.identifier == "toAddPlaceSegue" {
-            
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
-            
             destinationVC.placemark = placemark
         }
     }
@@ -78,9 +73,7 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
         guard let region = PlaceController.sharedController.region,
-            searchBarText = searchController.searchBar.text else {
-                return
-        }
+            searchBarText = searchController.searchBar.text else { return }
         
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
@@ -89,7 +82,6 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
         let search = MKLocalSearch(request: request)
         
         if searchBarText.characters.count > 0 {
-            
             search.startWithCompletionHandler { (response, error) in
                 if error != nil {
                     print("Error: \(error?.localizedDescription)")
@@ -100,7 +92,6 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
                 }
             }
         } else if searchBarText.characters.count == 0 {
-            
             search.cancel()
         }
     }
