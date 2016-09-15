@@ -18,13 +18,15 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var constraintBetweenMapAndTableView: NSLayoutConstraint!
     @IBOutlet weak var bottomMapToViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var mapSizeButtonImageView: UIImageView!
+    @IBOutlet weak var mapSizeButton: UIButton!
+    @IBOutlet weak var currentLocationButtonImageView: UIImageView!
     
     static let sharedController = PlaceListViewController()
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
     
-    let mapButton = UIButton()
     let settingsButton = UIButton()
     
     var droppedPinAnnotation: MKAnnotation?
@@ -45,14 +47,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         didSet {
             if mapIsCentered == true {
                 let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
-                currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
-                buttonView.backgroundColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+                currentLocationButtonImageView.image = image
+                currentLocationButtonImageView.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             } else if mapIsCentered == false {
                 let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
-                currentLocationButton.setImage(image, forState: .Normal)
-                currentLocationButton.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
-                buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+                currentLocationButtonImageView.image = image
+                currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
             }
         }
     }
@@ -61,6 +61,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         buttonView.layer.cornerRadius = 8
+        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
         
         updateConstraintsForMode()
         
@@ -102,14 +103,9 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func setUpButton() {
         
-        let image = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
-        mapButton.frame = CGRectMake(0, 0, 23, 23) // won't work if you don't set frame
-        mapButton.setImage(image, forState: .Normal)
-        mapButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        mapButton.addTarget(self, action: #selector(showMapView), forControlEvents: .TouchUpInside)
-        
-        let barButton = UIBarButtonItem()
-        barButton.customView = mapButton
+        let mapImage = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+        mapSizeButtonImageView.image = mapImage
+        mapSizeButtonImageView.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
         let settingsImage = UIImage(named: "Settings")?.imageWithRenderingMode(.AlwaysTemplate)
         settingsButton.frame = CGRectMake(0, 0, 23, 23)
@@ -120,7 +116,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         let settingsBarButton = UIBarButtonItem()
         settingsBarButton.customView = settingsButton
         
-        self.navigationItem.leftBarButtonItems = [barButton, settingsBarButton]
+        self.navigationItem.leftBarButtonItem = settingsBarButton
     }
     
     // MARK: - Map Button
@@ -131,8 +127,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh+1
             
-            let image = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
-            mapButton.setImage(image, forState: .Normal)
+            let mapImage = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+            mapSizeButtonImageView.image = mapImage
             
             mode = .FullScreenMode
         } else if mode == .FullScreenMode {
@@ -140,15 +136,14 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh-1
             
-            let image = UIImage(named: "ListScreen")?.imageWithRenderingMode(.AlwaysTemplate)
-            mapButton.setImage(image, forState: .Normal)
+            let listScreenImage = UIImage(named: "ListScreen")?.imageWithRenderingMode(.AlwaysTemplate)
+            mapSizeButtonImageView.image = listScreenImage
             
             mode = .HalfScreenMode
         }
     }
     
-    func showMapView() {
-        
+    @IBAction func mapSizeButtonTapped(sender: AnyObject) {
         self.view.layoutIfNeeded()
         
         UIView.animateWithDuration(0.5) {
