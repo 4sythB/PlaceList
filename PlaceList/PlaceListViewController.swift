@@ -33,6 +33,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var droppedPinPlacemark: MKPlacemark?
     
     var mode: MapViewMode = .HalfScreenMode
+    var mapType: MKMapType = .Standard
     
     var locationAuthorizationStatus: CLAuthorizationStatus?
     
@@ -61,6 +62,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // MARK: - View Lifecycle
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
@@ -73,6 +76,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         tableView.reloadData()
+        
+        mapView.mapType = mapType
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
         mapView.addAnnotations(PlaceController.sharedController.annotations)
         
@@ -198,12 +203,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if locationAuthorizationStatus == .AuthorizedWhenInUse {
             return PlaceController.sharedController.sortedPlaces.count
         } else {
@@ -288,7 +291,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Navigation
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

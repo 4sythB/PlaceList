@@ -38,11 +38,18 @@ class SettingsViewController: UIViewController {
             mapTypeHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             mapTypeSegmentedControl.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
+        
+        if PlaceListViewController.sharedController.mapType == .Standard {
+            mapTypeSegmentedControl.selectedSegmentIndex = 0
+        } else if PlaceListViewController.sharedController.mapType == .Hybrid {
+            mapTypeSegmentedControl.selectedSegmentIndex = 1
+        }
     }
     
     // MARK: - Actions
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -65,7 +72,16 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func mapTypeControlChanged(sender: AnyObject) {
-        
+        switch mapTypeSegmentedControl.selectedSegmentIndex {
+        case 0:
+            PlaceListViewController.sharedController.mapType = .Standard
+            return
+        case 1:
+            PlaceListViewController.sharedController.mapType = .Hybrid
+            return
+        default:
+            break
+        }
     }
     
     
