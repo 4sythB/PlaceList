@@ -75,8 +75,8 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
             placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             streetAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
-            notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
-            notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            notesTextView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
+            notesTextView.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             
             notesTextView.keyboardAppearance = .Default
         }

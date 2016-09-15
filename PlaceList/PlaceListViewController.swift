@@ -52,7 +52,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             } else if mapIsCentered == false {
                 let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
                 currentLocationButtonImageView.image = image
-                currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+                if SettingsController.sharedController.theme == .darkTheme {
+                    currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+                } else if SettingsController.sharedController.theme == .lightTheme {
+                    currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+                }
             }
         }
     }
@@ -76,19 +80,27 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         PlaceController.sharedController.region = region
+        
+        if SettingsController.sharedController.theme == .darkTheme {
+            buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+            mapSizeButtonImageView.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            buttonView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
+            mapSizeButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpMapView()
+        updateConstraintsForMode()
         
         self.view.layoutIfNeeded()
         
         buttonView.layer.cornerRadius = 8
-        buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
-        
-        updateConstraintsForMode()
         
         PlaceListViewController.locationManager.delegate = self
         PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -236,8 +248,15 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.contentView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
-        header.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        
+        if SettingsController.sharedController.theme == .darkTheme {
+            header.contentView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+            header.textLabel?.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            header.contentView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
+            header.textLabel?.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        }
+        
         header.textLabel?.font = UIFont(name: "avenir-medium", size: 16)!
     }
     
