@@ -18,14 +18,25 @@ class SearchTableViewController: UITableViewController {
         
         tableView.separatorStyle = .None
         
+        configureResultsSearchController()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.resultsSearchController?.active = true
+            self.resultsSearchController?.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    func configureResultsSearchController() {
         let locationSearchTable = storyboard?.instantiateViewControllerWithIdentifier("SearchResultsTableViewController") as? SearchResultsTableViewController
         
         resultsSearchController = CustomSearchController(searchViewController: locationSearchTable)
-        
         resultsSearchController?.delegate = self
         
         guard let resultsSearchController = resultsSearchController else { return }
-        
         resultsSearchController.searchResultsUpdater = locationSearchTable
         
         let searchBar = resultsSearchController.searchBar
@@ -38,21 +49,12 @@ class SearchTableViewController: UITableViewController {
         } else if SettingsController.sharedController.theme == .lightTheme {
             searchBar.keyboardAppearance = .Default
         }
-
+        
         navigationItem.titleView = resultsSearchController.searchBar
         
         resultsSearchController.hidesNavigationBarDuringPresentation = false
         resultsSearchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.resultsSearchController?.active = true
-            self.resultsSearchController?.searchBar.becomeFirstResponder()
-        }
     }
     
     // MARK: - Action
@@ -62,15 +64,14 @@ class SearchTableViewController: UITableViewController {
         self.performSegueWithIdentifier("toListSegue", sender: self)
     }
     
+    // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 0
     }
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toAddPlaceSegue" {
             guard let destinationVC = segue.destinationViewController as? AddPlaceViewController, resultsController = resultsSearchController?.searchResultsController as? SearchResultsTableViewController, tableView = resultsController.tableView, indexPath = tableView.indexPathForSelectedRow else { return }
