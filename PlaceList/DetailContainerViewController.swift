@@ -86,6 +86,8 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
+        mapView.mapType = SettingsController.sharedController.mapType
+        
         if let title = placemark.name {
             placeTitleLabel.text = title
         }

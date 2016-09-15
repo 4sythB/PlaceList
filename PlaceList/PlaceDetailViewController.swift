@@ -101,6 +101,8 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
+        mapView.mapType = SettingsController.sharedController.mapType
+        
         let title = place.title
         navigationItem.title = title
         placeTitleLabel.text = title
