@@ -196,8 +196,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 mapView.removeAnnotation(annotation)
             }
             
-            mapView.addAnnotations(PlaceController.sharedController.annotations)
-            
             if locationAuthorizationStatus == .AuthorizedWhenInUse {
                 let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
                 PlaceController.sharedController.deletePlace(place)
@@ -205,6 +203,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 let place = PlaceController.sharedController.places[indexPath.row]
                 PlaceController.sharedController.deletePlace(place)
             }
+            
+            mapView.addAnnotations(PlaceController.sharedController.annotations)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
