@@ -51,40 +51,34 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func setUpView() {
-        
-        // Appearance
+        setupAppearance()
+        setupDirectionsButton()
+        setupLabelsAndMapView()
+    }
+    
+    func setupAppearance() {
+        placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+        notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
         
         if SettingsController.sharedController.theme == .darkTheme {
-            
             view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             containerView.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            
-            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-            notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
             notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-            
             notesTextView.keyboardAppearance = .Dark
             
         } else if SettingsController.sharedController.theme == .lightTheme {
-            
             view.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
             containerView.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
-            
-            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             streetAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            notesHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             notesTextView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
             notesTextView.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            
             notesTextView.keyboardAppearance = .Default
         }
-        
-        
-        
-        // Directions Button
-        
+    }
+    
+    func setupDirectionsButton() {
         let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
         directionsButton.frame = CGRectMake(0, 0, 23, 23)
         directionsButton.setImage(image, forState: .Normal)
@@ -94,9 +88,9 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         let directionsBarButton = UIBarButtonItem()
         directionsBarButton.customView = directionsButton
         self.navigationItem.rightBarButtonItem = directionsBarButton
-        
-        // Labels/MapView
-        
+    }
+    
+    func setupLabelsAndMapView() {
         guard let placemark = placemark, place = place, notes = place.notes else { return }
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
@@ -220,24 +214,18 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        // remove the placeholder text when they start typing
-        // first, see if the field is empty
-        // if it's not empty, then the text should be black and not italic
-        // BUT, we also need to remove the placeholder text if that's the only text
-        // if it is empty, then the text should be the placeholder
+
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
-        if newLength > 0 { // have text, so don't show the placeholder
-            // check if the only text is the placeholder and remove it if needed
-            // unless they've hit the delete button with the placeholder displayed
+        if newLength > 0 {
             if textView == notesTextView && textView.text == placeholderText {
-                if text.utf16.count == 0 { // they hit the back button
-                    return false // ignore it
+                if text.utf16.count == 0 {
+                    return false
                 }
                 applyNonPlaceholderStyle(textView)
                 textView.text = ""
             }
             return true
-        } else {  // no text, so show the placeholder
+        } else {
             applyPlaceholderStyle(textView, placeholderText: placeholderText)
             moveCursorToStart(textView)
             return false
@@ -245,7 +233,6 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChangeSelection (textView: UITextView) {
-        // if placeholder is shown, prevent positioning of cursor within or selection of placeholder text
         if textView == notesTextView && textView.text == placeholderText {
             moveCursorToStart(textView)
         }

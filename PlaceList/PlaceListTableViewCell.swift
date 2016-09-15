@@ -27,11 +27,11 @@ class PlaceListTableViewCell: UITableViewCell {
         
         placeTitleLabel.text = place.title
         
+        placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
+        
         if SettingsController.sharedController.theme == .darkTheme {
-            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             placeAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         } else if SettingsController.sharedController.theme == .lightTheme {
-            placeTitleLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             placeAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
         
