@@ -39,9 +39,9 @@ class SettingsViewController: UIViewController {
             mapTypeSegmentedControl.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
         
-        if PlaceListViewController.sharedController.mapType == .Standard {
+        if PlaceListViewController.mapType == .Standard {
             mapTypeSegmentedControl.selectedSegmentIndex = 0
-        } else if PlaceListViewController.sharedController.mapType == .Hybrid {
+        } else if PlaceListViewController.mapType == .Hybrid {
             mapTypeSegmentedControl.selectedSegmentIndex = 1
         }
     }
@@ -74,10 +74,10 @@ class SettingsViewController: UIViewController {
     @IBAction func mapTypeControlChanged(sender: AnyObject) {
         switch mapTypeSegmentedControl.selectedSegmentIndex {
         case 0:
-            PlaceListViewController.sharedController.mapType = .Standard
+            PlaceListViewController.mapType = .Standard
             return
         case 1:
-            PlaceListViewController.sharedController.mapType = .Hybrid
+            PlaceListViewController.mapType = .Hybrid
             return
         default:
             break

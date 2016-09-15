@@ -22,7 +22,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapSizeButton: UIButton!
     @IBOutlet weak var currentLocationButtonImageView: UIImageView!
     
-    static let sharedController = PlaceListViewController()
     static let locationManager = CLLocationManager()
     
     var resultSearchController: UISearchController? = nil
@@ -33,7 +32,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var droppedPinPlacemark: MKPlacemark?
     
     var mode: MapViewMode = .HalfScreenMode
-    var mapType: MKMapType = .Standard
+    static var mapType: MKMapType = .Standard
     
     var locationAuthorizationStatus: CLAuthorizationStatus?
     
@@ -64,6 +63,18 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - View Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setUpMapView()
+        updateConstraintsForMode()
+        
+        self.view.layoutIfNeeded()
+        
+        buttonView.layer.cornerRadius = 8
+        configureLocationManager()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
@@ -77,7 +88,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.reloadData()
         
-        mapView.mapType = mapType
+        mapView.mapType = PlaceListViewController.mapType
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
         mapView.addAnnotations(PlaceController.sharedController.annotations)
         
@@ -97,21 +108,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpMapView()
-        updateConstraintsForMode()
-        
-        self.view.layoutIfNeeded()
-        
-        buttonView.layer.cornerRadius = 8
-        
-        PlaceListViewController.locationManager.delegate = self
-        PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        PlaceListViewController.locationManager.requestWhenInUseAuthorization()
-        PlaceListViewController.locationManager.requestLocation()
-    }
+
+    
+    
+    
     
     // MARK: - Reload View
     
@@ -295,7 +295,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+    
         if let indexPath = tableView.indexPathForSelectedRow {
             
             if locationAuthorizationStatus == .AuthorizedWhenInUse {
@@ -344,6 +344,13 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
 // MARK: - Location manager delegate
 
 extension PlaceListViewController: CLLocationManagerDelegate {
+    
+    func configureLocationManager() {
+        PlaceListViewController.locationManager.delegate = self
+        PlaceListViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        PlaceListViewController.locationManager.requestWhenInUseAuthorization()
+        PlaceListViewController.locationManager.requestLocation()
+    }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
