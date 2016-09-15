@@ -26,16 +26,16 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var resultSearchController: UISearchController? = nil
     
+    var locationAuthorizationStatus: CLAuthorizationStatus?
+    
+    var regionSet: Bool = false
+    
     let settingsButton = UIButton()
     
     var droppedPinAnnotation: MKAnnotation?
     var droppedPinPlacemark: MKPlacemark?
     
     var mode: MapViewMode = .HalfScreenMode
-    
-    var locationAuthorizationStatus: CLAuthorizationStatus?
-    
-    var regionSet: Bool = false
     
     enum MapViewMode {
         case FullScreenMode
@@ -67,11 +67,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         setUpMapView()
         updateConstraintsForMode()
+        configureLocationManager()
         
         self.view.layoutIfNeeded()
         
         buttonView.layer.cornerRadius = 8
-        configureLocationManager()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -79,7 +79,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadView), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
-        setUpButton()
+        setUpButtons()
         
         if droppedPinAnnotation != nil {
             mapView.removeAnnotation(droppedPinAnnotation!)
@@ -106,7 +106,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
     }
-
+    
     // MARK: - Reload View
     
     func reloadView() {
@@ -116,7 +116,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Setup
     
-    func setUpButton() {
+    func setUpButtons() {
         
         let mapImage = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
         mapSizeButtonImageView.image = mapImage
@@ -289,8 +289,10 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
+        
         if let indexPath = tableView.indexPathForSelectedRow {
+            
+            guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
             
             if locationAuthorizationStatus == .AuthorizedWhenInUse {
                 let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
@@ -298,7 +300,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
                 
                 if segue.identifier == "toDetailSegue" {
-                    guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
                     destinationVC.place = place
                     destinationVC.placemark = placemark
                 }
@@ -308,7 +309,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
                 
                 if segue.identifier == "toDetailSegue" {
-                    guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
                     destinationVC.place = place
                     destinationVC.placemark = placemark
                 }
@@ -372,9 +372,9 @@ extension PlaceListViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - Map Delegate
+
 extension PlaceListViewController: MKMapViewDelegate {
-    
-    // MARK: - Map Delegate
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -415,7 +415,6 @@ extension PlaceListViewController: MKMapViewDelegate {
             guard let clPlacemark = placemark else { return }
             
             let pm = MKPlacemark(placemark: clPlacemark)
-            
             self.droppedPinPlacemark = pm
         })
         
@@ -432,14 +431,12 @@ extension PlaceListViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         if newState == .Ending {
             guard let coordinate = view.annotation?.coordinate else { return }
-            
             let latitude = coordinate.latitude, longitude = coordinate.longitude
             
             LocationController.sharedController.reverseGeocoding(latitude, longitude: longitude, completion: { (placemark) in
                 guard let clPlacemark = placemark else { return }
                 
                 let pm = MKPlacemark(placemark: clPlacemark)
-                
                 self.droppedPinPlacemark = pm
             })
         }
@@ -452,7 +449,6 @@ extension PlaceListViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
-            
             guard let annotation = view.annotation, title = annotation.title else { print("Unable to create annotation"); return }
             
             if title == "New Location" {
