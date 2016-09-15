@@ -18,12 +18,13 @@ class SettingsController {
     var theme: appearanceTheme = .darkTheme {
         didSet {
             toggleAppearanceTheme()
+            saveSettings()
         }
     }
     
-    enum appearanceTheme {
-        case lightTheme
-        case darkTheme
+    enum appearanceTheme: String {
+        case lightTheme = "light"
+        case darkTheme = "dark"
     }
     
     func toggleAppearanceTheme() {
@@ -54,6 +55,19 @@ class SettingsController {
             UILabel.appearance().textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             CopyableLabel.appearance().textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
+    }
+    
+    func saveSettings() {
+        
+        NSUserDefaults.standardUserDefaults().setObject(theme.rawValue, forKey: "theme")
+        // NSUserDefaults.standardUserDefaults().setObject(mapType, forKey: "mapType")
+    }
+    
+    func loadSettings() {
+        
+        guard let themeRawValue = NSUserDefaults.standardUserDefaults().objectForKey("theme") as? appearanceTheme.RawValue, visualTheme = appearanceTheme(rawValue: themeRawValue) else { return }
+        
+        self.theme = visualTheme
     }
 }
 

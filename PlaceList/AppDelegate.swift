@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        SettingsController.sharedController.loadSettings()
+        
         guard let titleFont = UIFont(name: "avenir-medium", size: 20),
             let font = UIFont(name: "avenir", size: 18) else { return true }
         
