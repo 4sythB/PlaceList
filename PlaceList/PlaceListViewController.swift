@@ -32,7 +32,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var droppedPinPlacemark: MKPlacemark?
     
     var mode: MapViewMode = .HalfScreenMode
-    static var mapType: MKMapType = .Standard
     
     var locationAuthorizationStatus: CLAuthorizationStatus?
     
@@ -88,7 +87,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.reloadData()
         
-        mapView.mapType = PlaceListViewController.mapType
+        mapView.mapType = SettingsController.sharedController.mapType
         mapView.removeAnnotations(PlaceController.sharedController.annotations)
         mapView.addAnnotations(PlaceController.sharedController.annotations)
         

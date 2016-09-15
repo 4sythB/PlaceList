@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
 class SettingsController {
     
     static let sharedController = SettingsController()
+    
+    var mapType: MKMapType = .Standard
     
     var theme: appearanceTheme = .darkTheme {
         didSet {
