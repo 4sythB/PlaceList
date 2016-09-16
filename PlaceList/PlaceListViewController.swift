@@ -78,6 +78,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        configureButtonViews()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadView), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         if droppedPinAnnotation != nil {
@@ -94,18 +96,8 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         PlaceController.sharedController.region = region
-        
-        if SettingsController.sharedController.theme == .darkTheme {
-            buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
-            mapSizeButtonImageView.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-            currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
-        } else if SettingsController.sharedController.theme == .lightTheme {
-            buttonView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
-            mapSizeButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-        } 
     }
-    
+
     // MARK: - Reload View
     
     func reloadView() {
@@ -114,6 +106,18 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     // MARK: - Setup
+    
+    func configureButtonViews() {
+        if SettingsController.sharedController.theme == .darkTheme {
+            buttonView.backgroundColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
+            mapSizeButtonImageView.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+            currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
+        } else if SettingsController.sharedController.theme == .lightTheme {
+            buttonView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
+            mapSizeButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+            currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
+        }
+    }
     
     func setUpButtons() {
         
@@ -449,7 +453,7 @@ extension PlaceListViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
-            guard let annotation = view.annotation, title = annotation.title else { print("Unable to create annotation"); return }
+            guard let annotation = view.annotation, let title = annotation.title else { print("Unable to create annotation"); return }
             
             if title == "New Location" {
                 self.performSegueWithIdentifier("savePinSegue", sender: self)
