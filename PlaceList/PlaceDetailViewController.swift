@@ -19,6 +19,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var mapViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var notesToAddressConstraint: NSLayoutConstraint!
     
     var place: Place?
     var placemark: MKPlacemark?
@@ -119,6 +120,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
             streetAddressLabel.text = "\(streetAddress)\n\(city), \(state)"
         } else if place.streetAddress == nil && place.city == nil && place.state == nil && place.zipCode == nil {
             streetAddressLabel.hidden = true
+            notesToAddressConstraint.active = false
         }
     }
     

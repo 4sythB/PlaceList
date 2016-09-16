@@ -103,7 +103,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             buttonView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
             mapSizeButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             currentLocationButtonImageView.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-        }
+        } 
     }
     
     // MARK: - Reload View
