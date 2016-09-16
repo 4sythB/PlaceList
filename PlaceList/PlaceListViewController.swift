@@ -66,6 +66,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         setUpMapView()
+        setUpButtons()
         updateConstraintsForMode()
         configureLocationManager()
         
@@ -78,8 +79,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(true)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadView), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        
-        setUpButtons()
         
         if droppedPinAnnotation != nil {
             mapView.removeAnnotation(droppedPinAnnotation!)
@@ -156,6 +155,15 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Map Button
     
+    @IBAction func mapSizeButtonTapped(sender: AnyObject) {
+        self.view.layoutIfNeeded()
+        
+        UIView.animateWithDuration(0.5) {
+            self.updateConstraintsForMode()
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     func updateConstraintsForMode() {
         
         if mode == .HalfScreenMode {
@@ -178,20 +186,47 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    @IBAction func mapSizeButtonTapped(sender: AnyObject) {
-        self.view.layoutIfNeeded()
-        
-        UIView.animateWithDuration(0.5) {
-            self.updateConstraintsForMode()
-            self.view.layoutIfNeeded()
-        }
-    }
-    
     // MARK: - Settings Button
     
     func presentSettingsViewController() {
         guard let settingsVC = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsNavController") else { return }
         self.presentViewController(settingsVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Long press gesture
+    
+    @IBAction func longPressGesture(sender: AnyObject) {
+        
+        if sender.state == .Began {
+            if droppedPinAnnotation != nil {
+                mapView.removeAnnotation(droppedPinAnnotation!)
+            }
+            
+            let location = sender.locationInView(mapView)
+            let coordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "New Location"
+            annotation.subtitle = "Tap to add location"
+            
+            self.droppedPinAnnotation = annotation
+            
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    // MARK: - Current location button action
+    
+    @IBAction func currentLocationButtonTapped(sender: AnyObject) {
+        
+        if let location = PlaceListViewController.locationManager.location {
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+            PlaceController.sharedController.region = region
+        }
+        mapIsCentered = true
     }
     
     // MARK: - Table view data source
@@ -261,33 +296,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         return "My Saved Places"
     }
     
-    @IBAction func longPressGesture(sender: AnyObject) {
-        
-        if sender.state == .Began {
-            if droppedPinAnnotation != nil {
-                mapView.removeAnnotation(droppedPinAnnotation!)
-            }
-            
-            let location = sender.locationInView(mapView)
-            let coordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "New Location"
-            annotation.subtitle = "Tap to add location"
-            
-            self.droppedPinAnnotation = annotation
-            
-            mapView.addAnnotation(annotation)
-        }
-    }
-    
     // MARK: - Navigation
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
     }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -319,19 +332,6 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
                 destinationVC.placemark = droppedPinPlacemark
             }
         }
-    }
-    
-    // MARK: - Action
-    
-    @IBAction func currentLocationButtonTapped(sender: AnyObject) {
-        
-        if let location = PlaceListViewController.locationManager.location {
-            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.setRegion(region, animated: true)
-            PlaceController.sharedController.region = region
-        }
-        mapIsCentered = true
     }
 }
 
