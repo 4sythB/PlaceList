@@ -1,5 +1,3 @@
-# PlaceList
-
 Place List - Find and Save your favorite places
 ===================
 
