@@ -15,7 +15,6 @@
 		A20240681D74A31B004C2DDC /* PlaceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240671D74A31B004C2DDC /* PlaceListUITests.swift */; };
 		A20240761D74A3AB004C2DDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20240751D74A3AB004C2DDC /* MapKit.framework */; };
 		A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */; };
-		A202407D1D74B34D004C2DDC /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202407B1D74B34D004C2DDC /* Place.swift */; };
 		A20240801D74B3D8004C2DDC /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202407F1D74B3D8004C2DDC /* Stack.swift */; };
 		A20240821D74B620004C2DDC /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240811D74B620004C2DDC /* PlaceController.swift */; };
 		A202408A1D74CC25004C2DDC /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240891D74CC25004C2DDC /* LocationController.swift */; };
@@ -28,6 +27,7 @@
 		A202409A1D7512A7004C2DDC /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240991D7512A7004C2DDC /* CustomSearchBar.swift */; };
 		A202409C1D7513C6004C2DDC /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202409B1D7513C6004C2DDC /* CustomSearchController.swift */; };
 		A20240E41D765271004C2DDC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20240E31D765271004C2DDC /* MapPin.swift */; };
+		A228EB271E1F245B00794910 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A228EB261E1F245B00794910 /* Place.swift */; };
 		A25975B31D88530000020961 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25975B21D88530000020961 /* CopyableLabel.swift */; };
 		A2A6516A1D89C7A700A4976D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A651691D89C7A700A4976D /* SettingsController.swift */; };
 		A2A6516C1D89DDA900A4976D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A6516B1D89DDA900A4976D /* SettingsViewController.swift */; };
@@ -67,7 +67,6 @@
 		A20240691D74A31B004C2DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A20240751D74A3AB004C2DDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A20240781D74B2E0004C2DDC /* Place.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Place.xcdatamodel; sourceTree = "<group>"; };
-		A202407B1D74B34D004C2DDC /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Place.swift; path = ../Place.swift; sourceTree = "<group>"; };
 		A202407F1D74B3D8004C2DDC /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		A20240811D74B620004C2DDC /* PlaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceController.swift; sourceTree = "<group>"; };
 		A20240891D74CC25004C2DDC /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		A20240991D7512A7004C2DDC /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		A202409B1D7513C6004C2DDC /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		A20240E31D765271004C2DDC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
+		A228EB261E1F245B00794910 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		A25975B21D88530000020961 /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		A2A651691D89C7A700A4976D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		A2A6516B1D89DDA900A4976D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				A202407F1D74B3D8004C2DDC /* Stack.swift */,
 				A20240771D74B2E0004C2DDC /* Place.xcdatamodeld */,
 				A2EF0E7F1D838E2A00B25970 /* Place+CoreDataProperties.swift */,
-				A202407B1D74B34D004C2DDC /* Place.swift */,
+				A228EB261E1F245B00794910 /* Place.swift */,
 			);
 			name = "Model + CoreData";
 			sourceTree = "<group>";
@@ -368,13 +368,13 @@
 				A20240961D74CD88004C2DDC /* DetailContainerViewController.swift in Sources */,
 				A20240791D74B2E0004C2DDC /* Place.xcdatamodeld in Sources */,
 				A25975B31D88530000020961 /* CopyableLabel.swift in Sources */,
-				A202407D1D74B34D004C2DDC /* Place.swift in Sources */,
 				A2EF0E801D838E2A00B25970 /* Place+CoreDataProperties.swift in Sources */,
 				A20240E41D765271004C2DDC /* MapPin.swift in Sources */,
 				A2A6516A1D89C7A700A4976D /* SettingsController.swift in Sources */,
 				A20240981D75099D004C2DDC /* SearchTableViewController.swift in Sources */,
 				A20240821D74B620004C2DDC /* PlaceController.swift in Sources */,
 				A202408A1D74CC25004C2DDC /* LocationController.swift in Sources */,
+				A228EB271E1F245B00794910 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
