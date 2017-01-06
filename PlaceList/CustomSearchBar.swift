@@ -12,13 +12,13 @@ import UIKit
 class CustomSearchBar: UISearchBar {
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func setShowsCancelButton(showsCancelButton: Bool, animated: Bool) {
+    override func setShowsCancelButton(_ showsCancelButton: Bool, animated: Bool) {
     }
 }

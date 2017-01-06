@@ -24,14 +24,14 @@ class SettingsViewController: UIViewController {
         darkModeSwitch.tintColor = UIColor(red:0.40, green:0.41, blue:0.43, alpha:1.00)
         
         if SettingsController.sharedController.theme == .darkTheme {
-            darkModeSwitch.on = true
+            darkModeSwitch.isOn = true
             self.view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             themeHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             themeModeLabel.textColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
             mapTypeHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             mapTypeSegmentedControl.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
         } else if SettingsController.sharedController.theme == .lightTheme {
-            darkModeSwitch.on = false
+            darkModeSwitch.isOn = false
             self.view.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
             themeHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             themeModeLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
@@ -39,22 +39,22 @@ class SettingsViewController: UIViewController {
             mapTypeSegmentedControl.tintColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
         
-        if SettingsController.sharedController.mapType == .Standard {
+        if SettingsController.sharedController.mapType == .standard {
             mapTypeSegmentedControl.selectedSegmentIndex = 0
-        } else if SettingsController.sharedController.mapType == .Hybrid {
+        } else if SettingsController.sharedController.mapType == .hybrid {
             mapTypeSegmentedControl.selectedSegmentIndex = 1
         }
     }
     
     // MARK: - Actions
     
-    @IBAction func doneButtonTapped(sender: AnyObject) {
+    @IBAction func doneButtonTapped(_ sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func darkModeSwitchChanged(sender: UISwitch) {
-        if sender.on {
+    @IBAction func darkModeSwitchChanged(_ sender: UISwitch) {
+        if sender.isOn {
             SettingsController.sharedController.theme = .darkTheme
             self.view.backgroundColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             themeHeadingLabel.textColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
@@ -71,13 +71,13 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    @IBAction func mapTypeControlChanged(sender: AnyObject) {
+    @IBAction func mapTypeControlChanged(_ sender: AnyObject) {
         switch mapTypeSegmentedControl.selectedSegmentIndex {
         case 0:
-            SettingsController.sharedController.mapType = .Standard
+            SettingsController.sharedController.mapType = .standard
             return
         case 1:
-            SettingsController.sharedController.mapType = .Hybrid
+            SettingsController.sharedController.mapType = .hybrid
             return
         default:
             break

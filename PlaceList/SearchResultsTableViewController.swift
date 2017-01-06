@@ -25,12 +25,12 @@ class SearchResultsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchingItems.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("placeSearchCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placeSearchCell", for: indexPath)
         
         let item = matchingItems[indexPath.row].placemark
         
@@ -50,30 +50,30 @@ class SearchResultsTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let placemark = matchingItems[indexPath.row].placemark
         
         if segue.identifier == "toAddPlaceSegue" {
-            guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
+            guard let destinationVC = segue.destination as? AddPlaceViewController else { return }
             destinationVC.placemark = placemark
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let presentingVC = self.presentingViewController as? SearchTableViewController, cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+        guard let presentingVC = self.presentingViewController as? SearchTableViewController, let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        presentingVC.performSegueWithIdentifier("toAddPlaceSegue", sender: cell)
+        presentingVC.performSegue(withIdentifier: "toAddPlaceSegue", sender: cell)
     }
 }
 
 extension SearchResultsTableViewController: UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
         guard let region = PlaceController.sharedController.region,
-            searchBarText = searchController.searchBar.text else { return }
+            let searchBarText = searchController.searchBar.text else { return }
         
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
@@ -82,7 +82,7 @@ extension SearchResultsTableViewController: UISearchResultsUpdating {
         let search = MKLocalSearch(request: request)
         
         if searchBarText.characters.count > 0 {
-            search.startWithCompletionHandler { (response, error) in
+            search.start { (response, error) in
                 if error != nil {
                     print("Error: \(error?.localizedDescription)")
                 } else {

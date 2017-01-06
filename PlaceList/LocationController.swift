@@ -16,7 +16,7 @@ class LocationController {
     
     var selectedPin: MKPlacemark? = nil
     
-    func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: (CLPlacemark?) -> Void) {
+    func reverseGeocoding(_ latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (CLPlacemark?) -> Void) {
         
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
@@ -25,7 +25,7 @@ class LocationController {
             guard let placemarks = placemarks else { return }
             
             if error != nil {
-                print(error)
+                print(error as? NSError ?? "Unable to return placemarks")
                 completion(nil)
                 return
             } else if placemarks.count > 0 {
@@ -35,7 +35,7 @@ class LocationController {
         })
     }
     
-    func parseAddress(selectedItem: MKPlacemark) -> String {
+    func parseAddress(_ selectedItem: MKPlacemark) -> String {
         // put a space between address number and street name
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
         // put a comma between street and city/state
@@ -60,7 +60,7 @@ class LocationController {
         return addressLine
     }
     
-    func dropPinZoomIn(placemark:MKPlacemark, mapView: MKMapView){
+    func dropPinZoomIn(_ placemark:MKPlacemark, mapView: MKMapView){
         
         selectedPin = placemark
         

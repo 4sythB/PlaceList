@@ -23,25 +23,25 @@ class AddPlaceViewController: UIViewController {
     
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "embededDetailSegue" {
             
             guard let placemark = placemark else { return }
             
-            detailContainerViewController = segue.destinationViewController as? DetailContainerViewController
+            detailContainerViewController = segue.destination as? DetailContainerViewController
             detailContainerViewController.placemark = placemark
         }
     }
     
-    @IBAction func saveButtonTapped(sender: AnyObject) {
+    @IBAction func saveButtonTapped(_ sender: AnyObject) {
         
-        guard let placemark = placemark, notes = detailContainerViewController.notesTextView.text else { return }
+        guard let placemark = placemark, let notes = detailContainerViewController.notesTextView.text else { return }
         
         PlaceController.sharedController.addPlace(placemark, notes: notes)
         
         detailContainerViewController.notesTextView.resignFirstResponder()
-        self.performSegueWithIdentifier("toPlaceListSegue", sender: self)
+        self.performSegue(withIdentifier: "toPlaceListSegue", sender: self)
     }
 }
 

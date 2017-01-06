@@ -30,19 +30,19 @@ class CustomSearchController: UISearchController, UISearchBarDelegate {
         searchBar.delegate = self
     }
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(!searchBar.text!.isEmpty) {
-            self.active = true
+            self.isActive = true
         } else {
-            self.active = false
+            self.isActive = false
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    private override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    fileprivate override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     

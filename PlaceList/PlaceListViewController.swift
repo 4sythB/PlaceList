@@ -35,21 +35,21 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     var droppedPinAnnotation: MKAnnotation?
     var droppedPinPlacemark: MKPlacemark?
     
-    var mode: MapViewMode = .HalfScreenMode
+    var mode: MapViewMode = .halfScreenMode
     
     enum MapViewMode {
-        case FullScreenMode
-        case HalfScreenMode
+        case fullScreenMode
+        case halfScreenMode
     }
     
     var mapIsCentered: Bool = true {
         didSet {
             if mapIsCentered == true {
-                let image = UIImage(named: "navigation")?.imageWithRenderingMode(.AlwaysTemplate)
+                let image = UIImage(named: "navigation")?.withRenderingMode(.alwaysTemplate)
                 currentLocationButtonImageView.image = image
                 currentLocationButtonImageView.tintColor = UIColor(red:0.42, green:0.66, blue:0.76, alpha:1.00)
             } else if mapIsCentered == false {
-                let image = UIImage(named: "location")?.imageWithRenderingMode(.AlwaysTemplate)
+                let image = UIImage(named: "location")?.withRenderingMode(.alwaysTemplate)
                 currentLocationButtonImageView.image = image
                 if SettingsController.sharedController.theme == .darkTheme {
                     currentLocationButtonImageView.tintColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
@@ -75,12 +75,12 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         buttonView.layer.cornerRadius = 8
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         configureButtonViews()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadView), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         if droppedPinAnnotation != nil {
             mapView.removeAnnotation(droppedPinAnnotation!)
@@ -121,15 +121,15 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func setUpButtons() {
         
-        let mapImage = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+        let mapImage = UIImage(named: "Map")?.withRenderingMode(.alwaysTemplate)
         mapSizeButtonImageView.image = mapImage
         mapSizeButtonImageView.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         
-        let settingsImage = UIImage(named: "Settings")?.imageWithRenderingMode(.AlwaysTemplate)
-        settingsButton.frame = CGRectMake(0, 0, 23, 23)
-        settingsButton.setImage(settingsImage, forState: .Normal)
+        let settingsImage = UIImage(named: "Settings")?.withRenderingMode(.alwaysTemplate)
+        settingsButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+        settingsButton.setImage(settingsImage, for: UIControlState())
         settingsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        settingsButton.addTarget(self, action: #selector(presentSettingsViewController), forControlEvents: .TouchUpInside)
+        settingsButton.addTarget(self, action: #selector(presentSettingsViewController), for: .touchUpInside)
         
         let settingsBarButton = UIBarButtonItem()
         settingsBarButton.customView = settingsButton
@@ -150,64 +150,64 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let seconds = 1.5
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        let dispatchTime = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             self.mapView.setRegion(region, animated: true)
         })
     }
     
     // MARK: - Map Button
     
-    @IBAction func mapSizeButtonTapped(sender: AnyObject) {
+    @IBAction func mapSizeButtonTapped(_ sender: AnyObject) {
         self.view.layoutIfNeeded()
         
-        UIView.animateWithDuration(0.5) {
+        UIView.animate(withDuration: 0.5, animations: {
             self.updateConstraintsForMode()
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
     
     func updateConstraintsForMode() {
         
-        if mode == .HalfScreenMode {
+        if mode == .halfScreenMode {
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh+1
             
-            let mapImage = UIImage(named: "Map")?.imageWithRenderingMode(.AlwaysTemplate)
+            let mapImage = UIImage(named: "Map")?.withRenderingMode(.alwaysTemplate)
             mapSizeButtonImageView.image = mapImage
             
-            mode = .FullScreenMode
-        } else if mode == .FullScreenMode {
+            mode = .fullScreenMode
+        } else if mode == .fullScreenMode {
             bottomMapToViewConstraint.constant = 0
             constraintBetweenMapAndTableView.constant = 0
             bottomTableViewConstraint.priority = UILayoutPriorityDefaultHigh-1
             
-            let listScreenImage = UIImage(named: "ListScreen")?.imageWithRenderingMode(.AlwaysTemplate)
+            let listScreenImage = UIImage(named: "ListScreen")?.withRenderingMode(.alwaysTemplate)
             mapSizeButtonImageView.image = listScreenImage
             
-            mode = .HalfScreenMode
+            mode = .halfScreenMode
         }
     }
     
     // MARK: - Settings Button
     
     func presentSettingsViewController() {
-        guard let settingsVC = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsNavController") else { return }
-        self.presentViewController(settingsVC, animated: true, completion: nil)
+        guard let settingsVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavController") else { return }
+        self.present(settingsVC, animated: true, completion: nil)
     }
     
     // MARK: - Long press gesture
     
-    @IBAction func longPressGesture(sender: AnyObject) {
+    @IBAction func longPressGesture(_ sender: AnyObject) {
         
-        if sender.state == .Began {
+        if sender.state == .began {
             if droppedPinAnnotation != nil {
                 mapView.removeAnnotation(droppedPinAnnotation!)
             }
             
-            let location = sender.locationInView(mapView)
-            let coordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
+            let location = sender.location(in: mapView)
+            let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -222,7 +222,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Current location button action
     
-    @IBAction func currentLocationButtonTapped(sender: AnyObject) {
+    @IBAction func currentLocationButtonTapped(_ sender: AnyObject) {
         
         if let location = PlaceListViewController.locationManager.location {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -235,22 +235,22 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if locationAuthorizationStatus == .AuthorizedWhenInUse {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if locationAuthorizationStatus == .authorizedWhenInUse {
             return PlaceController.sharedController.sortedPlaces.count
         } else {
             return PlaceController.sharedController.places.count
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("placeListCell", forIndexPath: indexPath) as? PlaceListTableViewCell else { return UITableViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "placeListCell", for: indexPath) as? PlaceListTableViewCell else { return UITableViewCell() }
         
-        if locationAuthorizationStatus == .AuthorizedWhenInUse {
+        if locationAuthorizationStatus == .authorizedWhenInUse {
             let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
             cell.updateWithPlace(place)
             return cell
@@ -261,14 +261,14 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let annotations = mapView.annotations
             for annotation in annotations {
                 mapView.removeAnnotation(annotation)
             }
             
-            if locationAuthorizationStatus == .AuthorizedWhenInUse {
+            if locationAuthorizationStatus == .authorizedWhenInUse {
                 let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
                 PlaceController.sharedController.deletePlace(place)
             } else {
@@ -278,11 +278,11 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             
             mapView.addAnnotations(PlaceController.sharedController.annotations)
             
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         
         if SettingsController.sharedController.theme == .darkTheme {
@@ -296,22 +296,22 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
         header.textLabel?.font = UIFont(name: "avenir-medium", size: 16)!
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "My Saved Places"
     }
     
     // MARK: - Navigation
     
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let indexPath = tableView.indexPathForSelectedRow {
             
-            guard let destinationVC = segue.destinationViewController as? PlaceDetailViewController else { return }
+            guard let destinationVC = segue.destination as? PlaceDetailViewController else { return }
             
-            if locationAuthorizationStatus == .AuthorizedWhenInUse {
+            if locationAuthorizationStatus == .authorizedWhenInUse {
                 let place = PlaceController.sharedController.sortedPlaces[indexPath.row]
                 let coordinates = CLLocationCoordinate2DMake(place.latitude, place.longitude)
                 let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
@@ -332,7 +332,7 @@ class PlaceListViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         } else {
             if segue.identifier == "savePinSegue" {
-                guard let destinationVC = segue.destinationViewController as? AddPlaceViewController else { return }
+                guard let destinationVC = segue.destination as? AddPlaceViewController else { return }
                 destinationVC.placemark = droppedPinPlacemark
             }
         }
@@ -350,16 +350,16 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         PlaceListViewController.locationManager.requestLocation()
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        if status == .AuthorizedWhenInUse {
+        if status == .authorizedWhenInUse {
             PlaceListViewController.locationManager.requestLocation()
         }
         self.locationAuthorizationStatus = status
         self.tableView.reloadData()
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if regionSet == false {
             guard let location = locations.first else { return }
@@ -371,7 +371,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error: \(error.localizedDescription)")
     }
 }
@@ -380,7 +380,7 @@ extension PlaceListViewController: CLLocationManagerDelegate {
 
 extension PlaceListViewController: MKMapViewDelegate {
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
             return nil
@@ -392,24 +392,24 @@ extension PlaceListViewController: MKMapViewDelegate {
                 let pinView = MKPinAnnotationView(annotation: mapPin, reuseIdentifier: "pin")
                 pinView.canShowCallout = true
                 pinView.animatesDrop = false
-                pinView.pinTintColor = .redColor()
+                pinView.pinTintColor = .red
                 
                 return pinView
             }
         } else {
             let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             pinView.canShowCallout = true
-            pinView.draggable = true
+            pinView.isDraggable = true
             pinView.animatesDrop = true
-            pinView.pinTintColor = .purpleColor()
-            pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            pinView.pinTintColor = .purple
+            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
             return pinView
         }
         return nil
     }
     
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         
         guard let annotation = self.droppedPinAnnotation else { return }
         
@@ -424,16 +424,16 @@ extension PlaceListViewController: MKMapViewDelegate {
         
         let seconds = 0.5
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per second
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        let dispatchTime = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             
             mapView.selectAnnotation(annotation, animated: false)
         })
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-        if newState == .Ending {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        if newState == .ending {
             guard let coordinate = view.annotation?.coordinate else { return }
             let latitude = coordinate.latitude, longitude = coordinate.longitude
             
@@ -446,37 +446,37 @@ extension PlaceListViewController: MKMapViewDelegate {
         }
     }
     
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         mapIsCentered = false
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
             guard let annotation = view.annotation, let title = annotation.title else { print("Unable to create annotation"); return }
             
             if title == "New Location" {
-                self.performSegueWithIdentifier("savePinSegue", sender: self)
+                self.performSegue(withIdentifier: "savePinSegue", sender: self)
             } else {
-                self.performSegueWithIdentifier("toDetailSegue", sender: self)
+                self.performSegue(withIdentifier: "toDetailSegue", sender: self)
             }
         }
     }
     
-    func mapViewWillStartLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func mapViewWillStartRenderingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 

@@ -37,12 +37,12 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         
         applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setupAppearance() {
@@ -56,7 +56,7 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
             cityStateZipLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
             notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
             notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-            notesTextView.keyboardAppearance = .Dark
+            notesTextView.keyboardAppearance = .dark
             
         } else if SettingsController.sharedController.theme == .lightTheme {
             view.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
@@ -65,7 +65,7 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
             cityStateZipLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             notesTextView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
             notesTextView.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            notesTextView.keyboardAppearance = .Default
+            notesTextView.keyboardAppearance = .default
         }
     }
     
@@ -83,46 +83,46 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
             placeTitleLabel.text = title
         }
         
-        if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
+        if let subThoroughfare = placemark.subThoroughfare, let thoroughfare = placemark.thoroughfare {
             let streetAddress = "\(subThoroughfare) \(thoroughfare)"
             streetAddressLabel.text = streetAddress
             LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         } else {
-            streetAddressLabel.hidden = true
+            streetAddressLabel.isHidden = true
         }
-        if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+        if let city = placemark.locality, let state = placemark.administrativeArea, let zipCode = placemark.postalCode {
             cityStateZipLabel.text = "\(city), \(state) \(zipCode)"
         } else {
-            cityStateZipLabel.hidden = true
+            cityStateZipLabel.isHidden = true
         }
     }
     
     // MARK: - TextView placeholder
     
-    func applyPlaceholderStyle(textView: UITextView, placeholderText: String) {
-        textView.textColor = UIColor.lightGrayColor()
+    func applyPlaceholderStyle(_ textView: UITextView, placeholderText: String) {
+        textView.textColor = UIColor.lightGray
         textView.text = placeholderText
     }
     
-    func applyNonPlaceholderStyle(textView: UITextView) {
+    func applyNonPlaceholderStyle(_ textView: UITextView) {
         textView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
         textView.alpha = 1.0
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView == notesTextView && textView.text == placeholderText {
             moveCursorToStart(textView)
         }
         return true
     }
     
-    func moveCursorToStart(textView: UITextView) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func moveCursorToStart(_ textView: UITextView) {
+        DispatchQueue.main.async(execute: {
             textView.selectedRange = NSMakeRange(0, 0);
         })
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
             if textView == notesTextView && textView.text == placeholderText {
@@ -138,57 +138,57 @@ class DetailContainerViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewDidChangeSelection (textView: UITextView) {
+    func textViewDidChangeSelection (_ textView: UITextView) {
         if textView == notesTextView && textView.text == placeholderText {
             moveCursorToStart(textView)
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if notesTextView.text.characters.count == 0 {
             notesTextView.text = placeholderText
-            notesTextView.textColor = .lightGrayColor()
+            notesTextView.textColor = .lightGray
         }
     }
     
     // MARK: - Keyboard
     
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.size.height, 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
             
-            scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
+            scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
             
             scrollView.scrollRectToVisible((notesTextView.superview?.frame)!, animated: true)
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         let contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
-        scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height)
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
     }
 }
 
 extension DetailContainerViewController: MKMapViewDelegate {
     
-    func mapViewWillStartLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func mapViewWillStartRenderingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 

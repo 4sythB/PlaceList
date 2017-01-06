@@ -15,11 +15,11 @@ class Place: NSManagedObject {
     
     convenience init?(title: String, streetAddress: String?, city: String?, state: String?, zipCode: String?, latitude: Double, longitude: Double, notes: String?, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
-        guard let entity = NSEntityDescription.entityForName("Place", inManagedObjectContext: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Place", in: context) else {
             fatalError("Unable to initialize entity")
         }
         
-        self.init(entity: entity, insertIntoManagedObjectContext: context)
+        self.init(entity: entity, insertInto: context)
         
         self.title = title
         self.streetAddress = streetAddress

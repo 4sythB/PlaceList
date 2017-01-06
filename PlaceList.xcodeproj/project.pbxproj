@@ -284,7 +284,7 @@
 					A20240431D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = XV5S682VFJ;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -293,12 +293,12 @@
 					};
 					A20240571D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = A20240431D74A31B004C2DDC;
 					};
 					A20240621D74A31B004C2DDC = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = A20240431D74A31B004C2DDC;
 					};
 				};
@@ -531,7 +531,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -548,7 +548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -561,7 +561,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlaceList.app/PlaceList";
 			};
 			name = Debug;
@@ -574,7 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlaceList.app/PlaceList";
 			};
 			name = Release;
@@ -586,7 +586,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceListUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PlaceList;
 			};
 			name = Debug;
@@ -598,7 +598,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4syth.PlaceListUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PlaceList;
 			};
 			name = Release;

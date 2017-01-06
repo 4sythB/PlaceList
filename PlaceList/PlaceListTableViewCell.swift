@@ -17,13 +17,13 @@ class PlaceListTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    func updateWithPlace(place: Place) {
+    func updateWithPlace(_ place: Place) {
         
         placeTitleLabel.text = place.title
         
@@ -35,7 +35,7 @@ class PlaceListTableViewCell: UITableViewCell {
             placeAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
         }
         
-        if let city = place.city, state = place.state {
+        if let city = place.city, let state = place.state {
             placeAddressLabel.text = "\(city), \(state)"
         } else {
             placeAddressLabel.text = place.title

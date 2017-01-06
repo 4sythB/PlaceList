@@ -9,6 +9,19 @@
 import Foundation
 import CoreData
 import MapKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class PlaceController {
     
@@ -18,12 +31,12 @@ class PlaceController {
     var region: MKCoordinateRegion?
     
     var places: [Place] {
-        let request = NSFetchRequest(entityName: "Place")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place")
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
         do {
-            return try moc.executeFetchRequest(request) as? [Place] ?? []
+            return try moc.fetch(request) as? [Place] ?? []
         } catch {
             return []
         }
@@ -34,7 +47,7 @@ class PlaceController {
         
         guard let currentLocation = PlaceListViewController.locationManager.location else { return sortedPlaces }
         
-        sortedPlaces = places.sort({ $0.0.clLocation?.distanceFromLocation(currentLocation) < $0.1.clLocation?.distanceFromLocation(currentLocation) })
+        sortedPlaces = places.sorted(by: { $0.0.clLocation?.distance(from: currentLocation) < $0.1.clLocation?.distance(from: currentLocation) })
         
         return sortedPlaces
     }
@@ -54,7 +67,7 @@ class PlaceController {
                 let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: city, isSaved: true)
                 annotations.append(annotation)
             } else if place.streetAddress != nil && place.city != nil {
-                guard let streetAddress = place.streetAddress, city = place.city else { return [] }
+                guard let streetAddress = place.streetAddress, let city = place.city else { return [] }
                 let annotation = MapPin(coordinate: coordinate, title: place.title, subtitle: "\(streetAddress), \(city)", isSaved: true)
                 annotations.append(annotation)
             }
@@ -64,17 +77,17 @@ class PlaceController {
     
     // MARK: - Functions
     
-    func addPlace(placemark: MKPlacemark, notes: String?) {
+    func addPlace(_ placemark: MKPlacemark, notes: String?) {
         
         let latitude = placemark.coordinate.latitude
         let longitude = placemark.coordinate.longitude
         
         guard let title = placemark.name else { return }
         
-        if let subThoroughfare = placemark.subThoroughfare, thoroughfare = placemark.thoroughfare {
+        if let subThoroughfare = placemark.subThoroughfare, let thoroughfare = placemark.thoroughfare {
             let streetAddress = "\(subThoroughfare) \(thoroughfare)"
             
-            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+            if let city = placemark.locality, let state = placemark.administrativeArea, let zipCode = placemark.postalCode {
                 let _ = Place(title: title, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
                 saveToPersistentStore()
             } else {
@@ -82,7 +95,7 @@ class PlaceController {
                 saveToPersistentStore()
             }
         } else {
-            if let city = placemark.locality, state = placemark.administrativeArea, zipCode = placemark.postalCode {
+            if let city = placemark.locality, let state = placemark.administrativeArea, let zipCode = placemark.postalCode {
                 let _ = Place(title: title, streetAddress: nil, city: city, state: state, zipCode: zipCode, latitude: latitude, longitude: longitude, notes: notes)
                 saveToPersistentStore()
             } else {
@@ -92,17 +105,17 @@ class PlaceController {
         }
     }
     
-    func updateNotesForPlace(place: Place, notes: String?) {
+    func updateNotesForPlace(_ place: Place, notes: String?) {
         
-        if let index = places.indexOf(place) {
+        if let index = places.index(of: place) {
             places[index].notes = notes
             saveToPersistentStore()
         }
     }
     
-    func deletePlace(place: Place) {
+    func deletePlace(_ place: Place) {
         
-        moc.deleteObject(place)
+        moc.delete(place)
         saveToPersistentStore()
     }
     
@@ -115,8 +128,8 @@ class PlaceController {
         }
     }
     
-    func getById(id: NSManagedObjectID) -> Place? {
-        return moc.objectWithID(id) as? Place
+    func getById(_ id: NSManagedObjectID) -> Place? {
+        return moc.object(with: id) as? Place
     }
 }
 

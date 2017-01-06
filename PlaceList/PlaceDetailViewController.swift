@@ -28,7 +28,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     
     let placeholderText = "Type your notes here"
     
-    var mode: ButtonMode = .ViewMode
+    var mode: ButtonMode = .viewMode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +36,19 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         setUpView()
         
         notesTextView.delegate = self
-        notesTextView.editable = true
+        notesTextView.isEditable = true
         notesTextView.layer.cornerRadius = 8.0
         
         if notesTextView.text == placeholderText {
             applyPlaceholderStyle(notesTextView, placeholderText: placeholderText)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setUpView() {
@@ -67,7 +67,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
             streetAddressLabel.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
             notesTextView.backgroundColor = UIColor(red:0.44, green:0.47, blue:0.51, alpha:1.00)
             notesTextView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-            notesTextView.keyboardAppearance = .Dark
+            notesTextView.keyboardAppearance = .dark
             
         } else if SettingsController.sharedController.theme == .lightTheme {
             view.backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.00)
@@ -75,16 +75,16 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
             streetAddressLabel.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
             notesTextView.backgroundColor = UIColor(red:0.75, green:0.75, blue:0.75, alpha:1.00)
             notesTextView.textColor = UIColor(red:0.19, green:0.20, blue:0.23, alpha:1.00)
-            notesTextView.keyboardAppearance = .Default
+            notesTextView.keyboardAppearance = .default
         }
     }
     
     func setupDirectionsButton() {
-        let image = UIImage(named: "Arrow")?.imageWithRenderingMode(.AlwaysTemplate)
-        directionsButton.frame = CGRectMake(0, 0, 23, 23)
-        directionsButton.setImage(image, forState: .Normal)
+        let image = UIImage(named: "Arrow")?.withRenderingMode(.alwaysTemplate)
+        directionsButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+        directionsButton.setImage(image, for: UIControlState())
         directionsButton.tintColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
-        directionsButton.addTarget(self, action: #selector(getDirections), forControlEvents: .TouchUpInside)
+        directionsButton.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
         
         let directionsBarButton = UIBarButtonItem()
         directionsBarButton.customView = directionsButton
@@ -92,7 +92,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func setupLabelsAndMapView() {
-        guard let placemark = placemark, place = place, notes = place.notes else { return }
+        guard let placemark = placemark, let place = place, let notes = place.notes else { return }
         
         LocationController.sharedController.dropPinZoomIn(placemark, mapView: mapView)
         
@@ -104,43 +104,43 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         notesTextView.text = notes
         
         if place.streetAddress != nil && place.city != nil && place.state != nil && place.zipCode != nil {
-            guard let streetAddress = place.streetAddress, city = place.city, state = place.state, zipCode = place.zipCode else { return }
+            guard let streetAddress = place.streetAddress, let city = place.city, let state = place.state, let zipCode = place.zipCode else { return }
             streetAddressLabel.text = "\(streetAddress)\n\(city), \(state) \(zipCode)"
         } else if place.streetAddress == nil && place.city != nil && place.state != nil && place.zipCode != nil {
-            guard let city = place.city, state = place.state, zipCode = place.zipCode else { return }
+            guard let city = place.city, let state = place.state, let zipCode = place.zipCode else { return }
             streetAddressLabel.text = "\(city), \(state) \(zipCode)"
         } else if place.streetAddress != nil && place.city == nil && place.state != nil && place.zipCode != nil {
-            guard let streetAddress = place.streetAddress, state = place.state, zipCode = place.zipCode else { return }
+            guard let streetAddress = place.streetAddress, let state = place.state, let zipCode = place.zipCode else { return }
             streetAddressLabel.text = "\(streetAddress)\n\(state) \(zipCode)"
         } else if place.streetAddress != nil && place.city != nil && place.state == nil && place.zipCode != nil {
-            guard let streetAddress = place.streetAddress, city = place.city, zipCode = place.zipCode else { return }
+            guard let streetAddress = place.streetAddress, let city = place.city, let zipCode = place.zipCode else { return }
             streetAddressLabel.text = "\(streetAddress)\n\(city), \(zipCode)"
         } else if place.streetAddress != nil && place.city != nil && place.state != nil && place.zipCode == nil {
-            guard let streetAddress = place.streetAddress, city = place.city, state = place.state else { return }
+            guard let streetAddress = place.streetAddress, let city = place.city, let state = place.state else { return }
             streetAddressLabel.text = "\(streetAddress)\n\(city), \(state)"
         } else if place.streetAddress == nil && place.city == nil && place.state == nil && place.zipCode == nil {
-            streetAddressLabel.hidden = true
-            notesToAddressConstraint.active = false
+            streetAddressLabel.isHidden = true
+            notesToAddressConstraint.isActive = false
         }
     }
     
     // MARK: - View mode
     
     enum ButtonMode {
-        case ViewMode
-        case EditMode
+        case viewMode
+        case editMode
     }
     
     func goToEditMode() {
         
         directionsButton.removeFromSuperview()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(PlaceDetailViewController.goToViewMode))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(PlaceDetailViewController.goToViewMode))
         self.navigationItem.rightBarButtonItem = doneButton
         
-        mode = .EditMode
+        mode = .editMode
         
-        notesTextView.editable = true
+        notesTextView.isEditable = true
     }
     
     func goToViewMode() {
@@ -149,11 +149,11 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         barButton.customView = directionsButton
         self.navigationItem.rightBarButtonItem = barButton
         
-        mode = .ViewMode
+        mode = .viewMode
         
         notesTextView.resignFirstResponder()
         
-        guard let place = place, notes = notesTextView.text else { return }
+        guard let place = place, let notes = notesTextView.text else { return }
         
         PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
@@ -162,38 +162,38 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         
         let mapItem = MKMapItem(placemark: placemark!)
         mapItem.name = place?.title
-        mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     // MARK: - Action
     
-    @IBAction func doneButtonTapped(sender: AnyObject) {
+    @IBAction func doneButtonTapped(_ sender: AnyObject) {
         goToViewMode()
     }
     
     // MARK: - Editing/saving
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         goToEditMode()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        guard let place = place, notes = notesTextView.text else { return }
+    override func viewWillDisappear(_ animated: Bool) {
+        guard let place = place, let notes = notesTextView.text else { return }
         
         PlaceController.sharedController.updateNotesForPlace(place, notes: notes)
     }
     
     // MARK: - TextView placeholder
     
-    func applyPlaceholderStyle(textView: UITextView, placeholderText: String) {
+    func applyPlaceholderStyle(_ textView: UITextView, placeholderText: String) {
         
         // make it look (initially) like a placeholder
-        textView.textColor = UIColor.lightGrayColor()
+        textView.textColor = UIColor.lightGray
         textView.text = placeholderText
         textView.font = UIFont(name: "avenir", size: 14)
     }
     
-    func applyNonPlaceholderStyle(textView: UITextView) {
+    func applyNonPlaceholderStyle(_ textView: UITextView) {
         
         // make it look like normal text instead of a placeholder
         textView.textColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
@@ -201,7 +201,7 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         textView.font = UIFont(name: "avenir", size: 14)
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView == notesTextView && textView.text == placeholderText {
             // move cursor to start
             moveCursorToStart(textView)
@@ -209,13 +209,13 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         return true
     }
     
-    func moveCursorToStart(textView: UITextView) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func moveCursorToStart(_ textView: UITextView) {
+        DispatchQueue.main.async(execute: {
             textView.selectedRange = NSMakeRange(0, 0);
         })
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
@@ -234,61 +234,61 @@ class PlaceDetailViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewDidChangeSelection (textView: UITextView) {
+    func textViewDidChangeSelection (_ textView: UITextView) {
         if textView == notesTextView && textView.text == placeholderText {
             moveCursorToStart(textView)
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if notesTextView.text.characters.count == 0 {
             notesTextView.text = placeholderText
-            notesTextView.textColor = .lightGrayColor()
+            notesTextView.textColor = .lightGray
         }
     }
     
     // MARK: - Keyboard
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
             self.view.layoutIfNeeded()
             
-            UIView.animateWithDuration(0.5) {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.mapViewTopConstraint.constant = -keyboardSize.size.height
                 self.view.layoutIfNeeded()
-            }
+            }) 
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         
         self.view.layoutIfNeeded()
         
-        UIView.animateWithDuration(0.5) {
+        UIView.animate(withDuration: 0.5, animations: {
             self.mapViewTopConstraint.constant = 0
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 }
 
 extension PlaceDetailViewController: MKMapViewDelegate {
     
-    func mapViewWillStartLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func mapViewWillStartRenderingMap(mapView: MKMapView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
